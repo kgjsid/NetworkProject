@@ -25,7 +25,6 @@ public class RoomEntry : MonoBehaviour
         players.text = $"{roomInfo.PlayerCount}/ {roomInfo.MaxPlayers}";
         joinRoomButton.interactable = roomInfo.PlayerCount < roomInfo.MaxPlayers;
     }
-
     public void JoinRoom()
     {
         PhotonNetwork.LeaveLobby();

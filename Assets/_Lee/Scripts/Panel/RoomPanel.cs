@@ -29,6 +29,7 @@ public class RoomPanel : MonoBehaviour
             PlayerEntry playerEntry = Instantiate(platyerEntry, playerContent); // 생성 
             PlayerList.Add(playerEntry); // 플레이어 저장
         }
+        
     }
     private void Start()
     {
@@ -45,4 +46,5 @@ public class RoomPanel : MonoBehaviour
     {
 
     }
+
 }

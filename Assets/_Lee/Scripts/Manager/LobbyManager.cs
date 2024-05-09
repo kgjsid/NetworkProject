@@ -67,8 +67,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("방 만들기 성공");
         SetActivePanel(Panel.Room);
     }
-    public override void OnRoomListUpdate( List<RoomInfo> roomList )
+    public override void OnRoomListUpdate( List<RoomInfo> roomList ) // 방이 업데이트 될때마다
     {
         lobbyPanel.UpdateRoomList(roomList);
     }
+    public override void OnJoinedRoom()     // 방을 찾았으면 호출
+    {
+        SetActivePanel(Panel.Room);
+    }
+    public override void OnJoinRoomFailed( short returnCode, string message )       // 방을 못찾았으면 호출
+    {
+        Debug.Log($"방 들어가기 실패 : {returnCode}, {message}");
+    }
+    
 }
