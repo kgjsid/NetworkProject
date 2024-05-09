@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class DebuggingManager : MonoBehaviourPunCallbacks
 {
+    // 네트워크 디버깅용
     [SerializeField] string debugRoomName = "DebugRoom 1";
 
     private void Start()
     {
-        PhotonNetwork.LocalPlayer.NickName = $"TestPlayer({Random.Range(0, 5)})";
+        PhotonNetwork.LocalPlayer.NickName = $"TestPlayer({Random.Range(0, 1000)})";
         PhotonNetwork.ConnectUsingSettings();
     }
 
@@ -17,7 +18,6 @@ public class DebuggingManager : MonoBehaviourPunCallbacks
     {
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = 10;
-        options.IsVisible = false;
         TypedLobby typedLobby = new TypedLobby("DebugLobby", LobbyType.Default);
 
         PhotonNetwork.JoinOrCreateRoom(debugRoomName, options, typedLobby);
@@ -25,16 +25,20 @@ public class DebuggingManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        StartCoroutine(GameStartDelay());
+        if (PhotonNetwork.IsMasterClient)
+            StartCoroutine(GameStartDelay());
     }
 
     IEnumerator GameStartDelay()
     {
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         yield return new WaitForSeconds(1f);
-        GameStart();
+        // 원격에게 함수 호출
+        photonView.RPC("StartGame", RpcTarget.All);
     }
 
-    private void GameStart()
+    [PunRPC]
+    public void StartGame()
     {
         PhotonNetwork.LoadLevel("BaseGameScene");
     }

@@ -1597,8 +1597,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53825961e8130c348b49cd4ebdb72996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPrefab: {fileID: 7832512333496901261, guid: 022f202f917827549a590ecaf87b70fa,
-    type: 3}
   spawnCount: 0
   spawnMaxCount: 7
   spawnMinCount: 5
@@ -3966,6 +3964,7 @@ GameObject:
   - component: {fileID: 291955847}
   - component: {fileID: 291955846}
   - component: {fileID: 291955851}
+  - component: {fileID: 291955852}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4014,7 +4013,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 60.000004
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -4040,8 +4039,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291955845}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2810716, y: -0.050429877, z: 0.0020000096, w: -0.9583589}
-  m_LocalPosition: {x: -4.44416, y: 38.920002, z: -24.15006}
+  m_LocalRotation: {x: 0.4331887, y: 0.0000000111261675, z: -0.000000005347511, w: 0.9013033}
+  m_LocalPosition: {x: -19.802935, y: 11.4, z: -13.8928795}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4091,6 +4090,40 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
+--- !u!114 &291955852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 291955845}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShowDebugText: 0
+  m_ShowCameraFrustum: 1
+  m_IgnoreTimeScale: 0
+  m_WorldUpOverride: {fileID: 0}
+  m_UpdateMethod: 2
+  m_BlendUpdateMethod: 1
+  m_DefaultBlend:
+    m_Style: 1
+    m_Time: 2
+    m_CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  m_CustomBlends: {fileID: 0}
+  m_CameraCutEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_CameraActivatedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &296591827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4303,8 +4336,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53825961e8130c348b49cd4ebdb72996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPrefab: {fileID: 7832512333496901261, guid: 022f202f917827549a590ecaf87b70fa,
-    type: 3}
   spawnCount: 0
   spawnMaxCount: 7
   spawnMinCount: 5
@@ -4772,8 +4803,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53825961e8130c348b49cd4ebdb72996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPrefab: {fileID: 7832512333496901261, guid: 022f202f917827549a590ecaf87b70fa,
-    type: 3}
   spawnCount: 0
   spawnMaxCount: 7
   spawnMinCount: 5
@@ -5493,8 +5522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53825961e8130c348b49cd4ebdb72996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPrefab: {fileID: 7832512333496901261, guid: 022f202f917827549a590ecaf87b70fa,
-    type: 3}
   spawnCount: 0
   spawnMaxCount: 7
   spawnMinCount: 5
@@ -7766,6 +7793,104 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 505312735}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &507934164
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1270669922171822073, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -19.802935
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.8928795
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1495340024315896077, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4788220728133097829, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040440504799972472, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9013033
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040440504799972472, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.4331887
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040440504799972472, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000000111261675
+      objectReference: {fileID: 0}
+    - target: {fileID: 6040440504799972472, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.000000005347511
+      objectReference: {fileID: 0}
+    - target: {fileID: 7474948303723379636, guid: 481448bc9dc26764e8809e2d76433230,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 481448bc9dc26764e8809e2d76433230, type: 3}
 --- !u!1001 &509079832
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22357,8 +22482,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53825961e8130c348b49cd4ebdb72996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPrefab: {fileID: 7832512333496901261, guid: 022f202f917827549a590ecaf87b70fa,
-    type: 3}
   spawnCount: 0
   spawnMaxCount: 7
   spawnMinCount: 5
@@ -22910,8 +23033,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53825961e8130c348b49cd4ebdb72996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPrefab: {fileID: 7832512333496901261, guid: 022f202f917827549a590ecaf87b70fa,
-    type: 3}
   spawnCount: 0
   spawnMaxCount: 7
   spawnMinCount: 5
@@ -26906,8 +27027,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53825961e8130c348b49cd4ebdb72996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  aiPrefab: {fileID: 7832512333496901261, guid: 022f202f917827549a590ecaf87b70fa,
-    type: 3}
   spawnCount: 0
   spawnMaxCount: 7
   spawnMinCount: 5
@@ -28562,7 +28681,6 @@ MonoBehaviour:
   - {fileID: 338652329}
   checkGameState: {fileID: 1869868879}
   players: []
-  deathPlayers: []
 --- !u!114 &1869868879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32860,3 +32978,4 @@ SceneRoots:
   - {fileID: 1607640145}
   - {fileID: 1869868877}
   - {fileID: 1556007630}
+  - {fileID: 507934164}

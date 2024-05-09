@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class AISpawner : MonoBehaviour
 {
     // AI를 스폰할 스포너 스크립트
-
-    // TODO... AI 스크립트 or 인터페이스 지정하기
-    [SerializeField] GameObject aiPrefab;   // 스폰할 프리팹
-
     [SerializeField] int spawnCount;        // 스폰 카운트
     [SerializeField] int spawnMaxCount;     // 스폰 최대 수
     [SerializeField] int spawnMinCount;     // 스폰 최소 수
@@ -25,8 +21,23 @@ public class AISpawner : MonoBehaviour
             Quaternion randRot = Random.rotation;
             randRot.x = 0f; randRot.z = 0f;
 
-            GameObject instance = Instantiate(aiPrefab, randPos, randRot);
+            GameObject instance = PhotonNetwork.InstantiateRoomObject("TempAI", randPos, randRot);
         }
+    }
+
+    // 랜덤한 내비메시 포인트 찍기
+    private void Update()
+    {
+        GetRandomPointOnNavMesh(transform.position, 1f, NavMesh.AllAreas);
+    }
+
+    public void GetRandomPointOnNavMesh(Vector3 center, float distance, int areaMask)
+    {
+        Vector3 RandomPos = Random.insideUnitSphere * distance + center;
+
+        NavMeshHit hit;
+
+        Debug.Log(NavMesh.SamplePosition(RandomPos, out hit, distance, areaMask));
     }
 
 }

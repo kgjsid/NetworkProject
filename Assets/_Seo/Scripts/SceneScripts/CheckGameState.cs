@@ -38,7 +38,7 @@ public class CheckGameState : MonoBehaviour
     }
 
     IEnumerator InitGameRoutine()
-    {   // 게임 초기화 진행 중...
+    {   // 게임 초기화 진행 중
         while (true)
         {
             Debug.Log("초기화 진행 중");
