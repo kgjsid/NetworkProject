@@ -20,6 +20,11 @@ public class RoomPanel : MonoBehaviour
 
     private void Start()
     {
+        Player player = PhotonNetwork.LocalPlayer;
+        if(player.IsMasterClient)
+        {
+            startButton.interactable = false;
+        }
         lobbyButton.onClick.AddListener(() => Lobby());
         startButton.onClick.AddListener(() => GameStart());
     }
@@ -44,24 +49,18 @@ public class RoomPanel : MonoBehaviour
     // 로비로 보내기
     private void Lobby()
     {
+        Debug.Log("로비로");
         PhotonNetwork.LeaveRoom();
-        PhotonNetwork.JoinLobby();
     }
     private void GameStart()
     {
         Player player = PhotonNetwork.LocalPlayer;
-
-        foreach(PlayerEntry playerEntry in PlayerList )
+        if ( !player.IsMasterClient )
         {
-            if(player.ActorNumber == playerEntry.Player.ActorNumber )
-            {
-                playerEntry.ReadyTxT.text = "준비완료";
-            }
+            bool ready = player.GetReady();
+            player.SetReady(!ready);
         }
-        bool ready = player.GetReady();
-        player.SetReady(!ready);
-        
-        if ( player.IsMasterClient )
+        else if ( player.IsMasterClient && PhotonNetwork.CurrentRoom.PlayerCount > 1 )
         {
             // 마스터일때는 준비와 게임 시작을하게 해줄거임
             PhotonNetwork.CurrentRoom.IsVisible = false; // 방 닫기
@@ -104,6 +103,18 @@ public class RoomPanel : MonoBehaviour
         playerEntry.ChangeCustomProperty(changedProps);
         AllPlayerReadycheck();
     }
+
+    public void MasterClientSwitched( Player newMaster)
+    {
+        foreach ( PlayerEntry entry in PlayerList )
+        {
+           if(entry.Player.ActorNumber == newMaster.ActorNumber )
+            {
+                entry.SetPlayer(newMaster);
+            }
+        }
+    }
+
     private void AllPlayerReadycheck()
     {
         // 마스터만 확인
@@ -117,7 +128,7 @@ public class RoomPanel : MonoBehaviour
                 readyCount++;
         }
         // 같아지면 시작할수 있게
-        if ( readyCount == PhotonNetwork.PlayerList.Length - 1 )
+        if ( readyCount == PhotonNetwork.PlayerList.Length - 1 && PhotonNetwork.PlayerList.Length != 1 )
         {
             startButton.interactable = true;
         }

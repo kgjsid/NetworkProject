@@ -1,8 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +24,7 @@ public class LobbyPanel : MonoBehaviour
 
     private void OnDisable()
     {
+        creatRoomPenal.SetActive(false);
         // 나갈 때 dicrionary를 비워주자
         for ( int i = 0; i < roomContent.childCount; i++ )
         {
@@ -40,6 +39,7 @@ public class LobbyPanel : MonoBehaviour
         createRoomButton.onClick.AddListener(() => CreateRoom());
         randomMatchingButton.onClick.AddListener(() => RandomMatching());
     }
+   
     public void UpdateRoomList( List<RoomInfo> roomlist )
     {
         // 모든 방을 확인
@@ -73,11 +73,14 @@ public class LobbyPanel : MonoBehaviour
 
     private void Main()
     {
+        Debug.Log("메인 전환");
         PhotonNetwork.LeaveLobby();
     }
 
     private void RandomMatching()
     {
+        if ( PhotonNetwork.CurrentRoom == null ) // 여기에 방이 없으니 새로 만들어주세요 라는 UI 넣어주면됨
+            return;
         PhotonNetwork.JoinRandomOrCreateRoom();
     }
     private void CreateRoom()
