@@ -79,5 +79,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         Debug.Log($"방 들어가기 실패 : {returnCode}, {message}");
     }
-    
+    public override void OnPlayerEnteredRoom( Player newPlayer )        // 새로운 플레이어가 방에 들어올떄
+    {
+        roomPanel.PlayerEnterRoom(newPlayer);
+    }
+    public override void OnPlayerLeftRoom( Player otherPlayer )
+    {
+        roomPanel.PlayerLeftRoom(otherPlayer);
+    }
 }
