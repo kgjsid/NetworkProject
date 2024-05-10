@@ -19,6 +19,11 @@ public class CreateRoomPanel : MonoBehaviour
         cancel.onClick.AddListener(() => Cancel());
         creatRoomButton.onClick.AddListener(() => CreateRoomConfirm());
     }
+    private void OnDisable()
+    {
+        creatRoomName.text = "";
+        password.text = "";
+    }
 
     // 방만들기
     private void CreateRoomConfirm()
