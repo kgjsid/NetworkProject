@@ -94,4 +94,31 @@ public static class CustomProperty
 
     }
 
+    public const string PLAYERSTATE = "PlayerState";
+    public static PlayerState GetState(this Player player)
+    {
+        PhotonHashtable customProperty = player.CustomProperties;
+        if(customProperty.TryGetValue(PLAYERSTATE, out object value))
+        {
+            return (PlayerState)value;
+        }
+        else
+        {
+            return PlayerState.Size;
+        }
+    }
+    public static void SetState(this Player player, PlayerState state)
+    {
+        Propertys.Clear();
+        Propertys[PLAYERSTATE] = state;
+        player.SetCustomProperties(Propertys);
+    }
+}
+
+public enum PlayerState
+{
+    Live,
+    Die,
+    Default,
+    Size
 }
