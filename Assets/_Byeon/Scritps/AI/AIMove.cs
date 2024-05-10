@@ -4,10 +4,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class AIMove : MonoBehaviour
-{ 
+{
     [SerializeField] NavMeshAgent agent;
     [SerializeField] Transform endPos; // 이동좌표
-
+    
 
     float randomTime; //랜덤 이동 쿨타임
     float randomRange; //랜덤 이동 거리
@@ -21,6 +21,7 @@ public class AIMove : MonoBehaviour
 
     private void Start()
     {
+        //ai 랜덤한 위치로 이동
         StartCoroutine(AIRandomPos());
     }
 
