@@ -40,6 +40,11 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - StartGame
+  - GetRandomPointOnNavMesh
+  - RandPos
+  - RequestRandPos
+  - SetRandomPos
+  - ResultRandomPos
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

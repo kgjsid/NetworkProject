@@ -41,7 +41,7 @@ public class CheckGameState : MonoBehaviour
     {   // 게임 초기화 진행 중
         while (true)
         {
-            Debug.Log("초기화 진행 중");
+            //Debug.Log("초기화 진행 중");
             yield return null;
         }
     }
@@ -49,7 +49,7 @@ public class CheckGameState : MonoBehaviour
     {   // 게임 진행 상태
         while (true)
         {
-            Debug.Log("게임 진행 중");
+            //Debug.Log("게임 진행 중");
             yield return null;
         }
     }

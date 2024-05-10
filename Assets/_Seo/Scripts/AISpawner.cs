@@ -15,29 +15,26 @@ public class AISpawner : MonoBehaviour
 
         for(int i = 0; i < spawnCount; i++)
         {
-            Vector3 randPos = transform.position + Random.insideUnitSphere * 5f;
-            randPos.y = 2f;
+            Vector3 randNavPos = GetRandomPointOnNavMesh(transform.position, 20f, NavMesh.AllAreas);
+            // Vector3 randPos = transform.position + Random.insideUnitSphere * 20f;
+            // randPos.y = 2f;
 
             Quaternion randRot = Random.rotation;
             randRot.x = 0f; randRot.z = 0f;
 
-            GameObject instance = PhotonNetwork.InstantiateRoomObject("TempAI", randPos, randRot);
+            GameObject instance = PhotonNetwork.InstantiateRoomObject("TempAI", randNavPos, randRot);
         }
     }
 
-    // 랜덤한 내비메시 포인트 찍기
-    private void Update()
-    {
-        GetRandomPointOnNavMesh(transform.position, 1f, NavMesh.AllAreas);
-    }
-
-    public void GetRandomPointOnNavMesh(Vector3 center, float distance, int areaMask)
-    {
+    private Vector3 GetRandomPointOnNavMesh(Vector3 center, float distance, int areaMask)
+    {   // 랜덤한 내비메시 포인트 찍기
         Vector3 RandomPos = Random.insideUnitSphere * distance + center;
 
         NavMeshHit hit;
 
-        Debug.Log(NavMesh.SamplePosition(RandomPos, out hit, distance, areaMask));
+        NavMesh.SamplePosition(RandomPos, out hit, distance, areaMask);
+
+        return hit.position;
     }
 
 }
