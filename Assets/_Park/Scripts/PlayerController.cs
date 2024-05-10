@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         controller.Move(rightDir * moveDir.x * moveSpeed * Time.deltaTime);
 
         Vector3 lookDir = forwardDir * moveDir.z + rightDir * moveDir.x;
-        if (lookDir.sqrMagnitude > 0)
+        if ( lookDir.sqrMagnitude > 0 )
         {
             Quaternion lookRotation = Quaternion.LookRotation(lookDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 100);
@@ -38,14 +38,14 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         ySpeed += Physics.gravity.y * Time.deltaTime;
-        if (controller.isGrounded)
+        if ( controller.isGrounded )
         {
             ySpeed = 0f;
         }
         controller.Move(Vector3.up * ySpeed * Time.deltaTime);
     }
 
-    private void OnMove(InputValue value)
+    private void OnMove( InputValue value )
     {
         Vector2 inputDir = value.Get<Vector2>();
         moveDir.x = inputDir.x;
@@ -53,12 +53,12 @@ public class PlayerController : MonoBehaviour
         //animator.SetFloat("MoveSpeed", moveDir.magnitude);
     }
 
-    private void OnRun(InputValue value)
+    private void OnRun( InputValue value )
     {
 
     }
 
-    private void OnJump(InputValue value)
+    private void OnJump( InputValue value )
     {
         //if (controller.isGrounded)
         //{
@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour
         //}
     }
 
-    private void OnAttack(InputValue value)
+    private void OnAttack( InputValue value )
     {
 
     }
