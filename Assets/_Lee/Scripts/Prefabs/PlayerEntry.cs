@@ -56,6 +56,6 @@ public class PlayerEntry : MonoBehaviour
     public void ChangeCustomProperty( PhotonHashtable property )
     {
         bool ready = player.GetReady();
-        readyTxT.text = ready ? "Ready" : "";
+        readyTxT.text = ready ? "준비 완료" : "준비 미완료";
     }
 }
