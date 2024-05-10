@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CheckGameState : MonoBehaviour
 {   // 게임의 진행상황 체크용
     [SerializeField] GameState curState;   // 현재 상태
+    //[SerializeField] Image endImage;
 
     Coroutine curRoutine;
 
@@ -35,10 +37,12 @@ public class CheckGameState : MonoBehaviour
 
     private void Awake()
     {
+            
     }
 
     IEnumerator InitGameRoutine()
     {   // 게임 초기화 진행 중
+        //endImage.gameObject.SetActive(false);
         while (true)
         {
             //Debug.Log("초기화 진행 중");
@@ -55,6 +59,7 @@ public class CheckGameState : MonoBehaviour
     }
     IEnumerator GameEndRoutine()
     {   // 게임 끝
+        //endImage.gameObject.SetActive(true);
         while (true)
         {
             yield return null;
