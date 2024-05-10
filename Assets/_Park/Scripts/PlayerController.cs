@@ -5,15 +5,22 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
-    [SerializeField] float moveSpeed;
 
+    [SerializeField] int hp;
+
+    [Header("Move")]
+    private float moveSpeed=8;
+    [SerializeField] float walkSpeed;
+    [SerializeField] float runSpeed;
     private Vector3 moveDir;
     private float ySpeed;
+
 
     private void Update()
     {
         Move();
         Jump();
+        Die();
     }
 
     private void Move()
@@ -34,7 +41,7 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 100);
         }
 
-        animator.SetFloat("MoveSpeed", moveDir.magnitude * moveSpeed, 0.1f, Time.deltaTime);        
+        animator.SetFloat("MoveSpeed", moveDir.magnitude * moveSpeed, 0.1f, Time.deltaTime);
     }
 
     private void Jump()
@@ -57,7 +64,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnRun(InputValue value)
     {
-        animator.SetBool("Run",true);
+        if (value.isPressed)
+        {
+            moveSpeed = runSpeed;
+        }
+        else
+        {
+            moveSpeed = walkSpeed;
+        }
     }
 
     private void OnJump(InputValue value)
@@ -72,5 +86,13 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
-       
+
+    private void Die()
+    {
+        if (hp < 0)
+        {
+            
+            animator.SetTrigger("Die");
+        }
+    }
 }
