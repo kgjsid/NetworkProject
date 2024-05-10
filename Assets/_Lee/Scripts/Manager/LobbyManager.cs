@@ -1,9 +1,9 @@
 using Photon.Pun;
-using Photon.Pun.Demo.Asteroids;
 using Photon.Realtime;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
+
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
@@ -38,7 +38,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             mainCharacter.gameObject.SetActive(panel == Panel.Main);
         }
         if ( lobbyPanel != null ) lobbyPanel.gameObject.SetActive(panel == Panel.Lobby);
-        if(roomPanel !=null ) roomPanel.gameObject.SetActive(panel == Panel.Room);
+        if ( roomPanel != null ) roomPanel.gameObject.SetActive(panel == Panel.Room);
     }
     public override void OnConnected()
     {
@@ -46,6 +46,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnDisconnected( DisconnectCause cause )
     {
+        // 게임 자체를 나갔을경우 리턴
         if ( cause == DisconnectCause.ApplicationQuit ) return;
 
         SetActivePanel(Panel.Login); // 로그아웃? 되면 로그인 화면으로
@@ -56,7 +57,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnLeftLobby()
     {
-        SetActivePanel (Panel.Main); // 로비에서 나갈때 메인화면으로
+        SetActivePanel(Panel.Main); // 로비에서 나갈때 메인화면으로
     }
     public override void OnCreateRoomFailed( short returnCode, string message ) // 방만들기 실패시
     {
@@ -67,8 +68,33 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Debug.Log("방 만들기 성공");
         SetActivePanel(Panel.Room);
     }
-    public override void OnRoomListUpdate( List<RoomInfo> roomList )
+    public override void OnRoomListUpdate( List<RoomInfo> roomList ) // 방이 생성될때마다 호출ㄴ
     {
         lobbyPanel.UpdateRoomList(roomList);
+    }
+    public override void OnJoinedRoom()     // 방을 찾았으면 호출
+    {
+        SetActivePanel(Panel.Room);
+    }
+    public override void OnJoinRoomFailed( short returnCode, string message )       // 방을 못찾았으면 호출
+    {
+        Debug.Log($"방 들어가기 실패 : {returnCode}, {message}");
+    }
+    public override void OnLeftRoom()
+    {
+        SetActivePanel(Panel.Lobby);
+    }
+
+    public override void OnPlayerEnteredRoom( Player newPlayer )        // 새로운 플레이어가 방에 들어올떄
+    {
+        roomPanel.PlayerEnterRoom(newPlayer);
+    }
+    public override void OnPlayerLeftRoom( Player otherPlayer )         // 어떤 플레이어가 방을 나갈때
+    {
+        roomPanel.PlayerLeftRoom(otherPlayer);
+    }
+    public override void OnPlayerPropertiesUpdate( Player targetPlayer, PhotonHashtable changedProps )
+    {
+        roomPanel.PlayerPropertiesUpdate(targetPlayer, changedProps);
     }
 }
