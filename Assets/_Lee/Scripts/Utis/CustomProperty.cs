@@ -1,4 +1,5 @@
 using Photon.Realtime;
+using UnityEngine;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public static class CustomProperty
@@ -13,9 +14,11 @@ public static class CustomProperty
         if ( customProperty.TryGetValue(READY, out object value) )
         {
             ready = ( bool )value;
+            Debug.Log($"레디 있음 {ready}");
         }
         else
         {
+            Debug.Log("레디 없음");
             ready = false;
         }
         return ready;

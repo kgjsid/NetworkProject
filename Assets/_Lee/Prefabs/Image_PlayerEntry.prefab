@@ -200,7 +200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\uD760...."
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7521fc355c228c34e8e4521cdc0a1ee5, type: 2}
   m_sharedMaterial: {fileID: -6489787663175056560, guid: 7521fc355c228c34e8e4521cdc0a1ee5,
@@ -438,7 +438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nickName: {fileID: 824444257819902993}
-  readyIMG: {fileID: 0}
+  readyIMG: {fileID: 6578131411845393103}
+  readyTxT: {fileID: 6057357702925639926}
   masterIcon: {fileID: 8118608027233180783}
 --- !u!1 &5309835212467661248
 GameObject:
