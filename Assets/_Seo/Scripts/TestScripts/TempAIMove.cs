@@ -12,15 +12,17 @@ public class TempAIMove : MonoBehaviourPun
     [SerializeField] AIState curState;
     [SerializeField] NavMeshAgent agent;
 
-    [SerializeField] TempAIMove obj;
+    Vector3 randPos = Vector3.zero;
 
     private void Start()
     {
-        moveRoutine = StartCoroutine(MoveRoutine());
+        if (PhotonNetwork.IsMasterClient)
+            moveRoutine = StartCoroutine(MoveRoutine());
     }
 
     IEnumerator MoveRoutine()
     {
+        yield return new WaitForSeconds(1f);
         while(true)
         {
             curState = (AIState)Random.Range(0, 2);
@@ -44,22 +46,49 @@ public class TempAIMove : MonoBehaviourPun
         int time = 0;
 
         // 마스터에게 요청
-        photonView.RPC("RequestRandPos", RpcTarget.MasterClient, obj);
+        RequestRPC();
         // Vector3 randPos = GetRandomPointOnNavMesh(transform.position, 20f, NavMesh.AllAreas);
-        // agent.SetDestination(randPos);
+        agent.SetDestination(randPos);
 
-        // yield return new WaitUntil(() => ((Vector3.SqrMagnitude(randPos) < 50f) || time++ > 7));
+        yield return new WaitUntil(() => ((Vector3.SqrMagnitude(randPos) < 50f) || time++ > 7));
         yield return null;
     }
 
-    public void SetRandPos()
+    private void RequestRPC()
     {
-
+        photonView.RPC("RequestRandPos", RpcTarget.MasterClient, photonView.ViewID, transform.position);
     }
 
     private void OnDisable()
     {
         StopAllCoroutines();
+    }
+
+    [PunRPC]
+    public void RequestRandPos(int viewID, Vector3 target)
+    {
+        Vector3 randPos = GetRandomPointOnNavMesh(target, 20f, NavMesh.AllAreas);
+
+        photonView.RPC("ResultRandomPos", RpcTarget.All, viewID, randPos);
+    }
+    [PunRPC]
+    private void ResultRandomPos(int viewID, Vector3 target)
+    {
+        if (viewID != photonView.ViewID)
+            return;
+
+        randPos = target;
+    }
+
+    private Vector3 GetRandomPointOnNavMesh(Vector3 center, float distance, int areaMask)
+    {   // 랜덤한 내비메시 포인트 찍기
+        Vector3 RandomPos = Random.insideUnitSphere * distance + center;
+
+        NavMeshHit hit;
+
+        NavMesh.SamplePosition(RandomPos, out hit, distance, areaMask);
+
+        return hit.position;
     }
 }
 

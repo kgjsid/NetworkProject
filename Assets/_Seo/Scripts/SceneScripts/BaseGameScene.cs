@@ -1,15 +1,17 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 public class BaseGameScene : MonoBehaviourPunCallbacks
 {
-    // 게임 씬(매니저)
-
+    // 게임 씬
     [SerializeField] List<AISpawner> aiSpanwers = new List<AISpawner>();
     [SerializeField] CheckGameState checkGameState;
-    [SerializeField] List<GameObject> players = new List<GameObject>();
+    [SerializeField] List<Player> players;
     
     private IEnumerator Start()
     {   
@@ -17,6 +19,9 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         {   // 비어 있으면 하나는 찾아야 함
             checkGameState = FindObjectOfType<CheckGameState>();
         }
+        // 현재 플레이어들
+        players = PhotonNetwork.PlayerList.ToList();
+        
         GameObject instance = PhotonNetwork.Instantiate("Player", transform.position, Quaternion.identity);
 
         instance.GetComponent<CharacterController>().enabled = false;
@@ -42,5 +47,6 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
         yield return null;
     }
+
 
 }
