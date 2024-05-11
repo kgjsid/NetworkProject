@@ -11,19 +11,20 @@ public class TempPlayerMove : MonoBehaviourPun
 
     Vector3 moveDir;
     [SerializeField] PlayerInput input;
-    [SerializeField] CinemachineVirtualCamera virtualCamera;
+    [SerializeField] CinemachineFreeLook virtualCamera;
     [SerializeField] CharacterController controller;
 
     private void Start()
     {
         if(photonView.IsMine == false)
         {
-            Destroy(input);
-            Destroy(controller);
+            input.enabled = false;
+            controller.enabled = false;
             virtualCamera.gameObject.SetActive(false);
         }
     }
 
+    /*
     private void FixedUpdate()
     {
         Move();
@@ -45,4 +46,5 @@ public class TempPlayerMove : MonoBehaviourPun
         moveDir.x = inputDir.x;
         moveDir.z = inputDir.y;
     }
+    */
 }
