@@ -45,6 +45,7 @@ MonoBehaviour:
   - RequestRandPos
   - SetRandomPos
   - ResultRandomPos
+  - RequestAttack
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
