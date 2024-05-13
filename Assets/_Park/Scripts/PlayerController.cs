@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     private Vector3 moveDir;
-    //private float ySpeed;
+    private float ySpeed;
     private bool isAlive = true;
 
     [SerializeField] LayerMask damageLayer;
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         {
             Move();           
         }
+        Jump();
     }
 
     private void Move()
@@ -48,15 +49,17 @@ public class PlayerController : MonoBehaviour, IDamageable
         animator.SetFloat("MoveSpeed", moveDir.magnitude * moveSpeed, 0.1f, Time.deltaTime);
     }
 
-    //private void Jump()
-    //{
-    //    ySpeed += Physics.gravity.y * Time.deltaTime;
-    //    if (controller.isGrounded)
-    //    {
-    //        ySpeed = 0f;
-    //    }
-    //    controller.Move(Vector3.up * ySpeed * Time.deltaTime);
-    //}
+    private void Jump()
+    {
+        ySpeed += Physics.gravity.y * Time.deltaTime;
+        /*if (controller.isGrounded)
+        {
+            ySpeed = 0f;
+        }
+        */
+        controller.Move(Vector3.up * ySpeed * Time.deltaTime);
+        
+    }
 
     private void OnMove(InputValue value)
     {

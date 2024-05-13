@@ -2,8 +2,9 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using Photon.Pun;
+using System.Runtime.CompilerServices;
 
-public class TempAIMove : MonoBehaviourPun
+public class TempAIMove : MonoBehaviourPun, IDamageable
 {
     // AI 테스트 이동 코드
     Coroutine moveRoutine;
@@ -11,6 +12,10 @@ public class TempAIMove : MonoBehaviourPun
     [SerializeField] float choiceInterval;
     [SerializeField] AIState curState;
     [SerializeField] NavMeshAgent agent;
+    [SerializeField] Animator animator;
+    [SerializeField] Collider collider;
+
+    [SerializeField] LayerMask damageLayer;
 
     Vector3 randPos = Vector3.zero;
 
@@ -30,9 +35,11 @@ public class TempAIMove : MonoBehaviourPun
             switch(curState)
             {
                 case AIState.Walking:
+                    animator.SetFloat("MoveSpeed", 8f);
                     yield return GoRandomPos();
                     break;
                 case AIState.Stopping:
+                    animator.SetFloat("MoveSpeed", 0f);
                     yield return new WaitForSeconds(Random.Range(1, 3));
                     break;
             }
@@ -89,6 +96,25 @@ public class TempAIMove : MonoBehaviourPun
         NavMesh.SamplePosition(RandomPos, out hit, distance, areaMask);
 
         return hit.position;
+    }
+
+    private void Die()
+    {
+        animator.SetTrigger("Die");
+        collider.enabled = false;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        Die();
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (damageLayer.Contain(collision.gameObject.layer))
+        {
+            TakeDamage(2);
+        }
     }
 }
 
