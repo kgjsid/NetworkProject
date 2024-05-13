@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 7445287836826862896}
   - component: {fileID: 1796939713537756341}
   - component: {fileID: 7057082699829168759}
+  - component: {fileID: 7194526885348991568}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -249,7 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   input: {fileID: 2486219168679347798}
-  virtualCamera: {fileID: 6036931272384372372}
+  virtualCamera: {fileID: 0}
   controller: {fileID: 1270669922171822073}
 --- !u!114 &2486219168679347798
 MonoBehaviour:
@@ -392,6 +393,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
+--- !u!114 &7194526885348991568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4788220728133097829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f1190be2fa0d9d4bb7f27adb5634345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCoolTime: 5
+  curAttackState: 0
+  attackLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  attackTime: 0
 --- !u!1 &7485955042754586861
 GameObject:
   m_ObjectHideFlags: 0
