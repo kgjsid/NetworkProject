@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "236730103162",
+    "firebase_url": "https://miniature-manhunt-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "miniature-manhunt",
+    "storage_bucket": "miniature-manhunt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:236730103162:android:96ce7c36897c75ada312c3",
+        "android_client_info": {
+          "package_name": "com.BeastCoding.MiniatureManhunt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzBwmotV1J7tFIcyXK3ESULqxwxnxTOdw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
