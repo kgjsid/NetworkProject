@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamageable
 {
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
@@ -9,18 +9,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] int hp;
 
     [Header("Move")]
-    private float moveSpeed=8;
+    private float moveSpeed = 8;
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     private Vector3 moveDir;
-    private float ySpeed;
+    //private float ySpeed;
+    private bool isAlive = true;
 
+    [SerializeField] LayerMask damageLayer;
+    private bool isDamaged;
 
     private void Update()
     {
-        Move();
-        Jump();
-        Die();
+        if (isAlive) // Only allow movement if the player is alive
+        {
+            Move();           
+        }
     }
 
     private void Move()
@@ -44,22 +48,21 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("MoveSpeed", moveDir.magnitude * moveSpeed, 0.1f, Time.deltaTime);
     }
 
-    private void Jump()
-    {
-        ySpeed += Physics.gravity.y * Time.deltaTime;
-        if (controller.isGrounded)
-        {
-            ySpeed = 0f;
-        }
-        controller.Move(Vector3.up * ySpeed * Time.deltaTime);
-    }
+    //private void Jump()
+    //{
+    //    ySpeed += Physics.gravity.y * Time.deltaTime;
+    //    if (controller.isGrounded)
+    //    {
+    //        ySpeed = 0f;
+    //    }
+    //    controller.Move(Vector3.up * ySpeed * Time.deltaTime);
+    //}
 
     private void OnMove(InputValue value)
     {
         Vector2 inputDir = value.Get<Vector2>();
         moveDir.x = inputDir.x;
-        moveDir.z = inputDir.y;
-        //animator.SetFloat("MoveSpeed", moveDir.magnitude);
+        moveDir.z = inputDir.y;        
     }
 
     private void OnRun(InputValue value)
@@ -74,25 +77,52 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnJump(InputValue value)
-    {
-        //if (controller.isGrounded)
-        //{
-        //    ySpeed = jumpSpeed;
-        //}
-    }
-
     private void OnAttack(InputValue value)
     {
-        animator.SetTrigger("Attack");
+        animator.SetBool("Attack02",true);
+    }
+
+    public void AniAttack()
+    {
+        animator.SetBool("Attack02", false);
     }
 
     private void Die()
     {
-        if (hp < 0)
+        isDamaged = false;
+        animator.SetTrigger("Die");
+    }
+
+    public void TakeDamage(int damage)
+    {
+        if (!isDamaged)
         {
-            
-            animator.SetTrigger("Die");
+            isDamaged = true;
+            hp -= damage;
+            if (hp <= 0)
+            {
+                Die();
+            }
         }
+    }
+
+    private int damageCount;
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (damageLayer.Contain(collision.gameObject.layer))
+        {
+            TakeDamage(2);
+            
+        }
+    }
+
+    public void PlayerMove()
+    {
+        isAlive = true;
+        hp += 2;         // 테스트용 hp        
+    }
+    public void PlayerNotMove()
+    {
+        isAlive = false;
     }
 }
