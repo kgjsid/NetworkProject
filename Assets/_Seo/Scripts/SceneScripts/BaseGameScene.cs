@@ -96,6 +96,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         }
         else if(changedProps.ContainsKey(CustomProperty.PLAYERSTATE))
         {
+            // 플레이어 상태 바뀐 것 체크
             deathCount++;
 
             if(deathCount >= players.Count - 1)

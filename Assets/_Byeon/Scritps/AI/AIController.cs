@@ -20,13 +20,13 @@ public class AIController : MonoBehaviour, IDamageable,IPointerClickHandler
         
     }
 
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
         Destroy(gameObject);
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        TakeDamage();
+        TakeDamage(1);
     }
 }
