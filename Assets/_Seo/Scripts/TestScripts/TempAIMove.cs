@@ -21,6 +21,7 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
 
     private void Start()
     {
+        StartMoveRoutine();
         BaseGameScene.Instance.masterChangeEvent.AddListener(StartMoveRoutine);
     }
 
@@ -32,7 +33,7 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
 
     IEnumerator MoveRoutine()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
         while(true)
         {
             curState = (AIState)Random.Range(0, 2);
@@ -60,7 +61,8 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
         // 마스터에게 요청
         RequestRPC();
         // Vector3 randPos = GetRandomPointOnNavMesh(transform.position, 20f, NavMesh.AllAreas);
-        agent.SetDestination(randPos);
+        if (agent != null)
+            agent.SetDestination(randPos);
 
         yield return new WaitUntil(() => ((Vector3.SqrMagnitude(randPos) < 50f) || time++ > 7));
         yield return null;
@@ -105,11 +107,7 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
 
     private void Die()
     {
-        animator.SetTrigger("Die");
-        collider.enabled = false;
-        agent.speed = 0f;
-        agent.isStopped = false;
-        agent.enabled = false;
+        StartCoroutine(DieRoutine());
     }
 
     public void TakeDamage(int damage)
@@ -123,6 +121,26 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
         {
             TakeDamage(2);
         }
+    }
+
+    IEnumerator DieRoutine()
+    {
+        animator.SetTrigger("Die");
+        gameObject.layer = 0;
+        agent.speed = 0f;
+        agent.isStopped = false;
+        agent.enabled = false;
+        yield return new WaitForSeconds(1.5f);
+        photonView.RPC("PhotonDestroy", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void PhotonDestroy()
+    {
+        if (photonView.IsMine == false)
+            return;
+
+        PhotonNetwork.Destroy(gameObject);
     }
 }
 

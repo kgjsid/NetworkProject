@@ -25,7 +25,19 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     int loadCount = 0;
     int deathCount = 0;
 
-    public UnityEvent masterChangeEvent; 
+    public UnityEvent masterChangeEvent;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance.gameObject);
+        }
+    }
 
     private IEnumerator Start()
     {
@@ -115,6 +127,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
+        Debug.Log("마스터 변경");
         masterChangeEvent?.Invoke();
     }
 }
