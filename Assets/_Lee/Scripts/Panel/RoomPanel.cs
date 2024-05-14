@@ -1,5 +1,6 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -21,7 +22,7 @@ public class RoomPanel : MonoBehaviour
     private void Start()
     {
         Player player = PhotonNetwork.LocalPlayer;
-        if(player.IsMasterClient)
+        if ( player.IsMasterClient )
         {
             startButton.interactable = false;
         }
@@ -49,7 +50,6 @@ public class RoomPanel : MonoBehaviour
     // 로비로 보내기
     private void Lobby()
     {
-        Debug.Log("로비로");
         PhotonNetwork.LeaveRoom();
     }
     private void GameStart()
@@ -104,11 +104,11 @@ public class RoomPanel : MonoBehaviour
         AllPlayerReadycheck();
     }
 
-    public void MasterClientSwitched( Player newMaster)
+    public void MasterClientSwitched( Player newMaster )
     {
         foreach ( PlayerEntry entry in PlayerList )
         {
-           if(entry.Player.ActorNumber == newMaster.ActorNumber )
+            if ( entry.Player.ActorNumber == newMaster.ActorNumber )
             {
                 entry.SetPlayer(newMaster);
             }

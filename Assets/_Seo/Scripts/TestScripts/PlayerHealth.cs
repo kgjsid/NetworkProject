@@ -1,18 +1,10 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviourPun, IDamageable
+public class PlayerHealth : MonoBehaviourPun
 {
     [SerializeField] LayerMask damageLayer;
     [SerializeField] int hp;
-
-    public void TakeDamage(int damage)
-    {
-        hp -= damage;
-        if (hp <= 0)
-        {
-        }
-    }
 
     private void OnTriggerEnter(Collider collision)
     {

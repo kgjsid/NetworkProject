@@ -7,6 +7,7 @@ public class DebuggingManager : MonoBehaviourPunCallbacks
 {
     // 네트워크 디버깅용
     [SerializeField] string debugRoomName = "DebugRoom 1";
+    [SerializeField] string sceneName = "BaseGameScene";
 
     private void Start()
     {
@@ -40,6 +41,6 @@ public class DebuggingManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void StartGame()
     {
-        PhotonNetwork.LoadLevel("BaseGameScene");
+        PhotonNetwork.LoadLevel(sceneName);
     }
 }
