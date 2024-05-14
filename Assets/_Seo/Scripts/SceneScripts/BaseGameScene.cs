@@ -7,9 +7,14 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.Events;
 
 public class BaseGameScene : MonoBehaviourPunCallbacks
 {
+    private static BaseGameScene instance;
+
+    public static BaseGameScene Instance { get { return instance; } }  
+
     // 게임 씬
     [SerializeField] List<AISpawner> aiSpanwers = new List<AISpawner>();
     [SerializeField] CheckGameState checkGameState;
@@ -19,6 +24,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
     int loadCount = 0;
     int deathCount = 0;
+
+    public UnityEvent masterChangeEvent; 
 
     private IEnumerator Start()
     {
@@ -106,4 +113,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         }
     }
 
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        masterChangeEvent?.Invoke();
+    }
 }

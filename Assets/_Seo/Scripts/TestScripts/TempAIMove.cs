@@ -21,6 +21,11 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
 
     private void Start()
     {
+        BaseGameScene.Instance.masterChangeEvent.AddListener(StartMoveRoutine);
+    }
+
+    private void StartMoveRoutine()
+    {
         if (PhotonNetwork.IsMasterClient)
             moveRoutine = StartCoroutine(MoveRoutine());
     }
@@ -102,6 +107,9 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
     {
         animator.SetTrigger("Die");
         collider.enabled = false;
+        agent.speed = 0f;
+        agent.isStopped = false;
+        agent.enabled = false;
     }
 
     public void TakeDamage(int damage)
