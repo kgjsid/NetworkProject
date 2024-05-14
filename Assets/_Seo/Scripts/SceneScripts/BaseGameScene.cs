@@ -123,6 +123,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
                 checkGameState.CurState = GameState.GameEnd;
             }
         }
+        
     }
 
     public override void OnMasterClientSwitched(Player newMasterClient)
