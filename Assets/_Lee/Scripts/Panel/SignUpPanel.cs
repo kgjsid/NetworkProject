@@ -4,10 +4,11 @@ using Photon.Pun;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase.Auth;
 
 public class SignUpPanel : MonoBehaviour
 {
-    [SerializeField] LobbyManager manager;
+    [SerializeField] LobbyManager lobbymanager;
 
     [SerializeField] TMP_InputField nickNameInput;
     [SerializeField] TMP_InputField emailInput;
@@ -19,7 +20,7 @@ public class SignUpPanel : MonoBehaviour
 
     private void Awake()
     {
-        manager = FindObjectOfType<LobbyManager>();
+        lobbymanager = FindObjectOfType<LobbyManager>();
         singUp.onClick.AddListener(SingUp);
         cancel.onClick.AddListener(Cancel);
     }
@@ -34,7 +35,7 @@ public class SignUpPanel : MonoBehaviour
         string confirm = confirmInputInput.text;
         if ( pass != confirm )
         {
-            manager.ShowInfo("비밀번호가 같지 않음");
+            lobbymanager.ShowInfo("비밀번호가 같지 않음");
             SetInteractable(true);
             return;
         }
@@ -42,45 +43,75 @@ public class SignUpPanel : MonoBehaviour
         {
             if ( task.IsCanceled )
             {
-                manager.ShowInfo("회원가입 취소됨");
+                lobbymanager.ShowInfo("회원가입 취소됨");
                 SetInteractable(true);
                 return;
             }
             else if ( task.IsFaulted )
             {
-                manager.ShowInfo($"회원가입 실패함 : {task.Exception.Message}");
+                lobbymanager.ShowInfo($"회원가입 실패함 : {task.Exception.Message}");
                 SetInteractable(true);
                 return;
             }
-            manager.ShowInfo("회원가입 성공");
-            manager.SetActivePanel(LobbyManager.Panel.Login);
+            lobbymanager.ShowInfo("회원가입 성공");
+            lobbymanager.SetActivePanel(LobbyManager.Panel.Login);
             SetInteractable(true);
         });
-        // 나중에 구조체로 가져와야 할듯? ㅈㄴ 대충 만듬
+        // 로그인
         FirebaseManager.Auth.SignInWithEmailAndPasswordAsync(email, pass).ContinueWithOnMainThread(task =>
         {
             if ( task.IsCanceled )
             {
-                manager.ShowInfo("로그인이 취소됨");
+                lobbymanager.ShowInfo("로그인이 취소됨");
                 SetInteractable(true);
                 return;
             }
             else if ( task.IsFaulted )
             {
-                manager.ShowInfo($"로그인 실패 : {task.Exception.Message}");
+                lobbymanager.ShowInfo($"로그인 실패 : {task.Exception.Message}");
                 SetInteractable(true);
                 return;
             }
 
-            PhotonNetwork.LocalPlayer.NickName = nickNameInput.text; // 이부분은 DB에 닉네임 저장하고 불러오기로 할 예정
+            /*PhotonNetwork.LocalPlayer.NickName = nickNameInput.text; // 이부분은 DB에 닉네임 저장하고 불러오기로 할 예정
             PhotonNetwork.ConnectUsingSettings();
-            FirebaseManager.DB.GetReference($"UserDate/{email}/nickName").SetValueAsync(nickNameInput.text);
+            FirebaseManager.DB.GetReference($"UserDate/{email}/nickName").SetValueAsync(nickNameInput.text);*/
+            NicknameAppyly();
+            SetInteractable(true);
+        });
+
+
+    }
+
+    private void NicknameAppyly()
+    {
+        SetInteractable(false);
+        UserProfile userProfile = new UserProfile();
+        userProfile.DisplayName = nickNameInput.text;
+
+        FirebaseManager.Auth.CurrentUser.UpdateUserProfileAsync(userProfile).ContinueWithOnMainThread(task =>
+        {
+            if ( task.IsCanceled )
+            {
+                lobbymanager.ShowInfo("유저 프로필 갱신 취소");
+                SetInteractable(true);
+                return;
+            }
+            if ( task.IsFaulted )
+            {
+                lobbymanager.ShowInfo($"유저 프로필 갱신 실패: {task.Exception.Message}");
+                SetInteractable(true);
+                return;
+            }
+            PhotonNetwork.LocalPlayer.NickName =userProfile.DisplayName;
+            PhotonNetwork.ConnectUsingSettings();
+            lobbymanager.ShowInfo("유저 프로필 갱신 성공");
             SetInteractable(true);
         });
     }
     private void Cancel()
     {
-        manager.SetActivePanel(LobbyManager.Panel.Login);
+        lobbymanager.SetActivePanel(LobbyManager.Panel.Login);
     }
 
     private void SetInteractable( bool interactable )

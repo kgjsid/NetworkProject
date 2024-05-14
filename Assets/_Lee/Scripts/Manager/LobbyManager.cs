@@ -8,7 +8,7 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     [SerializeField] GameObject mainCharacter;
-    public enum Panel { Login, Main, Lobby, Room, Edit, Info, SignUp }// 패널 상태
+    public enum Panel { Login, Main, Lobby, Room, Info, SignUp }// 패널 상태
 
     [SerializeField] Panel curPanel;
   
@@ -16,7 +16,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] MainPanel mainPanel;
     [SerializeField] LobbyPanel lobbyPanel;
     [SerializeField] RoomPanel roomPanel;
-    [SerializeField] EditPanel editPanel;
     [SerializeField] InfoPanel infoPanel;
     [SerializeField] SignUpPanel signUpPanel;
 
@@ -46,7 +45,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
         if ( lobbyPanel != null ) lobbyPanel.gameObject.SetActive(panel == Panel.Lobby);
         if ( roomPanel != null ) roomPanel.gameObject.SetActive(panel == Panel.Room);
-        if ( editPanel != null ) editPanel.gameObject.SetActive(panel == Panel.Edit);
         if ( infoPanel != null ) infoPanel.gameObject.SetActive(panel == Panel.Info);
         if ( signUpPanel != null ) signUpPanel.gameObject.SetActive(panel == Panel.SignUp);
     }
@@ -63,7 +61,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {   // 마스터 서버에 접속할 때
         // 방을 떠나면 방 서버에서 나가고 매칭을 위한 마스터 서버로 접속할때마다 호출
         if ( connectedCount > 0 )
+        {
+            Debug.Log("들어옴");
             SetActivePanel(Panel.Lobby);
+        }
         connectedCount++;
     }
     public override void OnDisconnected( DisconnectCause cause )
@@ -75,14 +76,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnJoinedLobby()
     {
+        Debug.Log("로비패널로 감");
         SetActivePanel(Panel.Lobby); // 로비를 찾을 때 로비화면 보여줌
     }
     public override void OnLeftLobby()
     {
+        Debug.Log("메인패널로 감");
         SetActivePanel(Panel.Main); // 로비에서 나갈때 메인화면으로
-    }
-    public override void OnCreateRoomFailed( short returnCode, string message ) // 방만들기 실패시
-    {
     }
     public override void OnCreatedRoom() // 방만들기 성공시
     {
@@ -96,14 +96,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         SetActivePanel(Panel.Room);
     }
-    public override void OnJoinRoomFailed( short returnCode, string message )       // 방을 못찾았으면 호출
-    {
-    }
     public override void OnLeftRoom()
     {
         SetActivePanel(Panel.Lobby);
     }
-
     public override void OnPlayerEnteredRoom( Player newPlayer )        // 새로운 플레이어가 방에 들어올떄
     {
         roomPanel.PlayerEnterRoom(newPlayer);
