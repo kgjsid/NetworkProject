@@ -6537,6 +6537,7 @@ GameObject:
   - component: {fileID: 1624681915049889546}
   - component: {fileID: 3856817773525679793}
   - component: {fileID: 6678658630671019171}
+  - component: {fileID: 430357105598671776}
   m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
@@ -6736,6 +6737,21 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 1
     Name: Attack02
+  - Type: 4
+    SynchronizeType: 0
+    Name: Emote01
+  - Type: 4
+    SynchronizeType: 0
+    Name: Emote02
+  - Type: 4
+    SynchronizeType: 0
+    Name: Emote03
+  - Type: 4
+    SynchronizeType: 0
+    Name: Emote04
+  - Type: 4
+    SynchronizeType: 0
+    Name: EmoteMode
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -6754,6 +6770,22 @@ MonoBehaviour:
   input: {fileID: 3532579446112267764}
   virtualCamera: {fileID: 4497973077051589330}
   controller: {fileID: 1409454602665258959}
+--- !u!114 &430357105598671776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8587135801478471232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33ff4ec04ec8cac4192133398a70fbe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageLayer:
+    serializedVersion: 2
+    m_Bits: 512
+  hp: 2
 --- !u!1 &8678278905929033635
 GameObject:
   m_ObjectHideFlags: 3

@@ -7,7 +7,7 @@ public class DebuggingManager : MonoBehaviourPunCallbacks
 {
     // 네트워크 디버깅용
     [SerializeField] string debugRoomName = "DebugRoom 1";
-    [SerializeField] string sceneName;
+    [SerializeField] string sceneName = "BaseGameScene";
 
     private void Start()
     {
