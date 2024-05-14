@@ -6,12 +6,17 @@ using System.Linq;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
+using UnityEngine.Events;
 
 public class BaseGameScene : MonoBehaviourPunCallbacks
 {
+    private static BaseGameScene instance;
+
+    public static BaseGameScene Instance { get { return instance; } }
+
     // 게임 씬
-    [SerializeField] List<AISpawner> aiSpanwers = new List<AISpawner>();
+    [SerializeField] List<AISpawner> aiSpanwers;
+    [SerializeField] List<Transform> playerSpawnPoints;
     [SerializeField] CheckGameState checkGameState;
     [SerializeField] List<Player> players;
     [SerializeField] Image fade;
@@ -19,6 +24,20 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
     int loadCount = 0;
     int deathCount = 0;
+
+    public UnityEvent masterChangeEvent;
+
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(instance.gameObject);
+        }
+    }
 
     private IEnumerator Start()
     {
@@ -65,7 +84,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
     private IEnumerator PlayerSpawn()
     {   // 플레이어 스폰루틴
-        GameObject instance = PhotonNetwork.Instantiate("Player", transform.position, Quaternion.identity);
+        GameObject instance = PhotonNetwork.Instantiate("Player", playerSpawnPoints[Random.Range(0, playerSpawnPoints.Count)].position, Quaternion.identity);
 
         instance.GetComponent<CharacterController>().enabled = false;
         instance.transform.position = new Vector3(transform.position.x, 1.4f, transform.position.z);
@@ -106,4 +125,9 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         }
     }
 
+    public override void OnMasterClientSwitched(Player newMasterClient)
+    {
+        Debug.Log("마스터 변경");
+        masterChangeEvent?.Invoke();
+    }
 }
