@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 using UnityEngine.UI;
 
 public class LobbyPanel : MonoBehaviour
@@ -16,10 +17,24 @@ public class LobbyPanel : MonoBehaviour
     [SerializeField] Button randomMatchingButton;
 
     private Dictionary<string, RoomEntry> roomDictionary;
-
+    LobbyManager lobbyManager;
     private void Awake()
     {
         roomDictionary = new Dictionary<string, RoomEntry>();
+        lobbyManager = FindObjectOfType<LobbyManager>();
+    }
+
+    private void OnEnable()
+    {
+        Debug.Log($"현재 로비 상황 : {PhotonNetwork.InLobby}");
+        if ( !PhotonNetwork.InLobby )
+        {
+            Debug.Log("로비 접속 시도");
+            PhotonNetwork.JoinLobby();
+            Debug.Log("로비 접속 끝");
+            TypedLobby curlobby = PhotonNetwork.CurrentLobby;
+            Debug.Log($"{curlobby}");
+        }
     }
 
     private void OnDisable()
@@ -38,6 +53,9 @@ public class LobbyPanel : MonoBehaviour
         mainButton.onClick.AddListener(() => Main());
         createRoomButton.onClick.AddListener(() => CreateRoom());
         randomMatchingButton.onClick.AddListener(() => RandomMatching());
+
+        TypedLobby curlobby = PhotonNetwork.CurrentLobby;
+        Debug.Log($"{curlobby}");
     }
    
     public void UpdateRoomList( List<RoomInfo> roomlist )
@@ -74,7 +92,9 @@ public class LobbyPanel : MonoBehaviour
     private void Main()
     {
         Debug.Log("메인 전환");
-        PhotonNetwork.LeaveLobby();
+        lobbyManager.SetActivePanel(LobbyManager.Panel.Main);
+        /*PhotonNetwork.LeaveLobby();*/
+
     }
 
     private void RandomMatching()
