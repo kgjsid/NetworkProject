@@ -29448,6 +29448,11 @@ MonoBehaviour:
   - {fileID: 1522574945}
   - {fileID: 338652329}
   - {fileID: 2025148956}
+  playerSpawnPoints:
+  - {fileID: 1584653161}
+  - {fileID: 698291608}
+  - {fileID: 376763996}
+  - {fileID: 1433509038}
   checkGameState: {fileID: 1869868879}
   fade: {fileID: 3570199}
   fadeTime: 2
