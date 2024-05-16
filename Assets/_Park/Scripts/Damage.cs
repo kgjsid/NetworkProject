@@ -5,7 +5,7 @@ public class Damage : MonoBehaviour
     [SerializeField] LayerMask damageCheckLayer;
     [SerializeField] int damage;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if ((damageCheckLayer.value & 1 << collision.gameObject.layer) != 0)
         {
