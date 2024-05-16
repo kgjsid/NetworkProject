@@ -18,7 +18,6 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
     [SerializeField] LayerMask damageLayer;
 
     Vector3 randPos = Vector3.zero;
-
     private void Start()
     {
         StartMoveRoutine();

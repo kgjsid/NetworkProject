@@ -6,13 +6,17 @@ public class PlayerHealth : MonoBehaviourPun
     [SerializeField] LayerMask damageLayer;
     [SerializeField] int hp;
     public int dieViewId;
-
+    [SerializeField] KillLogUI killLogUI;
+    private void Awake()
+    {
+        killLogUI = FindObjectOfType<KillLogUI>();
+    }
     private void OnTriggerEnter(Collider collision)
     {
         if (damageLayer.Contain(collision.gameObject.layer))
         {
             int targetID = collision.GetComponent<PhotonView>().ViewID;
-
+            Debug.Log("마스터한테 요청");
             photonView.RPC("RequestAttack", RpcTarget.MasterClient, targetID);
         }
     }
@@ -20,9 +24,12 @@ public class PlayerHealth : MonoBehaviourPun
     [PunRPC]
     private void RequestAttack(int targetViewID)
     {
+        Debug.Log("RPC 호출");
+        string die = PhotonNetwork.GetPhotonView(targetViewID).name;
         IDamageable target = PhotonView.Find(targetViewID).GetComponent<IDamageable>();
         dieViewId = targetViewID;
         target?.TakeDamage(2);
+        killLogUI.KillLog(PhotonNetwork.LocalPlayer.NickName, die );
     }
     // 여기서 킬로그 함수 만들어줘서 붙여주면될듯?
     // 그럼 킬로그패널에서 해야될거는?

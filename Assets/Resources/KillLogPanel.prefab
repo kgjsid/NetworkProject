@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6468400294226997414}
   - component: {fileID: 2276994603233950327}
   - component: {fileID: 7673154774304875509}
+  - component: {fileID: 3422011279935103124}
   m_Layer: 5
   m_Name: KillLogPanel
   m_TagString: Untagged
@@ -78,6 +79,20 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3422011279935103124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201517451609772290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e15106d96fcd01b4eb5d303d507a3bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  killerText: {fileID: 4201429114489392933}
+  DieText: {fileID: 8634403725081664147}
 --- !u!1 &2798646772300526278
 GameObject:
   m_ObjectHideFlags: 0

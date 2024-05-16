@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class KillLogPanel : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] TMP_Text killerText;
+    [SerializeField] TMP_Text DieText;
+    
+    public void changeLog(string killer , string die )
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        killerText.text = killer;
+        DieText.text = die;
     }
 }
