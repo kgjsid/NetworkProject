@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 703750735836234806}
   - component: {fileID: 4697171325722841776}
   - component: {fileID: 3852445107572737733}
-  - component: {fileID: 3181208093250913666}
   - component: {fileID: 9117481876614528857}
   - component: {fileID: 2100613663132930969}
   - component: {fileID: 3259012290933323427}
@@ -136,26 +135,6 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &3181208093250913666
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 204425265791416288}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7fa42b9d21bb6b49923496a3ae4f708, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  choiceInterval: 3
-  curState: 0
-  agent: {fileID: 703750735836234806}
-  animator: {fileID: 7194826483744481469}
-  collider: {fileID: 4697171325722841776}
-  damageLayer:
-    serializedVersion: 2
-    m_Bits: 512
 --- !u!114 &9117481876614528857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -232,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b03922177a16974da40868bbd790acb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
 --- !u!114 &-3127367830042513098
 MonoBehaviour:
   m_ObjectHideFlags: 0
