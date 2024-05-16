@@ -4,26 +4,35 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Photon.Pun;
+using static AIController;
 
 public class AIController : MonoBehaviour, IDamageable//,IPointerClickHandler
 {
-    private Animator aiAnimator;
+    public enum AIstate { Idle, Walk, Die}
+
+    AIstate aiState;
+
+    private Animator animator;
+    public Animator Animator {  get { return animator; } }
+
     private AIMove aiMove;
+
     private ObjectPoolManager objectPoolManager;
     private AISpawnPos aiSpawnPos;
 
     [SerializeField] int hp; //AI 체력
 
 
+
     private void Awake()
     {
-        aiAnimator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         aiMove = GetComponent<AIMove>();
         hp = 1;
     }
     private void Start()
     {
-        
+        aiState = AIstate.Idle;
     }
 
     public void TakeDamage(int damage)
@@ -44,7 +53,8 @@ public class AIController : MonoBehaviour, IDamageable//,IPointerClickHandler
         aiMove.Agent.speed = 0;
         aiMove.Agent.angularSpeed = 0;
 
-        aiAnimator.SetTrigger("Die");
+        aiState = AIstate.Die;
+        animator.SetTrigger("Die");
         StartCoroutine(DieDelay());
     }
 
