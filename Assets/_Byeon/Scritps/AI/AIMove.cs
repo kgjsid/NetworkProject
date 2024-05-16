@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class AIMove : MonoBehaviour
 {
     [SerializeField] NavMeshAgent agent;
+    public NavMeshAgent Agent { get { return agent; } }
     [SerializeField] Transform endPos; // 이동좌표
     
 
