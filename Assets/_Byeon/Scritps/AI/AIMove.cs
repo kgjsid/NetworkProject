@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+
 public class AIMove : MonoBehaviour
 {
+    [SerializeField] AIController controller;
+
     [SerializeField] NavMeshAgent agent;
     public NavMeshAgent Agent { get { return agent; } }
+
     [SerializeField] Transform endPos; // 이동좌표
     
 
     float randomTime; //랜덤 이동 쿨타임
     float randomRange; //랜덤 이동 거리
-    Vector3 randomPos;
+    Vector3 randomPos; //랜덤 방향
 
     private void Awake()
     {
+        controller = GetComponent<AIController>();
         agent = transform.GetComponent<NavMeshAgent>();
-        endPos = transform.Find("endPos");
+        endPos = transform.GetChild(1);
     }
 
     private void Start()
@@ -26,16 +31,30 @@ public class AIMove : MonoBehaviour
         StartCoroutine(AIRandomPos());
     }
 
+    private void Update()
+    {
+        if(agent.velocity.sqrMagnitude > 1f )
+        {
+            controller.Animator.SetFloat("MoveSpeed", agent.speed);
+        }
+        else
+        {
+            controller.Animator.SetFloat("MoveSpeed", 0);
+        }
+    }
+
     IEnumerator AIRandomPos()
     {
         while (true)
         {
+            
             randomTime = Random.Range(0, 5);
-            randomRange = Random.Range(0, 50);
-
+            randomRange = Random.Range(0, 20);
             randomPos = Random.insideUnitSphere;
+
             endPos.position = transform.position + (new Vector3(randomPos.x, 0, randomPos.z).normalized * randomRange);
             agent.destination = endPos.position;
+
 
             yield return new WaitForSeconds(randomTime);
         }
