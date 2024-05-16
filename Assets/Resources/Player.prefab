@@ -6788,6 +6788,7 @@ MonoBehaviour:
   hp: 2
   dieViewId: 0
   killLogUI: {fileID: 0}
+  targetView: {fileID: 0}
 --- !u!1 &8678278905929033635
 GameObject:
   m_ObjectHideFlags: 3

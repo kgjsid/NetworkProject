@@ -1,7 +1,8 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, IDamageable
+public class PlayerController : MonoBehaviourPun, IDamageable
 {
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
@@ -19,11 +20,16 @@ public class PlayerController : MonoBehaviour, IDamageable
     [SerializeField] LayerMask damageLayer;
     private bool isDamaged;
 
+    private KillLogUI killLogUI;
+    private void Awake()
+    {
+        killLogUI = FindObjectOfType<KillLogUI>();
+    }
     private void Update()
     {
-        if (isAlive) // Only allow movement if the player is alive
+        if ( isAlive ) // Only allow movement if the player is alive
         {
-            Move();           
+            Move();
         }
         Jump();
     }
@@ -40,7 +46,7 @@ public class PlayerController : MonoBehaviour, IDamageable
         controller.Move(rightDir * moveDir.x * moveSpeed * Time.deltaTime);
 
         Vector3 lookDir = forwardDir * moveDir.z + rightDir * moveDir.x;
-        if (lookDir.sqrMagnitude > 0)
+        if ( lookDir.sqrMagnitude > 0 )
         {
             Quaternion lookRotation = Quaternion.LookRotation(lookDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 100);
@@ -58,19 +64,19 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         */
         controller.Move(Vector3.up * ySpeed * Time.deltaTime);
-        
+
     }
 
-    private void OnMove(InputValue value)
+    private void OnMove( InputValue value )
     {
         Vector2 inputDir = value.Get<Vector2>();
         moveDir.x = inputDir.x;
-        moveDir.z = inputDir.y;        
+        moveDir.z = inputDir.y;
     }
 
-    private void OnRun(InputValue value)
+    private void OnRun( InputValue value )
     {
-        if (value.isPressed)
+        if ( value.isPressed )
         {
             moveSpeed = runSpeed;
         }
@@ -80,9 +86,9 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnAttack(InputValue value)
+    private void OnAttack( InputValue value )
     {
-        animator.SetBool("Attack02",true);
+        animator.SetBool("Attack02", true);
     }
 
     public void AniAttack()
@@ -94,28 +100,35 @@ public class PlayerController : MonoBehaviour, IDamageable
     {
         isDamaged = false;
         animator.SetTrigger("Die");
+        photonView.RPC("RequestKillLog", RpcTarget.MasterClient);
     }
-
-    public void TakeDamage(int damage)
+    [PunRPC]
+    public void RequestKillLog()
     {
-        if (!isDamaged)
+        killLogUI.KillDieLog(PhotonNetwork.LocalPlayer.NickName);
+
+    }
+    public void TakeDamage( int damage )
+    {
+        if ( !isDamaged )
         {
             isDamaged = true;
             hp -= damage;
-            if (hp <= 0)
+            if ( hp <= 0 )
             {
                 Die();
+
             }
         }
     }
 
     private int damageCount;
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter( Collider collision )
     {
-        if (damageLayer.Contain(collision.gameObject.layer))
+        if ( damageLayer.Contain(collision.gameObject.layer) )
         {
             TakeDamage(2);
-            
+
         }
     }
 

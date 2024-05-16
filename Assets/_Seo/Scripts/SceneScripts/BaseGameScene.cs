@@ -18,6 +18,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     [SerializeField] List<AISpawner> aiSpanwers;
     [SerializeField] List<Transform> playerSpawnPoints;
     [SerializeField] CheckGameState checkGameState;
+    public CheckGameState CheckGameState { get { return checkGameState; } }
     [SerializeField] List<Player> players;
     public List<Player> Players { get { return players; } }
     [SerializeField] Image fade;
@@ -28,8 +29,12 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
     public UnityEvent masterChangeEvent;
 
+    // 한판 시간
+    [SerializeField] GameTime gameTimeUI;
+
     private void Awake()
     {
+        gameTimeUI = FindObjectOfType<GameTime>();
         if(instance == null)
         {
             instance = this;
@@ -39,7 +44,10 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             Destroy(instance.gameObject);
         }
     }
-
+    private IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(1);
+    }
     private IEnumerator Start()
     {
         checkGameState.CurState = GameState.InitGame;
@@ -106,6 +114,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             fade.color = Color.Lerp(fadeOutColor, fadeInColor, rate);
             yield return null;
         }
+       fade.gameObject.SetActive(false); // 네트워크보내는 UI가 가려져서 클릭이 안되어 false로 바꿈
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, PhotonHashtable changedProps)
@@ -125,7 +134,10 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             }
         }
     }
-
+    public override void OnLeftRoom()
+    {
+        Debug.Log("게임씬에서 나감");
+    }
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
         Debug.Log("마스터 변경");
