@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameTime : MonoBehaviourPun
 {
     [SerializeField] LobbyManager lobbyManager;
-    int maxTime = 20;
+    int maxTime = 90;
     [SerializeField] PhotonView PV;
     [SerializeField] TMP_Text timeText;
     [SerializeField] Image endingCredit;

@@ -1,22 +1,37 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class KillLogUI : MonoBehaviour
 {
     [SerializeField] GameObject KillLogContent;
     [SerializeField] GameObject killLogPrefab;
-    [SerializeField] GameObject killLogObject;
-    public void KillDieLog( string die )
+    GameObject killLogObject;
+    Queue<GameObject> killLogQueue;
+    private void Awake()
+    {
+        killLogQueue = new Queue<GameObject>();
+    }
+    public void KillLog( string killer, string die )
     {
         Debug.Log("킬로그 생성");
-        killLogObject = Instantiate(killLogPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+        killLogObject = Instantiate(killLogPrefab, KillLogContent.transform);
+        killLogQueue.Enqueue(killLogObject);
         killLogObject.transform.parent = KillLogContent.transform;
-        killLogObject.GetComponent<KillLogPanel>().ChangeDie(die);
+        killLogObject.GetComponent<KillLogPanel>().changeLog(killer, die);
+        if ( killLogQueue.Count > 5 )
+        {
+            killLogQueue.Dequeue().gameObject.SetActive(false);
+        }
+        StartCoroutine(KillLogCool());
     }
-    public void KillerLog(string killer )
+
+    IEnumerator KillLogCool()
     {
-        killLogObject.GetComponent<KillLogPanel>().ChangKiller(killer);
+        yield return new WaitForSeconds(3);
+        killLogQueue.Dequeue().gameObject.SetActive(false);
     }
 }
