@@ -109,10 +109,6 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 2. 투명 처리
         // 3. 어택을 받을 수 없도록 처리 필요
     }
-    [PunRPC]
-    public void RequestKillLog()
-    {
-        killLogUI.KillDieLog(PhotonNetwork.LocalPlayer.NickName);
 
     public void TakeDamage(int damage)
     {   // 실제 데미지 함수
