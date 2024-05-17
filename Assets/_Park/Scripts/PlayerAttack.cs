@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -8,15 +9,17 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Animator animator;
     [SerializeField] Slider coolTimeGauge;
     [SerializeField] int coolTime;
-
+    [SerializeField] AudioClip attackSound;
     public bool canAttack = true;
     private void OnAttack(InputValue value)
     {
         if (canAttack == false)
-        {
             return;
-        }
-        animator.SetBool("Attack02", true);
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
+        animator.SetTrigger("Attack");
         StartCoroutine(StartCoolTime());
     }
 
@@ -31,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
             coolTimeGauge.value = timePassed / coolTime; // Update the cool time gauge if needed
             yield return null;
         }
-        canAttack = true;
         coolTimeGauge.value = 1f;
+        canAttack = true;
     }
 }
