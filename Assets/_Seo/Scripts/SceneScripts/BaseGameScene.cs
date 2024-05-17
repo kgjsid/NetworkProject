@@ -106,6 +106,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             fade.color = Color.Lerp(fadeOutColor, fadeInColor, rate);
             yield return null;
         }
+
+        fade.gameObject.SetActive(false);
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, PhotonHashtable changedProps)

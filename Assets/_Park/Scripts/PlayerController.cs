@@ -1,26 +1,46 @@
+using Cinemachine;
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerController : MonoBehaviour, IDamageable
-{
+public class PlayerController : MonoBehaviourPun, IDamageable
+{   // 플레이어 컨트롤러 스크립트
     [SerializeField] CharacterController controller;
     [SerializeField] Animator animator;
 
     [SerializeField] int hp;
 
     [Header("Move")]
-    private float moveSpeed = 8;
-    [SerializeField] float walkSpeed;
-    [SerializeField] float runSpeed;
-    private Vector3 moveDir;
-    private float ySpeed;
-    private bool isAlive = true;
+    private float moveSpeed = 8;            // 움직일 때의 속도
+    [SerializeField] float walkSpeed;       // 걷는 속도(8)
+    [SerializeField] float runSpeed;        // 뛰는 속도(12)
+    private Vector3 moveDir;                // 움직임 벡터
+    private float ySpeed;                   // 중력 및 점프력(수정 필요)
+    private bool isAlive = true;            // 살아있는지 여부
 
-    [SerializeField] LayerMask damageLayer;
-    private bool isDamaged;
+    [SerializeField] LayerMask damageLayer; // 데미지 레이어
+    private bool isDamaged;                 // 데미지를 받고 있는지에 대한 여부
 
-    private void Update()
+    [SerializeField] PlayerInput input;
+    [SerializeField] CinemachineFreeLook virtualCamera;
+    [SerializeField] Canvas playerUI;
+
+    private void Start()
+    {   // 시작시 네트워크 작업
+        if (photonView.IsMine == false)
+        {   // 로컬에서만 움직일 수 있도록 설정 수정
+            input.enabled = false;
+            playerUI.enabled = false;
+            Destroy(controller);
+            virtualCamera.gameObject.SetActive(false);
+        }
+    }
+
+    private void FixedUpdate()   
     {
+        if (controller == null)
+            return;
+
         if (isAlive) // Only allow movement if the player is alive
         {
             Move();           
@@ -29,7 +49,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
 
     private void Move()
-    {
+    {   // 실제 움직임 스크립트
         Vector3 forwardDir = Camera.main.transform.forward;
         forwardDir = new Vector3(forwardDir.x, 0, forwardDir.z).normalized;
 
@@ -50,7 +70,7 @@ public class PlayerController : MonoBehaviour, IDamageable
     }
 
     private void Jump()
-    {
+    {   // 중력 및 점프 스크립트
         ySpeed += Physics.gravity.y * Time.deltaTime;
         /*if (controller.isGrounded)
         {
@@ -58,18 +78,17 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
         */
         controller.Move(Vector3.up * ySpeed * Time.deltaTime);
-        
     }
 
     private void OnMove(InputValue value)
-    {
+    {   // 움직임 입력 함수(WASD)
         Vector2 inputDir = value.Get<Vector2>();
         moveDir.x = inputDir.x;
         moveDir.z = inputDir.y;        
     }
 
     private void OnRun(InputValue value)
-    {
+    {   // 달리는 것 설정함수(Shift)
         if (value.isPressed)
         {
             moveSpeed = runSpeed;
@@ -80,52 +99,38 @@ public class PlayerController : MonoBehaviour, IDamageable
         }
     }
 
-    private void OnAttack(InputValue value)
-    {
-        animator.SetBool("Attack02",true);
-    }
-
-    public void AniAttack()
-    {
-        animator.SetBool("Attack02", false);
-    }
-
     private void Die()
-    {
-        isDamaged = false;
-        animator.SetTrigger("Die");
+    {   // 사망 함수
+        isDamaged = false;          // 데미지는 받지 않는 상태로
+        animator.SetTrigger("Die"); // Die 애니메이션 재생
+
+        // TODO... Die시 추가 작업 진행
+        // 1. 공격 스크립트 제외
+        // 2. 투명 처리
+        // 3. 어택을 받을 수 없도록 처리 필요
     }
 
     public void TakeDamage(int damage)
-    {
-        if (!isDamaged)
+    {   // 실제 데미지 함수
+        if (!isDamaged)         // 데미지를 받는 상태가 아니라면(isDamage가 false)
         {
-            isDamaged = true;
-            hp -= damage;
-            if (hp <= 0)
-            {
-                Die();
+            isDamaged = true;   // 데미지를 받고 있고
+            hp -= damage;       // 체력 감소
+            if (hp <= 0)        // hp가 0보다 작으면
+            {   
+                Die();          // 사망처리
             }
         }
     }
 
-    private int damageCount;
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (damageLayer.Contain(collision.gameObject.layer))
-        {
-            TakeDamage(2);
-            
-        }
-    }
 
     public void PlayerMove()
-    {
+    {   // 애니메이션 이벤트에서 활용 중
         isAlive = true;
         hp += 2;         // 테스트용 hp        
     }
     public void PlayerNotMove()
-    {
+    {   // 애니메이션 이벤트에서 활용 중
         isAlive = false;
     }
 }

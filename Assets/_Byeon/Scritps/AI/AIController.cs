@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 using Photon.Pun;
 using static AIController;
 
-public class AIController : MonoBehaviour, IDamageable//,IPointerClickHandler
+public class AIController : MonoBehaviourPun, IDamageable//,IPointerClickHandler
 {
     public enum AIstate { Idle, Walk, Die}
 
@@ -61,7 +61,8 @@ public class AIController : MonoBehaviour, IDamageable//,IPointerClickHandler
     IEnumerator DieDelay()
     {
         yield return new WaitForSeconds(3f);
-        PhotonNetwork.Destroy(gameObject);
+        if (photonView.IsMine)
+            PhotonNetwork.Destroy(gameObject);
     }
 
     //플레이어 애니메이션 이벤트용 
