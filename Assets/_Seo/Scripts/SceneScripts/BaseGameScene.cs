@@ -19,9 +19,10 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     [SerializeField] List<Transform> playerSpawnPoints;
     [SerializeField] CheckGameState checkGameState;
     [SerializeField] List<Player> players;
+    public List<Player> Players { get { return players; } }
     [SerializeField] Image fade;
     [SerializeField] float fadeTime = 2f;
-
+    [SerializeField] KillLogUI killLogUI;
     int loadCount = 0;
     int deathCount = 0;
 
