@@ -113,6 +113,46 @@ public static class CustomProperty
         Propertys[PLAYERSTATE] = state;
         player.SetCustomProperties(Propertys);
     }
+
+    public const string PLAYERMISSION = "PlayerMission";
+    public static MissionType GetMission(this Player player)
+    {
+        PhotonHashtable customProperty = player.CustomProperties;
+        if (customProperty.TryGetValue(PLAYERMISSION, out object value))
+        {
+            return (MissionType)value;
+        }
+        else
+        {
+            return MissionType.Size;
+        }
+    }
+    public static void SetMission(this Player player, MissionType missionType)
+    {
+        Propertys.Clear();
+        Propertys[PLAYERMISSION] = missionType;
+        player.SetCustomProperties(Propertys);
+    }
+
+    public const string GAMEMODE = "GameMode";
+    public static GameMode GetMode(this Room room)
+    {
+        PhotonHashtable customProperty = room.CustomProperties;
+        if(customProperty.TryGetValue(GAMEMODE, out object value))
+        {
+            return (GameMode)value;
+        }
+        else
+        {
+            return GameMode.normal;
+        }
+    }
+    public static void SetMode(this Room room, GameMode gameMode)
+    {
+        Propertys.Clear();
+        Propertys[GAMEMODE] = gameMode;
+        room.SetCustomProperties(Propertys);
+    }
 }
 
 public enum PlayerState
@@ -121,4 +161,17 @@ public enum PlayerState
     Die,
     Default,
     Size
+}
+public enum MissionType
+{
+    killMission,
+    itemMission,
+    runMission,
+    Size,
+    Clear
+}
+public enum GameMode
+{
+    normal,
+    mission
 }

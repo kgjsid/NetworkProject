@@ -11,28 +11,28 @@ using UnityEngine.Events;
 public class BaseGameScene : MonoBehaviourPunCallbacks
 {
     private static BaseGameScene instance;
-
     public static BaseGameScene Instance { get { return instance; } }
 
     // 게임 씬
-    [SerializeField] List<AISpawner> aiSpanwers;
-    [SerializeField] List<Transform> playerSpawnPoints;
-    [SerializeField] CheckGameState checkGameState;
+    [SerializeField] protected List<AISpawner> aiSpanwers;
+    [SerializeField] protected List<Transform> playerSpawnPoints;
+    [SerializeField] protected CheckGameState checkGameState;
     public CheckGameState CheckGameState { get { return checkGameState; } }
-    [SerializeField] List<Player> players;
+    protected List<Player> players;
     public List<Player> Players { get { return players; } }
-    [SerializeField] Image fade;
-    [SerializeField] float fadeTime = 2f;
+    [SerializeField] protected Image fade;
+    [SerializeField] protected float fadeTime = 2f;
     [SerializeField] KillLogUI killLogUI;
-    int loadCount = 0;
-    int deathCount = 0;
+    protected int loadCount = 0;
+    protected int deathCount = 0;
+    [SerializeField] protected string spawnName;
 
     public UnityEvent masterChangeEvent;
 
     // 한판 시간
-    [SerializeField] GameTime gameTimeUI;
+    [SerializeField] protected GameTime gameTimeUI;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         gameTimeUI = FindObjectOfType<GameTime>();
         if(instance == null)
@@ -48,7 +48,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     {
         yield return new WaitForSeconds(1);
     }
-    private IEnumerator Start()
+    protected virtual IEnumerator Start()
     {
         checkGameState.CurState = GameState.InitGame;
         deathCount = 0;
@@ -77,7 +77,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         checkGameState.CurState = GameState.GameProgress;
     }
 
-    private IEnumerator SpawnRoutine()
+    protected virtual IEnumerator SpawnRoutine()
     {   // 실제 스폰 루틴
         if (PhotonNetwork.IsMasterClient)
         {   // 마스터 클라이언트는 AI를 스폰
@@ -91,9 +91,9 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         yield return null;
     }
 
-    private IEnumerator PlayerSpawn()
+    protected virtual IEnumerator PlayerSpawn()
     {   // 플레이어 스폰루틴
-        GameObject instance = PhotonNetwork.Instantiate("Player", playerSpawnPoints[Random.Range(0, playerSpawnPoints.Count)].position, Quaternion.identity);
+        GameObject instance = PhotonNetwork.Instantiate(spawnName, playerSpawnPoints[Random.Range(0, playerSpawnPoints.Count)].position, Quaternion.identity);
 
         instance.GetComponent<CharacterController>().enabled = false;
         instance.transform.position = new Vector3(transform.position.x, 1.4f, transform.position.z);
@@ -102,7 +102,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         yield return null;
     }
 
-    IEnumerator FadeIn()
+    protected virtual IEnumerator FadeIn()
     {
         float rate = 0;
         Color fadeOutColor = new Color(fade.color.r, fade.color.g, fade.color.b, 1f);
