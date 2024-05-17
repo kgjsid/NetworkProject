@@ -7344,6 +7344,7 @@ MonoBehaviour:
   input: {fileID: 2260261226062770527}
   virtualCamera: {fileID: 6903159871962604132}
   playerUI: {fileID: 3538356437983217742}
+  damageCheck: {fileID: 5486037445203589161}
 --- !u!143 &2857780490664833706
 CharacterController:
   m_ObjectHideFlags: 0
@@ -7490,7 +7491,7 @@ MonoBehaviour:
   prefixField: -1
   Synchronization: 3
   OwnershipTransfer: 0
-  observableSearch: 2
+  observableSearch: 0
   ObservedComponents:
   - {fileID: -7392773402436155110}
   - {fileID: 7810129418600353855}
@@ -8426,11 +8427,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447c8816a198ef14e924fc49e3cd172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
   damageCheckLayer:
     serializedVersion: 2
     m_Bits: 72
   damage: 2
+  ownerController: {fileID: 3401126481195836339}
+  targetView: {fileID: 0}
 --- !u!54 &1985998485336159987
 Rigidbody:
   m_ObjectHideFlags: 0

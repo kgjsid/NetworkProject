@@ -25,7 +25,6 @@ public class PlayerHealth : MonoBehaviourPun
             int targetID = targetView.ViewID;
             Debug.Log("마스터한테 요청");
             photonView.RPC("RequestAttack", RpcTarget.MasterClient, targetID);
-            killLogUI.KillerLog(PhotonNetwork.LocalPlayer.NickName);
         }
     }
 
