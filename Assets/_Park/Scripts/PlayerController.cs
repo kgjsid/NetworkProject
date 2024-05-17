@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 
         if (isAlive) // Only allow movement if the player is alive
         {
-            Move();           
+            Move();
         }
         Jump();
     }
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         controller.Move(rightDir * moveDir.x * moveSpeed * Time.deltaTime);
 
         Vector3 lookDir = forwardDir * moveDir.z + rightDir * moveDir.x;
-        if (lookDir.sqrMagnitude > 0)
+        if ( lookDir.sqrMagnitude > 0 )
         {
             Quaternion lookRotation = Quaternion.LookRotation(lookDir);
             transform.rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 100);
@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     {   // 움직임 입력 함수(WASD)
         Vector2 inputDir = value.Get<Vector2>();
         moveDir.x = inputDir.x;
-        moveDir.z = inputDir.y;        
+        moveDir.z = inputDir.y;
     }
 
     private void OnRun(InputValue value)
@@ -109,6 +109,10 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 2. 투명 처리
         // 3. 어택을 받을 수 없도록 처리 필요
     }
+    [PunRPC]
+    public void RequestKillLog()
+    {
+        killLogUI.KillDieLog(PhotonNetwork.LocalPlayer.NickName);
 
     public void TakeDamage(int damage)
     {   // 실제 데미지 함수

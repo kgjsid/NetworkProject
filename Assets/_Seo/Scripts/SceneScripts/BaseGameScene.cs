@@ -18,6 +18,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     [SerializeField] List<AISpawner> aiSpanwers;
     [SerializeField] List<Transform> playerSpawnPoints;
     [SerializeField] CheckGameState checkGameState;
+    public CheckGameState CheckGameState { get { return checkGameState; } }
     [SerializeField] List<Player> players;
     public List<Player> Players { get { return players; } }
     [SerializeField] Image fade;
@@ -28,8 +29,12 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
     public UnityEvent masterChangeEvent;
 
+    // 한판 시간
+    [SerializeField] GameTime gameTimeUI;
+
     private void Awake()
     {
+        gameTimeUI = FindObjectOfType<GameTime>();
         if(instance == null)
         {
             instance = this;
@@ -39,7 +44,10 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             Destroy(instance.gameObject);
         }
     }
-
+    private IEnumerator Timer()
+    {
+        yield return new WaitForSeconds(1);
+    }
     private IEnumerator Start()
     {
         checkGameState.CurState = GameState.InitGame;
@@ -127,7 +135,10 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             }
         }
     }
-
+    public override void OnLeftRoom()
+    {
+        Debug.Log("게임씬에서 나감");
+    }
     public override void OnMasterClientSwitched(Player newMasterClient)
     {
         Debug.Log("마스터 변경");

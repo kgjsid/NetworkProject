@@ -286,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a83902f1b2e0342912a2f19c52fb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugRoomName: DebugRoom 1
+  debugRoomName: DebugRoom 2
   sceneName: BaseGameScene_Lee
 --- !u!114 &871058290
 MonoBehaviour:

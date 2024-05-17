@@ -13,4 +13,12 @@ public class KillLogPanel : MonoBehaviour
         killerText.text = killer;
         DieText.text = die;
     }
+    public void ChangeDie(string die )
+    {
+        DieText.text = die;
+    }
+    public void ChangKiller(string killer )
+    {
+        killerText.text = killer;
+    }
 }

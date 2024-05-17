@@ -6,11 +6,17 @@ using UnityEngine;
 public class KillLogUI : MonoBehaviour
 {
     [SerializeField] GameObject KillLogContent;
-    public void KillLog( string killer, string die )
+    [SerializeField] GameObject killLogPrefab;
+    [SerializeField] GameObject killLogObject;
+    public void KillDieLog( string die )
     {
         Debug.Log("킬로그 생성");
-        GameObject killLogObject = PhotonNetwork.Instantiate("KillLogPanel", new Vector3(0, 0, 0), Quaternion.identity);
+        killLogObject = Instantiate(killLogPrefab, new Vector3(0, 0, 0), Quaternion.identity);
         killLogObject.transform.parent = KillLogContent.transform;
-        killLogObject.GetComponent<KillLogPanel>().changeLog(killer, die);
+        killLogObject.GetComponent<KillLogPanel>().ChangeDie(die);
+    }
+    public void KillerLog(string killer )
+    {
+        killLogObject.GetComponent<KillLogPanel>().ChangKiller(killer);
     }
 }
