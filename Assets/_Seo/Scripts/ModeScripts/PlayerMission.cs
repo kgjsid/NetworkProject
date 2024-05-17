@@ -75,7 +75,7 @@ public class PlayerMission : MonoBehaviourPun
     }
 
     private IEnumerator KillMission()
-    {
+    {   // 킬처리 추가
         Debug.Log("킬미션");
         int killCount = 0;
         while (killCount < 3)
