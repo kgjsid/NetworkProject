@@ -50,6 +50,9 @@ MonoBehaviour:
   - PhotonDestroy
   - RequestKillLog
   - RequestTimer
+  - RequestKillLogNickName
+  - ResultKillLogNickName
+  - KillLogNickName
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

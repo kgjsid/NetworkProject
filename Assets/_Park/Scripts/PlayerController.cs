@@ -1,7 +1,9 @@
 using Cinemachine;
 using Photon.Pun;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class PlayerController : MonoBehaviourPun, IDamageable
 {   // 플레이어 컨트롤러 스크립트
@@ -25,9 +27,39 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] CinemachineFreeLook virtualCamera;
     [SerializeField] Canvas playerUI;
 
+    KillLogUI killLogUI;
+    [SerializeField] Damage damageCheck;
+    private void Awake()
+    {
+        killLogUI = FindObjectOfType<KillLogUI>();
+    }
+    [PunRPC]
+    public void KillLogNickName( int targetID )
+    {
+        // 모든 클라이언트에서 실행됨
+        PhotonView targetView = PhotonView.Find(targetID);
+        if ( targetView != null )
+        {
+            string targetName = targetView.Controller.NickName;
+            if ( targetView.gameObject.layer == 3 )
+            {
+                killLogUI.KillLog(photonView.Controller.NickName, targetName);
+
+            }
+            else
+            {
+                killLogUI.KillLog(photonView.Controller.NickName, "AI");
+
+            }
+        }
+    }
+    public void KillLog( int targetID )
+    {
+        photonView.RPC("KillLogNickName", RpcTarget.AllViaServer, targetID);
+    }
     private void Start()
     {   // 시작시 네트워크 작업
-        if (photonView.IsMine == false)
+        if ( photonView.IsMine == false )
         {   // 로컬에서만 움직일 수 있도록 설정 수정
             input.enabled = false;
             playerUI.enabled = false;
@@ -36,12 +68,14 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         }
     }
 
-    private void FixedUpdate()   
+
+
+    private void FixedUpdate()
     {
-        if (controller == null)
+        if ( controller == null )
             return;
 
-        if (isAlive) // Only allow movement if the player is alive
+        if ( isAlive ) // Only allow movement if the player is alive
         {
             Move();
         }
@@ -80,16 +114,16 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         controller.Move(Vector3.up * ySpeed * Time.deltaTime);
     }
 
-    private void OnMove(InputValue value)
+    private void OnMove( InputValue value )
     {   // 움직임 입력 함수(WASD)
         Vector2 inputDir = value.Get<Vector2>();
         moveDir.x = inputDir.x;
         moveDir.z = inputDir.y;
     }
 
-    private void OnRun(InputValue value)
+    private void OnRun( InputValue value )
     {   // 달리는 것 설정함수(Shift)
-        if (value.isPressed)
+        if ( value.isPressed )
         {
             moveSpeed = runSpeed;
         }
@@ -109,19 +143,14 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 2. 투명 처리
         // 3. 어택을 받을 수 없도록 처리 필요
     }
-    [PunRPC]
-    public void RequestKillLog()
-    {
-        killLogUI.KillDieLog(PhotonNetwork.LocalPlayer.NickName);
-
-    public void TakeDamage(int damage)
+    public void TakeDamage( int damage )
     {   // 실제 데미지 함수
-        if (!isDamaged)         // 데미지를 받는 상태가 아니라면(isDamage가 false)
+        if ( !isDamaged )         // 데미지를 받는 상태가 아니라면(isDamage가 false)
         {
             isDamaged = true;   // 데미지를 받고 있고
             hp -= damage;       // 체력 감소
-            if (hp <= 0)        // hp가 0보다 작으면
-            {   
+            if ( hp <= 0 )        // hp가 0보다 작으면
+            {
                 Die();          // 사망처리
             }
         }

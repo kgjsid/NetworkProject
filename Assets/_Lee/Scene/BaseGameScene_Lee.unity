@@ -332,7 +332,6 @@ MonoBehaviour:
   KillLogContent: {fileID: 1832358768}
   killLogPrefab: {fileID: 1201517451609772290, guid: da34672e86e656f4d9de0f2e5e84a0f8,
     type: 3}
-  killLogObject: {fileID: 0}
 --- !u!1001 &18379615
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15434,7 +15433,7 @@ Canvas:
   m_GameObject: {fileID: 955264777}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 291955847}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -22510,8 +22509,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2038205355}
   m_HandleRect: {fileID: 2038205354}
   m_Direction: 2
-  m_Value: 1.0000018
-  m_Size: 0.8256041
+  m_Value: 1
+  m_Size: 0.825604
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
