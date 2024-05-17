@@ -9219,10 +9219,105 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4842597515579046, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -18.9
+      value: -5.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176228333253036, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: aiLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 114176228333253036, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114181230191376748, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: range
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374774605792098, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_Model
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374774605792098, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_BehaviorType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374774605792098, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSpaceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374774605792098, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorObservationSize
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374774605792098, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374774605792098, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_BrainParameters.VectorActionSize.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114374774605792098, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_BrainParameters.m_ActionSpec.BranchSizes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_AgentGameObject
+      value: 
+      objectReference: {fileID: 1807493910}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_CompressionType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_DebugColors.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_DetectableTags.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_DebugColors.Array.data[3].b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_DebugColors.Array.data[3].g
+      value: 0.22745098
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_DebugColors.Array.data[3].r
+      value: 0.74509805
+      objectReference: {fileID: 0}
+    - target: {fileID: 2106566910232743969, guid: b5339e4b990ade14f992aadf3bf8591b,
+        type: 3}
+      propertyPath: m_DetectableTags.Array.data[3]
+      value: badFood
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1672905243433088, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+    - {fileID: 1706274796045088, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+    - {fileID: 1601500200010266, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+    - {fileID: 1495617568563208, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
+    - {fileID: 1081721624670010, guid: b5339e4b990ade14f992aadf3bf8591b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1946057994373464, guid: b5339e4b990ade14f992aadf3bf8591b,
@@ -10691,7 +10786,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &672363775
 Transform:
   m_ObjectHideFlags: 0
@@ -22178,7 +22273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1416938782
 Transform:
   m_ObjectHideFlags: 0
@@ -22482,7 +22577,6 @@ MonoBehaviour:
   agents: []
   listArea: []
   totalScore: 0
-  scoreText: {fileID: 0}
 --- !u!4 &1430274852
 Transform:
   m_ObjectHideFlags: 0
@@ -24345,7 +24439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1556007630
 Transform:
   m_ObjectHideFlags: 0
@@ -25177,7 +25271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1607640145
 Transform:
   m_ObjectHideFlags: 0
@@ -29031,6 +29125,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1804870963}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1807493910 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1464820575638702, guid: b5339e4b990ade14f992aadf3bf8591b,
+    type: 3}
+  m_PrefabInstance: {fileID: 581472785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1807497492
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29800,7 +29900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1869868877
 Transform:
   m_ObjectHideFlags: 0

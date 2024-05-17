@@ -114,7 +114,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             fade.color = Color.Lerp(fadeOutColor, fadeInColor, rate);
             yield return null;
         }
-       fade.gameObject.SetActive(false); // 네트워크보내는 UI가 가려져서 클릭이 안되어 false로 바꿈
+
+        fade.gameObject.SetActive(false);
     }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, PhotonHashtable changedProps)

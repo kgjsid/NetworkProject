@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 using UnityEngine.Rendering.VirtualTexturing;
 
 public class PlayerEmote : MonoBehaviour
-{
+{   // 플레이어 이모트용 스크립트
+    // 4번키를 눌러 이모트 진행
     [SerializeField] Animator ani;
     [SerializeField] InputAction action;
     [SerializeField] GameObject emoteUI;
