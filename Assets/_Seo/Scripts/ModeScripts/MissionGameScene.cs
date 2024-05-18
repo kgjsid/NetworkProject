@@ -1,7 +1,7 @@
 using Photon.Pun;
 using Photon.Realtime;
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
@@ -15,38 +15,81 @@ public class MissionGameScene : BaseGameScene
 
     Coroutine missionRoutine;
 
+    [SerializeField] List<PlayerMission> playerMissions;
+
+    public float MissionTime { get { return missionTime; } }
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+    }
+
     protected override IEnumerator Start()
     {
         yield return base.Start();
+
         missionRoutine = StartCoroutine(MissionRoutine());
     }
 
     private IEnumerator MissionRoutine()
     {
-        yield return new WaitForSeconds(missionInterval);
-
-        foreach (Player player in players)
+        while (true)
         {
-            if (player.GetState() == PlayerState.Die)
-                continue;
+            if (playerMissions.Count == 0)
+                break;
 
-            MissionType randomMission = (MissionType)UnityEngine.Random.Range(0, (int)MissionType.Size);
-            player.SetMission(randomMission);
-        }
+            yield return new WaitForSeconds(missionInterval);
 
-        yield return new WaitForSeconds(missionTime);
-        Debug.Log("미션 시간 종료");
-        foreach(Player player in players)
-        {
-            if (player.GetState() == PlayerState.Die)
-                continue;
-
-            if(player.GetMission() != MissionType.Clear)
+            foreach (PlayerMission playerMission in playerMissions)
             {
+                photonView.RPC("SetPlayerMission", RpcTarget.MasterClient);
+            }
 
+            yield return new WaitForSeconds(missionTime);
+            Debug.Log("미션 시간 종료");
+
+            for(int i = 0; i < playerMissions.Count; i++)
+            {
+                if (playerMissions[i].CurMissionType != MissionType.Clear)
+                {   // 미션 실패시 10 데미지??
+                    PlayerController target = playerMissions[i].gameObject.GetComponent<PlayerController>();
+                    if (target == null) // 미리 맞아서 죽었을 수 있으니까
+                        continue;
+                    
+                    playerMissions.Remove(playerMissions[i]);
+
+                    if (target.Hp > 0)
+                    {
+                        target.TakeDamage(10);
+                    }
+                }
             }
         }
     }
 
+    public void SetMissionScript(PlayerMission playerMission)
+    {
+        playerMissions.Add(playerMission);
+    }
 
+    [PunRPC]
+    private void SetPlayerMission()
+    {
+        for (int i = 0; i < playerMissions.Count; i++)
+        {
+            MissionType randomMission = (MissionType)Random.Range(0, (int)MissionType.Size);
+            playerMissions[i].SetMission(randomMission);
+        }
+    }
+}
+
+public enum MissionType
+{
+    killMission,
+    itemMission,
+    runMission,
+    Size,
+    Clear
 }

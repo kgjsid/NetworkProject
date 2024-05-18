@@ -1,9 +1,9 @@
 using Photon.Pun;
 using Photon.Realtime;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class PlayerMission : MonoBehaviourPun
@@ -11,15 +11,16 @@ public class PlayerMission : MonoBehaviourPun
     // 미션용 스크립트
     // 이모트 미션도 만들어 보기
     [SerializeField] MissionType curMissionType;
-
-    public UnityEvent<MissionType> changeMission;
+    
+    public Action<MissionType> changeMission;
 
     [SerializeField] int killCount;
     [SerializeField] bool isRun;
 
     Coroutine missionRoutine;
+    MissionPanel panel;
 
-    private MissionType CurMissionType
+    public MissionType CurMissionType
     {
         get { return curMissionType; }
         set
@@ -44,7 +45,9 @@ public class PlayerMission : MonoBehaviourPun
 
     private void Start()
     {
-        CurMissionType = MissionType.killMission;
+        MissionGameScene.Instance.SetMissionScript(this);
+        panel = FindObjectOfType<MissionPanel>();
+        changeMission += panel.ShowMissionDetail;
     }
 
     private void ClearMission()
@@ -99,11 +102,13 @@ public class PlayerMission : MonoBehaviourPun
         isRun = value.isPressed;
     }
 
-    [PunRPC]
+
     public void SetMission(MissionType mission)
     {
-        if (photonView.IsMine)
-            CurMissionType = mission;
+        if (!photonView.IsMine)
+            return;
+
+        CurMissionType = mission;
     }
 
 

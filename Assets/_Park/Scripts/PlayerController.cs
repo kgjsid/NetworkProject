@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 
     [SerializeField] int hp;
 
+    public int Hp { get { return hp; } }
+
     [Header("Move")]
     private float moveSpeed = 8;            // 움직일 때의 속도
     [SerializeField] float walkSpeed;       // 걷는 속도(8)
@@ -29,6 +31,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 
     KillLogUI killLogUI;
     [SerializeField] Damage damageCheck;
+
     private void Awake()
     {
         killLogUI = FindObjectOfType<KillLogUI>();
