@@ -19,7 +19,7 @@ public class PlayerMission : MonoBehaviourPun
 
     Coroutine missionRoutine;
 
-    private MissionType CurMissionType
+    public MissionType CurMissionType
     {
         get { return curMissionType; }
         set

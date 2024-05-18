@@ -919,11 +919,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 447c8816a198ef14e924fc49e3cd172b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owner: {fileID: 0}
   damageCheckLayer:
     serializedVersion: 2
     m_Bits: 72
   damage: 2
+  ownerController: {fileID: 0}
+  targetView: {fileID: 0}
 --- !u!54 &3315904299779308388
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7386,6 +7387,7 @@ MonoBehaviour:
   input: {fileID: 8238807199770441221}
   virtualCamera: {fileID: 3321114525504476651}
   playerUI: {fileID: 3890518662210527495}
+  damageCheck: {fileID: 0}
 --- !u!143 &4297965436915358703
 CharacterController:
   m_ObjectHideFlags: 0

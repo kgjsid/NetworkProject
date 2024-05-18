@@ -93,10 +93,11 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
     protected virtual IEnumerator PlayerSpawn()
     {   // 플레이어 스폰루틴
-        GameObject instance = PhotonNetwork.Instantiate(spawnName, playerSpawnPoints[Random.Range(0, playerSpawnPoints.Count)].position, Quaternion.identity);
+        int randPoint = Random.Range(0, playerSpawnPoints.Count);
+        GameObject instance = PhotonNetwork.Instantiate(spawnName, Vector3.zero, Quaternion.identity);
 
         instance.GetComponent<CharacterController>().enabled = false;
-        instance.transform.position = new Vector3(transform.position.x, 1.4f, transform.position.z);
+        instance.transform.position = new Vector3(playerSpawnPoints[randPoint].position.x, 1.4f, playerSpawnPoints[randPoint].position.z);
         instance.GetComponent<CharacterController>().enabled = true;
 
         yield return null;

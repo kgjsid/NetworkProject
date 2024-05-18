@@ -162,14 +162,6 @@ public enum PlayerState
     Default,
     Size
 }
-public enum MissionType
-{
-    killMission,
-    itemMission,
-    runMission,
-    Size,
-    Clear
-}
 public enum GameMode
 {
     normal,

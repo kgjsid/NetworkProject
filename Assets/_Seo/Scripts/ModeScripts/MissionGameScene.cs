@@ -48,5 +48,22 @@ public class MissionGameScene : BaseGameScene
         }
     }
 
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, PhotonHashtable changedProps)
+    {
+        if(changedProps.ContainsKey(CustomProperty.PLAYERMISSION))
+        {
+            
+        }
 
+        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+    }
+}
+
+public enum MissionType
+{
+    killMission,
+    itemMission,
+    runMission,
+    Size,
+    Clear
 }
