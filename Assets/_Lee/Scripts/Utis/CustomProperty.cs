@@ -114,26 +114,6 @@ public static class CustomProperty
         player.SetCustomProperties(Propertys);
     }
 
-    public const string PLAYERMISSION = "PlayerMission";
-    public static MissionType GetMission(this Player player)
-    {
-        PhotonHashtable customProperty = player.CustomProperties;
-        if (customProperty.TryGetValue(PLAYERMISSION, out object value))
-        {
-            return (MissionType)value;
-        }
-        else
-        {
-            return MissionType.Size;
-        }
-    }
-    public static void SetMission(this Player player, MissionType missionType)
-    {
-        Propertys.Clear();
-        Propertys[PLAYERMISSION] = missionType;
-        player.SetCustomProperties(Propertys);
-    }
-
     public const string GAMEMODE = "GameMode";
     public static GameMode GetMode(this Room room)
     {

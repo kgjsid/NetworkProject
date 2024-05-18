@@ -7554,9 +7554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curMissionType: 0
-  changeMission:
-    m_PersistentCalls:
-      m_Calls: []
   killCount: 0
   isRun: 0
 --- !u!1 &6213062719678508507

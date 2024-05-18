@@ -54,6 +54,7 @@ MonoBehaviour:
   - ResultKillLogNickName
   - KillLogNickName
   - SetMission
+  - SetPlayerMission
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

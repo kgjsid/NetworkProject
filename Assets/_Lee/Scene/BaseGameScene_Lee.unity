@@ -30518,6 +30518,7 @@ MonoBehaviour:
   fade: {fileID: 3570199}
   fadeTime: 2
   killLogUI: {fileID: 12201598}
+  spawnName: Player
   masterChangeEvent:
     m_PersistentCalls:
       m_Calls: []
