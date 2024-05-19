@@ -26,6 +26,7 @@ public class AIController : MonoBehaviourPun, IDamageable//,IPointerClickHandler
 
     private void Awake()
     {
+        BaseGameScene.Instance.aiControllers.Add(this);
         animator = GetComponent<Animator>();
         aiMove = GetComponent<AIMove>();
         hp = 1;
