@@ -24,6 +24,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         SetActivePanel(Panel.Login); // 시작시 무조건 Login 화면이 나올수 있게
     }
+   private void Start()
+    {
+        if ( PhotonNetwork.CurrentRoom != null )
+        {
+            SetActivePanel(Panel.Room);
+
+        }
+        else
+        {
+            SetActivePanel(Panel.Login);
+        }
+    }
     private void Update()
     {
         ClientState curState = PhotonNetwork.NetworkClientState;// 네트워크가 받은 클라이언트의 현재상태

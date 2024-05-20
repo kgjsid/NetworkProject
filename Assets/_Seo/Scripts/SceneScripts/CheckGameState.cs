@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
 public class CheckGameState : MonoBehaviour
 {   // 게임의 진행상황 체크용
@@ -37,7 +38,11 @@ public class CheckGameState : MonoBehaviour
 
     private void Awake()
     {
-            
+        PhotonView pv;
+
+        // pv.IsMine
+        // pv.Controller
+        // 
     }
 
     IEnumerator InitGameRoutine()

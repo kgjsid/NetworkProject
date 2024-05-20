@@ -19,6 +19,7 @@ public class RoomPanel : MonoBehaviour
     // 현재들어온 플레이어들 관리
     private List<PlayerEntry> PlayerList;
 
+    string gameModName; // 애로 하면면될듯
     private void Start()
     {
         Player player = PhotonNetwork.LocalPlayer;
@@ -64,7 +65,7 @@ public class RoomPanel : MonoBehaviour
         {
             // 마스터일때는 준비와 게임 시작을하게 해줄거임
             PhotonNetwork.CurrentRoom.IsVisible = false; // 방 닫기
-            PhotonNetwork.LoadLevel("BaseGameScene_bcw");
+            PhotonNetwork.LoadLevel("BaseGameScene_Lee"); // 게임 모드 바뀔때마다 바꿔야됨
         }
     }
     public void PlayerEnterRoom( Player newPlayer )

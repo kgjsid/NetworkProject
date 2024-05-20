@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using Unity.VisualScripting;
 using System.Runtime.InteropServices.WindowsRuntime;
 
+// 모든 데이터들이 관리 해주는 친구
 public class BaseGameScene : MonoBehaviourPunCallbacks
 {
     private static BaseGameScene instance;
@@ -131,7 +132,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         else if ( changedProps.ContainsKey(CustomProperty.PLAYERSTATE) )
         {
             // 플레이어 상태 바뀐 것 체크
-            if ((PlayerState)changedProps[CustomProperty.PLAYERSTATE] != PlayerState.Die)
+            if ( ( PlayerState )changedProps [CustomProperty.PLAYERSTATE] != PlayerState.Die )
                 return;
 
             deathCount++;
@@ -148,17 +149,14 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     }
     public override void OnMasterClientSwitched( Player newMasterClient )
     {
-        Debug.Log("마스터 변경");
         masterChangeEvent?.Invoke();
     }
     // 시간 동기화
     [PunRPC]
     public void StartTime()
     {
-        Debug.Log("시간 PunRPC");
         gameTimeUI.StartTimer();
     }
-
     IEnumerator GameOver()
     {
         // 조건 
@@ -168,18 +166,19 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         // 게임 상태를 해보았으나 처음에 End상태로 가서 바꿈
         while ( true )
         {
-            Debug.Log($"죽은 수 : {deathCount}");
-            Debug.Log($"살아 있는 수 :{players.Count}");
-            if ( deathCount >= players.Count - 1 && PhotonNetwork.LocalPlayer.GetState()== PlayerState.Live)
+            if ( checkGameState.CurState == GameState.GameEnd)
             {
-                gameTimeUI.EndingImage();
-                gameTimeUI.Victory();
+                if ( PhotonNetwork.LocalPlayer.GetState() == PlayerState.Live )
+                {
+                    gameTimeUI.EndingImage();
+                    gameTimeUI.Victory();
+                }
+                else if ( PhotonNetwork.LocalPlayer.GetState() == PlayerState.Die )
+                {
+                    gameTimeUI.EndingImage();
+                    gameTimeUI.Lose();
+                }
                 yield break;
-            }
-            else
-            {
-                gameTimeUI.EndingImage();
-                gameTimeUI.Lose();
             }
             yield return null;
         }

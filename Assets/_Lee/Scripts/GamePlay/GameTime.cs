@@ -1,4 +1,5 @@
 using Photon.Pun;
+using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -14,17 +15,14 @@ public class GameTime : MonoBehaviourPun
     [SerializeField] Image endingCredit;
     [SerializeField] TMP_Text resultText;
     public TMP_Text TimeText { get { return timeText; } }
-    [SerializeField] Button lobbyButton;
-
     private void Awake()
     {
-        lobbyButton.onClick.AddListener(LobbyButton);
     }
     // 여기 밑에 있는거 네트워크로 동기화 시켜야됨
     public void StartTimer()
     {
-        if( timerRoutine !=null)
-            timerRoutine =StartCoroutine(Timer());
+        if ( timerRoutine == null )
+            timerRoutine = StartCoroutine(Timer());
         Debug.Log("시간 들어옴?");
     }
     public void Victory()
@@ -46,13 +44,19 @@ public class GameTime : MonoBehaviourPun
             yield return new WaitForSeconds(1);
         }
     }
+    IEnumerator EndingLobby()
+    {
+        yield return new WaitForSeconds(3f);
+        RoomButton();
+    }
     public void EndingImage()
     {
         // 여기 있는 조건 게임이 끝났을때 조건
         endingCredit.gameObject.SetActive(true);
-
+        StartCoroutine(EndingLobby());
     }
-    private void LobbyButton()
+
+    private void RoomButton()
     {
         PhotonNetwork.LoadLevel("NetworkRoom");
     }
