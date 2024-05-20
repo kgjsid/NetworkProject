@@ -4197,7 +4197,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 291955845}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20368247, y: 0.000000016845684, z: -0.0000000035046386, w: 0.979037}
+  m_LocalRotation: {x: 0.20368247, y: -0.000000016845684, z: 0.0000000035046386, w: 0.979037}
   m_LocalPosition: {x: 0.13002008, y: 6.9526353, z: -9.064182}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7744,10 +7744,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a8a09af9543f32498735a1d02885d90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lobbyManager: {fileID: 0}
   PV: {fileID: 0}
   timeText: {fileID: 1919572522}
   endingCredit: {fileID: 2007003040}
+  resultText: {fileID: 1625943110}
   lobbyButton: {fileID: 1448361172}
 --- !u!114 &498662056
 MonoBehaviour:
@@ -30515,6 +30515,7 @@ MonoBehaviour:
   - {fileID: 133392380}
   - {fileID: 1758884883}
   checkGameState: {fileID: 1869868879}
+  aiControllers: []
   fade: {fileID: 3570199}
   fadeTime: 2
   killLogUI: {fileID: 12201598}
@@ -30522,7 +30523,7 @@ MonoBehaviour:
   masterChangeEvent:
     m_PersistentCalls:
       m_Calls: []
-  gameTimeUI: {fileID: 0}
+  gameTimeUI: {fileID: 498662055}
 --- !u!114 &1869868879
 MonoBehaviour:
   m_ObjectHideFlags: 0

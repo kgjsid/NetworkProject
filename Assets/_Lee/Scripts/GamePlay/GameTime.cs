@@ -7,34 +7,50 @@ using UnityEngine.UI;
 
 public class GameTime : MonoBehaviourPun
 {
-    [SerializeField] LobbyManager lobbyManager;
-    int maxTime = 90;
+    int time = 10;
+    public int Time { get { return time; } }
     [SerializeField] PhotonView PV;
     [SerializeField] TMP_Text timeText;
     [SerializeField] Image endingCredit;
+    [SerializeField] TMP_Text resultText;
     public TMP_Text TimeText { get { return timeText; } }
     [SerializeField] Button lobbyButton;
 
     private void Awake()
     {
-        lobbyManager = FindObjectOfType<LobbyManager>();
         lobbyButton.onClick.AddListener(LobbyButton);
     }
     // 여기 밑에 있는거 네트워크로 동기화 시켜야됨
-    private void Update()
+    public void StartTimer()
     {
-        if(BaseGameScene.Instance.CheckGameState.CurState == GameState.GameProgress) // 게임 실행중일때 부터 타이머 움직이게 함
-        RequestTimer();
+        if( timerRoutine !=null)
+            timerRoutine =StartCoroutine(Timer());
+        Debug.Log("시간 들어옴?");
     }
-    public void RequestTimer()
+    public void Victory()
     {
-        timeText.text = $"{( int )( Time.time )}";
-        if ( Time.time > maxTime )
+        resultText.text = "게임 승리";
+    }
+    public void Lose()
+    {
+        resultText.text = "게임 패배";
+    }
+    Coroutine timerRoutine;
+    IEnumerator Timer()
+    {
+        while ( time >= 0 )
         {
-            endingCredit.gameObject.SetActive(true);
-            BaseGameScene.Instance.CheckGameState.CurState = GameState.GameEnd; // 게임 끝난 상태로 바꿔줌
-            // 여기서 로비로 보내주는거 해주면될듯
+            Debug.Log("시간 코루틴에 들어옴?");
+            timeText.text = time.ToString();
+            time--;
+            yield return new WaitForSeconds(1);
         }
+    }
+    public void EndingImage()
+    {
+        // 여기 있는 조건 게임이 끝났을때 조건
+        endingCredit.gameObject.SetActive(true);
+
     }
     private void LobbyButton()
     {
