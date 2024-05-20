@@ -17,10 +17,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Lee/Scene/TestLobbyScene_Lee.unity
     guid: 3ee8d5c6dfdcfb243bc4a0d9b18490d2
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Lee/Scene/BaseGameScene_Lee.unity
     guid: 3b31df18595850f4895b609b7d2ccaad
   - enabled: 1
@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Seo/Scenes/MissionGameScene.unity
     guid: 300cedd42ef2e2e459183e828f19efa7
+  - enabled: 1
+    path: Assets/_Byeon/NetworkRoom_bcw.unity
+    guid: 3a1e997acde527c489524d10921f8e1c
+  - enabled: 1
+    path: Assets/_Byeon/BaseGameScene_bcw.unity
+    guid: 3ed4e6816096c094cb1e72e1c3d5db1c
   m_configObjects: {}
