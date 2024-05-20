@@ -140,14 +140,14 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     {   // 사망 함수
         isDamaged = false;          // 데미지는 받지 않는 상태로
         animator.SetTrigger("Die"); // Die 애니메이션 재생
-
+        // 사망시 플레이어 상태 변경
         // TODO... Die시 추가 작업 진행
         // 1. 공격 스크립트 제외
         // 2. 투명 처리
         // 3. 어택을 받을 수 없도록 처리 필요
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage( int damage )
     {   // 실제 데미지 함수
         if ( !isDamaged )         // 데미지를 받는 상태가 아니라면(isDamage가 false)
         {
