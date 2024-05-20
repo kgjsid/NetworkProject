@@ -1,5 +1,6 @@
 using Photon.Realtime;
 using UnityEngine;
+using static Cinemachine.CinemachineTriggerAction.ActionSettings;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public static class CustomProperty

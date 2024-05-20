@@ -10,6 +10,7 @@ using UnityEngine.Events;
 using Unity.VisualScripting;
 using System.Runtime.InteropServices.WindowsRuntime;
 
+// 모든 데이터들이 관리 해주는 친구
 public class BaseGameScene : MonoBehaviourPunCallbacks
 {
     private static BaseGameScene instance;
