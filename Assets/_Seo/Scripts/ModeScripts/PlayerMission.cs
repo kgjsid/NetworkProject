@@ -111,5 +111,8 @@ public class PlayerMission : MonoBehaviourPun
         CurMissionType = mission;
     }
 
-
+    public void IncreaseKillCount()
+    {
+        killCount++;
+    }
 }

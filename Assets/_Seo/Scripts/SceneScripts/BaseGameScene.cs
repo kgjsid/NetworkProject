@@ -8,6 +8,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using Unity.VisualScripting;
+using System.Runtime.InteropServices.WindowsRuntime;
 
 public class BaseGameScene : MonoBehaviourPunCallbacks
 {
@@ -130,6 +131,9 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         else if ( changedProps.ContainsKey(CustomProperty.PLAYERSTATE) )
         {
             // 플레이어 상태 바뀐 것 체크
+            if ((PlayerState)changedProps[CustomProperty.PLAYERSTATE] != PlayerState.Die)
+                return;
+
             deathCount++;
 
             if ( deathCount >= players.Count - 1 )
