@@ -23,7 +23,7 @@ public class GameTime : MonoBehaviourPun
     // 여기 밑에 있는거 네트워크로 동기화 시켜야됨
     public void StartTimer()
     {
-        if( timerRoutine !=null)
+        if( timerRoutine ==null)
             timerRoutine =StartCoroutine(Timer());
         Debug.Log("시간 들어옴?");
     }

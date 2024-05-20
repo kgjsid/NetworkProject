@@ -141,6 +141,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         isDamaged = false;          // 데미지는 받지 않는 상태로
         animator.SetTrigger("Die"); // Die 애니메이션 재생
         // 사망시 플레이어 상태 변경
+        PhotonNetwork.LocalPlayer.SetState(PlayerState.Die);
         // TODO... Die시 추가 작업 진행
         // 1. 공격 스크립트 제외
         // 2. 투명 처리
@@ -164,7 +165,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     public void PlayerMove()
     {   // 애니메이션 이벤트에서 활용 중
         isAlive = true;
-        hp += 2;         // 테스트용 hp        
+        //hp += 2;         // 테스트용 hp        
     }
     public void PlayerNotMove()
     {   // 애니메이션 이벤트에서 활용 중
