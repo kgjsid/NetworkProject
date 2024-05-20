@@ -5,9 +5,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
-public class RoomPanel : MonoBehaviour
+public class RoomPanel_TestChat : MonoBehaviourPun
 {
     [SerializeField] TMP_Text roomName;
     [SerializeField] RectTransform playerContent;
@@ -18,6 +19,31 @@ public class RoomPanel : MonoBehaviour
 
     // 현재들어온 플레이어들 관리
     private List<PlayerEntry> PlayerList;
+
+    [SerializeField] TMP_Text chatTextPrefab;
+    [SerializeField] TMP_InputField inputField;
+    [SerializeField] RectTransform content;
+
+
+    private void Awake()
+    {
+        inputField.onSubmit.AddListener(Send);
+    }
+
+    private void Send(string a)
+    {
+        photonView.RPC("SendRpc", RpcTarget.All, inputField.text);
+        inputField.text = "";
+    }
+
+    [PunRPC]
+    private void SendRpc(string inputField)
+    {
+        TMP_Text textPrefab = Instantiate(chatTextPrefab, content);
+        textPrefab.text = $"{PhotonNetwork.NickName} : {inputField}";
+    }
+
+
 
     private void Start()
     {
