@@ -1,3 +1,4 @@
+using Photon.Pun;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -32,6 +33,10 @@ public class MissionPanel : MonoBehaviour
         {
             ClearMission();
         }
+        else if(missionType == MissionType.Fail)
+        {
+            FailMission();
+        }
         else
         {
             SetfailColor();
@@ -60,12 +65,20 @@ public class MissionPanel : MonoBehaviour
         SetClearColor();
         clearOrNot.text = "완료";
         StopCoroutine(missionTimer);
-        timeText.text = $" (남은 시간 : {0})";
+        timeText.text = $" (남은 시간 : 0)";
     }
 
     [Serializable] struct MissionDetailStruct
     {
         public string missionDetail;
+    }
+
+    private void FailMission()
+    {
+        SetfailColor();
+        missionDetail.text = $"{missionDetail.text} (실패)";
+        StopCoroutine(missionTimer);
+        timeText.text = " (남은 시간 : 0)";
     }
 
     private void SetClearColor()
