@@ -20,6 +20,7 @@ public class TempAIMove : MonoBehaviourPun, IDamageable
     Vector3 randPos = Vector3.zero;
     private void Start()
     {
+        
         StartMoveRoutine();
         BaseGameScene.Instance.masterChangeEvent.AddListener(StartMoveRoutine);
     }

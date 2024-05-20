@@ -29,7 +29,7 @@ public class MissionGameScene : BaseGameScene
     protected override IEnumerator Start()
     {
         yield return base.Start();
-
+        
         missionRoutine = StartCoroutine(MissionRoutine());
     }
 
@@ -53,7 +53,9 @@ public class MissionGameScene : BaseGameScene
             for(int i = 0; i < playerMissions.Count; i++)
             {
                 if (playerMissions[i].CurMissionType != MissionType.Clear)
-                {   // 미션 실패시 10 데미지??
+                {   // 미션 실패시 10 데미지
+                    playerMissions[i].CurMissionType = MissionType.Fail;
+
                     PlayerController target = playerMissions[i].gameObject.GetComponent<PlayerController>();
                     if (target == null) // 미리 맞아서 죽었을 수 있으니까
                         continue;
@@ -91,5 +93,6 @@ public enum MissionType
     itemMission,
     runMission,
     Size,
-    Clear
+    Clear,
+    Fail
 }
