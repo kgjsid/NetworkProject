@@ -6,8 +6,8 @@ using UnityEngine;
 public class DebuggingManager : MonoBehaviourPunCallbacks
 {
     // 네트워크 디버깅용
-    [SerializeField] string debugRoomName = "DebugRoom 1";
-    [SerializeField] string sceneName = "BaseGameScene";
+    [SerializeField] string debugRoomName;
+    [SerializeField] string sceneName;
 
     private void Start()
     {
@@ -20,6 +20,11 @@ public class DebuggingManager : MonoBehaviourPunCallbacks
         RoomOptions options = new RoomOptions();
         options.MaxPlayers = 10;
         TypedLobby typedLobby = new TypedLobby("DebugLobby", LobbyType.Default);
+
+        if(debugRoomName == "")
+        {
+            debugRoomName = "Debugging1";
+        }
 
         PhotonNetwork.JoinOrCreateRoom(debugRoomName, options, typedLobby);
     }
