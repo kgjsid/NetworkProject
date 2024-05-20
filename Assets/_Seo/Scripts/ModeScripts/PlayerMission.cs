@@ -55,7 +55,7 @@ public class PlayerMission : MonoBehaviourPun
         Debug.Log("미션 끝");
         CurMissionType = MissionType.Clear;
     }
-
+    //완
     private IEnumerator RunMission()
     {
         Debug.Log("달리기 미션");
@@ -79,18 +79,21 @@ public class PlayerMission : MonoBehaviourPun
 
     private IEnumerator KillMission()
     {   // 킬처리 추가
+        // 킬이 5킬 (플레이어(2점)나 AI(1점)잡았을때)
         Debug.Log("킬미션");
         int killCount = 0;
         while (killCount < 3)
         {
             yield return new WaitForSeconds(0.1f);
         }
-
+        
         ClearMission();
     }
 
     private IEnumerator ItemMission()
     {   // 아이템전은 나중에 아이템 만들고 나면 스크립트 이용해 볼 것
+        // 아이템 먹는거 구현 완료
+        // 특정 아이템을 특정 플레이어만 먹을 수 있게(다른 사람이 보여야함)
         Debug.Log("아이템 미션");
         yield return null;
 

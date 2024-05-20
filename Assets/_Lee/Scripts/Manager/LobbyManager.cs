@@ -26,13 +26,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
    private void Start()
     {
-        if(PhotonNetwork.CurrentRoom == null )
+        if ( PhotonNetwork.CurrentRoom != null )
         {
-            SetActivePanel(Panel.Login);
+            SetActivePanel(Panel.Room);
+
         }
         else
         {
-            SetActivePanel(Panel.Room);
+            SetActivePanel(Panel.Login);
         }
     }
     private void Update()
