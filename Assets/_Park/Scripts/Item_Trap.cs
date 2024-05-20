@@ -18,7 +18,6 @@ public class Item_Trap : MonoBehaviour
         StartCoroutine(TrapCount());        
     }
 
-
     private IEnumerator TrapCount()
     {
         yield return new WaitForSeconds(count);

@@ -1,25 +1,30 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class ItemBox : MonoBehaviour
+public class ItemBox : MonoBehaviourPun
 {
-    [SerializeField] private LayerMask playerCheck; 
-    [SerializeField] private GameObject box; 
-    [SerializeField] private int count; 
+    [SerializeField] private LayerMask playerCheck;
+    //[SerializeField] private GameObject box;
+    [SerializeField] private int respawnTime;
 
     private IEnumerator ReCreate()
-    {        
-        yield return new WaitForSeconds(count); 
-        box.SetActive(true); 
+    {
+        yield return new WaitForSeconds(respawnTime);
+        gameObject.SetActive(true);
     }
-
     private void OnTriggerEnter(Collider other)
     {
         if ((playerCheck.value & 1 << other.gameObject.layer) != 0)
         {
-            box.SetActive(false);
-            StartCoroutine(ReCreate()); 
+            if (PhotonNetwork.IsMasterClient)
+                photonView.RPC("GetItemBox", RpcTarget.All);
         }
     }
+    [PunRPC]
+    private void GetItemBox()
+    {
+        gameObject.SetActive(false);
+        StartCoroutine(ReCreate());
+    }    
 }

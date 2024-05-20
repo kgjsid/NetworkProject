@@ -154,13 +154,58 @@
             ]
         },
         {
-            "name": "JB",
-            "id": "b073ed16-9a32-4c52-b5db-2fca842ac5af",
+            "name": "Player(DeathMatch)",
+            "id": "d06721cb-69cf-459d-b901-00c015c3492e",
             "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "985a86df-c0de-41c0-a870-ae4f3c78cf7d",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Run",
+                    "type": "PassThrough",
+                    "id": "e1885086-e275-462e-bff1-86a22621637a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "51de3b4d-b095-4714-a163-2af8131c240b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "fdbd5c4a-7f90-4b38-8587-08c334b8e7f2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Emote",
+                    "type": "Button",
+                    "id": "d00328fa-3ac2-44fa-94c2-98b0333f8b42",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
                 {
                     "name": "UsingItem",
                     "type": "Button",
-                    "id": "1ffc5411-79e4-4dd4-9c0e-3597f8e3b599",
+                    "id": "f382a8f3-3877-4df1-816c-12c767c47c13",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -169,8 +214,107 @@
             ],
             "bindings": [
                 {
+                    "name": "KeyBoard",
+                    "id": "d631664f-0783-4f75-83ce-b5244ef204c3",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "37eecb04-d1b9-46e2-ac81-8cc4897d9e50",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "ebc8c2f3-ad3e-4916-a832-2dc2b7f1d662",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "6856032f-6a55-4645-ae21-0addf5b7ff44",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "ac59f677-eb69-42c0-ac7d-2d52d1e2455a",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
-                    "id": "547479cd-5c9e-4beb-a27a-f94f1b56b593",
+                    "id": "c675eb89-9a37-49cc-8359-005420ee188c",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Run",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "98f27c51-5a1a-439b-93ff-80d2398922c2",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5679b7b6-edb5-4c2e-908c-7ca7fe445a16",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "608d5d16-92d3-4e11-b90a-42fa9f190131",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Emote",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "75394b36-99c9-4cb4-8b67-d36051bf99db",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",

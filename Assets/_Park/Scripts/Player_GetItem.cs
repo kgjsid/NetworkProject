@@ -1,14 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Photon.Pun;
 
-
-public class Player_GetItem : MonoBehaviour
+public class Player_GetItem : MonoBehaviourPun
 {
-    [SerializeField] Image itemBox;    
-    [SerializeField] List<Sprite> itemIcon; 
+    [SerializeField] Image itemBox;
+    [SerializeField] List<Sprite> itemIcon;
     [SerializeField] LayerMask itemBoxCheck;
 
     [Header("Item")]
@@ -17,21 +15,24 @@ public class Player_GetItem : MonoBehaviour
     private int itemCode;
     private bool itemCheack = false;
 
+
     public void GetItem()
     {
-        itemBox.gameObject.SetActive(true);
-        
-            switch (itemCode)
-            {
-                case 0:
-                    itemBox.sprite = itemIcon[0];
-                    break;
-                case 1:
-                    itemBox.sprite = itemIcon[1];
-                    break;
-            }        
-    }
+        itemCode = Random.Range(0, 2);  //아이템 랜덤
+        itemCheack = true;              //아이템 소유여부
+        itemBox.gameObject.SetActive(true);//아이템 아이콘 on
 
+        switch (itemCode)
+        {
+            case 0:
+                itemBox.sprite = itemIcon[0];
+                break;
+            case 1:
+                itemBox.sprite = itemIcon[1];
+                break;
+        }
+    }
+    [PunRPC]
     public void Using_Item()
     {
         switch (itemCode)
@@ -46,19 +47,17 @@ public class Player_GetItem : MonoBehaviour
         itemCheack = false;
         itemBox.gameObject.SetActive(false);
     }
-
+    
     private void OnUsingItem()
     {
-        Using_Item();
+        photonView.RPC("Using_Item", RpcTarget.All);
     }
 
     private void OnTriggerEnter(Collider other)
     {
         if ((itemBoxCheck.value & 1 << other.gameObject.layer) != 0)
-        {            
-            itemCode = Random.Range(0, 2);
-            itemCheack = true;
-            GetItem();            
-        }        
+        {
+            GetItem();
+        }
     }
 }
