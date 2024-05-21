@@ -166,7 +166,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         // 게임 상태를 해보았으나 처음에 End상태로 가서 바꿈
         while ( true )
         {
-            if ( checkGameState.CurState == GameState.GameEnd)
+            if ( checkGameState.CurState == GameState.GameEnd )
             {
                 if ( PhotonNetwork.LocalPlayer.GetState() == PlayerState.Live )
                 {
