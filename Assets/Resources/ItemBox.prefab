@@ -154,8 +154,7 @@ MonoBehaviour:
   playerCheck:
     serializedVersion: 2
     m_Bits: 8
-  box: {fileID: 866810565663136156}
-  count: 30
+  respawnTime: 0
 --- !u!114 &7913842730609805656
 MonoBehaviour:
   m_ObjectHideFlags: 0

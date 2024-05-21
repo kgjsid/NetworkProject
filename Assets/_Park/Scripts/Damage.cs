@@ -8,7 +8,8 @@ public class Damage : MonoBehaviourPun
     [SerializeField] int damage;
     [SerializeField] PlayerController ownerController;
     public PhotonView targetView;
-
+    private int targetID;
+    public int TargetID {  get { return targetID; } }
     private void OnTriggerEnter( Collider collision )
     {
         if ( ( damageCheckLayer.value & ( 1 << collision.gameObject.layer ) ) != 0 )
@@ -16,13 +17,15 @@ public class Damage : MonoBehaviourPun
             targetView = collision.GetComponent<PhotonView>();
             if ( targetView != null )
             {
-                int targetID = targetView.ViewID;
+                targetID = targetView.ViewID;
                 IDamageable damagable = collision.GetComponent<IDamageable>();
                 damagable?.TakeDamage(damage);
                 ownerController.KillLog(targetID);
             }
         }
     }
-
-
+    public void TargetIDReset()
+    {
+        targetID = -12;
+    }
 }

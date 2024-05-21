@@ -12,12 +12,13 @@ public class MissionGameScene : BaseGameScene
 
     [SerializeField] float missionInterval;
     [SerializeField] float missionTime;
+    public float MissionTime { get { return missionTime; } }
 
     Coroutine missionRoutine;
 
     [SerializeField] List<PlayerMission> playerMissions;
-
-    public float MissionTime { get { return missionTime; } }
+    [SerializeField] List<GameObject> itemSpawnsPoint;
+    public List<GameObject> ItemSpawnsPoint { get { return itemSpawnsPoint; } }
     private void Awake()
     {
         if(instance == null)
@@ -44,7 +45,8 @@ public class MissionGameScene : BaseGameScene
 
             foreach (PlayerMission playerMission in playerMissions)
             {
-                photonView.RPC("SetPlayerMission", RpcTarget.MasterClient);
+                if(PhotonNetwork.IsMasterClient)
+                photonView.RPC("SetPlayerMission", RpcTarget.All);
             }
 
             yield return new WaitForSeconds(missionTime);
@@ -81,8 +83,11 @@ public class MissionGameScene : BaseGameScene
     {
         for (int i = 0; i < playerMissions.Count; i++)
         {
-            MissionType randomMission = (MissionType)Random.Range(0, (int)MissionType.Size);
-            playerMissions[i].SetMission(randomMission);
+            // 원래꺼 
+            MissionType randomMission = ( MissionType )Random.Range(0, ( int )MissionType.Size);
+            playerMissions [i].SetMission(randomMission);
+            // 테스트용
+            // playerMissions [i].SetMission(MissionType.itemMission) ;
         }
     }
 }

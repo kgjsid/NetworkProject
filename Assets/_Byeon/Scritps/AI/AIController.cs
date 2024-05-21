@@ -8,12 +8,12 @@ using static AIController;
 
 public class AIController : MonoBehaviourPun, IDamageable//,IPointerClickHandler
 {
-    public enum AIstate { Idle, Walk, Die}
+    public enum AIstate { Idle, Walk, Die }
 
     AIstate aiState;
 
     private Animator animator;
-    public Animator Animator {  get { return animator; } }
+    public Animator Animator { get { return animator; } }
 
     private AIMove aiMove;
 
@@ -26,7 +26,10 @@ public class AIController : MonoBehaviourPun, IDamageable//,IPointerClickHandler
 
     private void Awake()
     {
-        BaseGameScene.Instance.aiControllers.Add(this);
+        if ( BaseGameScene.Instance != null )
+        {
+            BaseGameScene.Instance.aiControllers.Add(this);
+        }
         animator = GetComponent<Animator>();
         aiMove = GetComponent<AIMove>();
         hp = 1;
@@ -36,9 +39,9 @@ public class AIController : MonoBehaviourPun, IDamageable//,IPointerClickHandler
         aiState = AIstate.Idle;
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage( int damage )
     {
-        if (hp - damage < 0)
+        if ( hp - damage < 0 )
         {
             Die();
         }
@@ -62,17 +65,17 @@ public class AIController : MonoBehaviourPun, IDamageable//,IPointerClickHandler
     IEnumerator DieDelay()
     {
         yield return new WaitForSeconds(3f);
-        if (photonView.IsMine)
+        if ( photonView.IsMine )
             PhotonNetwork.Destroy(gameObject);
     }
 
     //플레이어 애니메이션 이벤트용 
     public void PlayerMove()
     {
-        
+
     }
     public void PlayerNotMove()
     {
-        
+
     }
 }
