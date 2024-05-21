@@ -51,8 +51,12 @@ public class PlayerMission : MonoBehaviourPun
     private void Start()
     {
         MissionGameScene.Instance.SetMissionScript(this);
-        panel = FindObjectOfType<MissionPanel>();
-        changeMission += panel.ShowMissionDetail;
+
+        if (photonView.IsMine)
+        {
+            panel = FindObjectOfType<MissionPanel>();
+            changeMission += panel.ShowMissionDetail;
+        }
     }
 
     private void ClearMission()
