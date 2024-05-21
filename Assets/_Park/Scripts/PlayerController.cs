@@ -31,7 +31,8 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 
     KillLogUI killLogUI;
     [SerializeField] Damage damageCheck;
-
+    int playerKillCount = 0;
+    public int PlayerKillCount {  get { return playerKillCount; } }// 이 친구를 가져다 쓰면될듯
     private void Awake()
     {
         killLogUI = FindObjectOfType<KillLogUI>();
@@ -46,13 +47,12 @@ public class PlayerController : MonoBehaviourPun, IDamageable
             string targetName = targetView.Controller.NickName;
             if ( targetView.gameObject.layer == 3 )
             {
+                playerKillCount++;
                 killLogUI.KillLog(photonView.Controller.NickName, targetName);
-
             }
             else
             {
                 killLogUI.KillLog(photonView.Controller.NickName, "AI");
-
             }
         }
     }

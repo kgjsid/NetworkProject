@@ -16,7 +16,7 @@ public class MissionPanel : MonoBehaviour
     [SerializeField] Color clearColor;
     [SerializeField] Color failColor;
 
-    [SerializeField] MissionDetailStruct[] missionDetailStruct;
+    [SerializeField] MissionDetailStruct [] missionDetailStruct;
 
     Coroutine missionTimer;
 
@@ -27,13 +27,13 @@ public class MissionPanel : MonoBehaviour
         timeText.text = "";
     }
 
-    public void ShowMissionDetail(MissionType missionType)
+    public void ShowMissionDetail( MissionType missionType )
     {
-        if(missionType == MissionType.Clear)
+        if ( missionType == MissionType.Clear )
         {
             ClearMission();
         }
-        else if(missionType == MissionType.Fail)
+        else if ( missionType == MissionType.Fail )
         {
             FailMission();
         }
@@ -41,7 +41,7 @@ public class MissionPanel : MonoBehaviour
         {
             SetfailColor();
             missionPanel.gameObject.SetActive(true);
-            missionDetail.text = missionDetailStruct[(int)missionType].missionDetail;
+            missionDetail.text = missionDetailStruct [( int )missionType].missionDetail;
             clearOrNot.text = "미완료";
             missionTimer = StartCoroutine(MissionTimer());
         }
@@ -50,15 +50,16 @@ public class MissionPanel : MonoBehaviour
 
     IEnumerator MissionTimer()
     {
-        int time = (int)MissionGameScene.Instance.MissionTime;
+        int time = ( int )MissionGameScene.Instance.MissionTime;
 
-        while (true)
+        while ( true )
         {
             timeText.text = $" (남은 시간 : {time})";
             time--;
             yield return new WaitForSeconds(1);
         }
     }
+
 
     private void ClearMission()
     {
@@ -68,7 +69,8 @@ public class MissionPanel : MonoBehaviour
         timeText.text = $" (남은 시간 : 0)";
     }
 
-    [Serializable] struct MissionDetailStruct
+    [Serializable]
+    struct MissionDetailStruct
     {
         public string missionDetail;
     }
