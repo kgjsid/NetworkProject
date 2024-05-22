@@ -291,7 +291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000017166138}
+  m_AnchoredPosition: {x: 0, y: 0.000032870164}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &79648173
@@ -1048,7 +1048,7 @@ PrefabInstance:
         type: 3}
       propertyPath: inputField
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 233126553}
     - target: {fileID: 5529257181096569531, guid: bac7589dd72fa3346a23f0318e6fc694,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1089,6 +1089,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bac7589dd72fa3346a23f0318e6fc694, type: 3}
+--- !u!114 &233126553 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6910714598020001959, guid: bac7589dd72fa3346a23f0318e6fc694,
+    type: 3}
+  m_PrefabInstance: {fileID: 233126552}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &250609638
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,10 +2991,10 @@ MonoBehaviour:
   startButton: {fileID: 2067765545}
   GameModButton: {fileID: 1539176772}
   gameModPanel: {fileID: 1517309705}
-  baseGameScene: BaseGameScene_Lee
+  baseGameScene: BaseGameScene
   missionGameScne: MissionGameScene
   itemGameScene: GameScene_DeathMatch
-  curentGameModname: 
+  curentGameModname: BaseGameScene
 --- !u!224 &471746171
 RectTransform:
   m_ObjectHideFlags: 0

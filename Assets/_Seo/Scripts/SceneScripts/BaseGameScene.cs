@@ -78,7 +78,6 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         yield return FadeIn();
         checkGameState.CurState = GameState.GameProgress;
     }
-
     protected virtual IEnumerator SpawnRoutine()
     {   // 실제 스폰 루틴
         if ( PhotonNetwork.IsMasterClient )
