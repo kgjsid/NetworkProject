@@ -5,26 +5,44 @@ using Photon.Pun;
 public class ItemBox : MonoBehaviourPun
 {
     [SerializeField] private LayerMask playerCheck;
-    //[SerializeField] private GameObject box;
+    [SerializeField] GameObject box;    
     [SerializeField] private int respawnTime;
 
+    public bool boxStatus = true;
+
+    
     private IEnumerator ReCreate()
     {
         yield return new WaitForSeconds(respawnTime);
-        gameObject.SetActive(true);
+        if (box != null)
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+            boxStatus = true;
+            box.gameObject.SetActive(true);
+        }
     }
-    private void OnTriggerEnter(Collider other)
+
+/*    private void OnTriggerEnter(Collider other)
     {
         if ((playerCheck.value & 1 << other.gameObject.layer) != 0)
         {
-            if (PhotonNetwork.IsMasterClient)
-                photonView.RPC("GetItemBox", RpcTarget.All);
         }
+    }
+*/
+    public void GetTwoItem()
+    {
+        photonView.RPC("GetItemBox", RpcTarget.All);
+
     }
     [PunRPC]
     private void GetItemBox()
     {
-        gameObject.SetActive(false);
-        StartCoroutine(ReCreate());
-    }    
+        if (box != null)
+        {            
+            boxStatus = false;
+            box.gameObject.SetActive(false);     
+            gameObject.GetComponent<BoxCollider>().enabled = false;
+            StartCoroutine(ReCreate());
+        }        
+    }
 }

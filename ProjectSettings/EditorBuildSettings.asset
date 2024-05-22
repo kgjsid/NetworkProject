@@ -5,6 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 1
+    path: Assets/_Lee/Scene/NetworkRoom.unity
+    guid: 51d7cb7b3140c844896a79293f8e12c3
   - enabled: 0
     path: Assets/_Seo/Scenes/TestLobbyScene.unity
     guid: 359ec83e97d6db2489e3c0107f73c1fb
@@ -18,15 +21,15 @@ EditorBuildSettings:
     path: Assets/_Lee/Scene/TestLobbyScene_Lee.unity
     guid: 3ee8d5c6dfdcfb243bc4a0d9b18490d2
   - enabled: 1
-    path: Assets/_Lee/Scene/NetworkRoom.unity
-    guid: 51d7cb7b3140c844896a79293f8e12c3
-  - enabled: 1
     path: Assets/_Lee/Scene/BaseGameScene_Lee.unity
     guid: 3b31df18595850f4895b609b7d2ccaad
+  - enabled: 1
+    path: Assets/Scenes/GameScene_DeathMatch.unity
+    guid: a58c08de94fa1884b889bf1e41c459ad
   - enabled: 0
     path: Assets/_Seo/Scenes/TestLobbyScene 1.unity
     guid: 18bda89cf9ff21a4cb22a107da918731
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Seo/Scenes/MissionGameScene.unity
     guid: 300cedd42ef2e2e459183e828f19efa7
   - enabled: 0
