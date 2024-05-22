@@ -7,6 +7,8 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
+    private static LobbyManager instance;
+    public static LobbyManager Instance { get { return instance; } }
     [SerializeField] GameObject mainCharacter;
     public enum Panel { Login, Main, Lobby, Room, Info, SignUp }// 패널 상태
 
@@ -18,14 +20,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] RoomPanel roomPanel;
     [SerializeField] InfoPanel infoPanel;
     [SerializeField] SignUpPanel signUpPanel;
-
+    [SerializeField] AudioClip BGM;
     private ClientState state; // 클라이언트의 상태
     private void Awake()
     {
-        SetActivePanel(Panel.Login); // 시작시 무조건 Login 화면이 나올수 있게
+        if ( instance == null )
+        {
+            instance = this;
+        }
+
     }
-   private void Start()
+    private void Start()
     {
+        SetActivePanel(Panel.Login); // 시작시 무조건 Login 화면이 나올수 있게
+        Manager.Sound.PlayBGM(BGM);
         if ( PhotonNetwork.CurrentRoom != null )
         {
             SetActivePanel(Panel.Room);
