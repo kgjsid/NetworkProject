@@ -4,13 +4,13 @@ using Photon.Pun;
 
 public class ItemBox : MonoBehaviourPun
 {
+
     [SerializeField] private LayerMask playerCheck;
     [SerializeField] GameObject box;    
     [SerializeField] private int respawnTime;
 
     public bool boxStatus = true;
 
-    
     private IEnumerator ReCreate()
     {
         yield return new WaitForSeconds(respawnTime);

@@ -286,8 +286,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0a83902f1b2e0342912a2f19c52fb31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugRoomName: DebugRoom 3
-  sceneName: MissionGameScene
+  debugRoomName: DebugRoom 5
+  sceneName: DeathMatchGameScene
 --- !u!114 &871058290
 MonoBehaviour:
   m_ObjectHideFlags: 0
