@@ -10,7 +10,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private static LobbyManager instance;
     public static LobbyManager Instance { get { return instance; } }
     [SerializeField] GameObject mainCharacter;
-    public enum Panel { Login, Main, Lobby, Room, Info, SignUp, GameMod }// 패널 상태
+    public enum Panel { Login, Main, Lobby, Room, Info, SignUp }// 패널 상태
 
     [SerializeField] Panel curPanel;
   
@@ -20,7 +20,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] RoomPanel roomPanel;
     [SerializeField] InfoPanel infoPanel;
     [SerializeField] SignUpPanel signUpPanel;
-    [SerializeField] GameModPanel gameModPanel;
     [SerializeField] AudioClip BGM;
     private ClientState state; // 클라이언트의 상태
     private void Awake()
@@ -68,7 +67,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if ( roomPanel != null ) roomPanel.gameObject.SetActive(panel == Panel.Room);
         if ( infoPanel != null ) infoPanel.gameObject.SetActive(panel == Panel.Info);
         if ( signUpPanel != null ) signUpPanel.gameObject.SetActive(panel == Panel.SignUp);
-        if( gameModPanel !=null) gameModPanel.gameObject.SetActive (panel == Panel.GameMod);
     }
     int connectedCount = 0;
     public override void OnConnected()
