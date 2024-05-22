@@ -151,13 +151,13 @@ MonoBehaviour:
   ShowParameterInspector: 1
   m_SynchronizeParameters:
   - Type: 9
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Attack
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Run
   - Type: 1
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: MoveSpeed
   - Type: 9
     SynchronizeType: 0
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204425265791416288}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   agent: {fileID: 703750735836234806}
-  endPos: {fileID: 0}
+  endPos: {x: 0, y: 0, z: 0}
 --- !u!1 &303992131211876343
 GameObject:
   m_ObjectHideFlags: 0
