@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 public class Player_GetItem : MonoBehaviourPun
 {
@@ -15,13 +16,19 @@ public class Player_GetItem : MonoBehaviourPun
     private int itemCode;
     private bool itemCheack = false;
 
+    private ItemBox itemBoxScript;
+
+    private void Start()
+    {
+        itemBoxScript = GetComponent<ItemBox>();
+    }
 
     public void GetItem()
     {
+        Debug.Log("아이템 생성");
         itemCode = Random.Range(0, 2);  //아이템 랜덤
         itemCheack = true;              //아이템 소유여부
         itemBox.gameObject.SetActive(true);//아이템 아이콘 on
-
         switch (itemCode)
         {
             case 0:
@@ -32,22 +39,29 @@ public class Player_GetItem : MonoBehaviourPun
                 break;
         }
     }
+
     [PunRPC]
     public void Using_Item()
     {
-        switch (itemCode)
+        if (itemCheack != false)
         {
-            case 0:
-                Debug.Log("트랩 아이템 사용");
-                break;
-            case 1:
-                Debug.Log("쉴드 아이템 사용");
-                break;
+            switch (itemCode)
+            {
+                case 0:
+                    Debug.Log("트랩 아이템 사용");
+                    
+                    break;
+                case 1:
+                    Debug.Log("쉴드 아이템 사용");
+                    
+                    break;
+            }
+            itemCheack = false;
+            itemBox.gameObject.SetActive(false);
+            Debug.Log("아이템 사용");
         }
-        itemCheack = false;
-        itemBox.gameObject.SetActive(false);
     }
-    
+
     private void OnUsingItem()
     {
         photonView.RPC("Using_Item", RpcTarget.All);
@@ -57,7 +71,12 @@ public class Player_GetItem : MonoBehaviourPun
     {
         if ((itemBoxCheck.value & 1 << other.gameObject.layer) != 0)
         {
-            GetItem();
+                Debug.Log("박스 충돌");
+                GetItem();
+            other.gameObject.GetComponent<ItemBox>().GetTwoItem();
+            if (itemBoxScript != null && itemBoxScript.boxStatus == true)
+            {
+            }
         }
     }
 }

@@ -29,7 +29,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Seo/Scenes/TestLobbyScene 1.unity
     guid: 18bda89cf9ff21a4cb22a107da918731
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Seo/Scenes/MissionGameScene.unity
     guid: 300cedd42ef2e2e459183e828f19efa7
   - enabled: 0

@@ -60,7 +60,6 @@ MonoBehaviour:
   - SendRpc
   - GetItemBox
   - Using_Item
-  - SetTwoPlayerMission
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
