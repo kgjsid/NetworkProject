@@ -12,25 +12,24 @@ public class AIMove : MonoBehaviourPun
     [SerializeField] NavMeshAgent agent;
     public NavMeshAgent Agent { get { return agent; } }
 
-    [SerializeField] Vector3 endPos; // 이동좌표
-    
-
+    Vector3 endPos; // 이동좌표
     float randomTime; //랜덤 이동 쿨타임
     float randomRange; //랜덤 이동 거리
     Vector3 randomPos; //랜덤 방향
-    float speed;
 
     private void Awake()
     {
         //드래그앤드랍 참조 가능
-        controller = GetComponent<AIController>();
-        agent = transform.GetComponent<NavMeshAgent>();
-        endPos = transform.GetChild(1).position;
+        if (controller == null)
+            controller = GetComponent<AIController>();
+        if (agent == null)
+            agent = transform.GetComponent<NavMeshAgent>();
+        if (endPos == null)
+            endPos = transform.GetChild(1).position;
     }
 
     private void Start()
     {
-        //마스터가 랜덤한 위치좌표 지정 후 OnPhotonSerializeView함수로 동기화
         if (photonView.IsMine)
             StartCoroutine(AIRandomPos());
 
@@ -38,11 +37,6 @@ public class AIMove : MonoBehaviourPun
         StartCoroutine(AIMoveCoroutine());
     }
 
-
-    private void Update()
-    {
-
-    }
 
     //마스터만실행
     IEnumerator AIRandomPos()

@@ -22,7 +22,7 @@ public class AISpawner : MonoBehaviour
             Quaternion randRot = Random.rotation;
             randRot.x = 0f; randRot.z = 0f;
             //AI 테스트
-            GameObject instance = PhotonNetwork.InstantiateRoomObject("TestAI", randNavPos, randRot);
+            GameObject instance = PhotonNetwork.InstantiateRoomObject("TestAI_2", randNavPos, randRot);
         }
     }
 
