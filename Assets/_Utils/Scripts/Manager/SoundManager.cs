@@ -10,7 +10,7 @@ public class SoundManager : Singleton<SoundManager>
     public float SFXVolme { get { return sfxSource.volume; } set { sfxSource.volume = value; } }
 
     public void PlayBGM(AudioClip clip)
-    {
+    { 
         if (bgmSource.isPlaying)
         {
             bgmSource.Stop();

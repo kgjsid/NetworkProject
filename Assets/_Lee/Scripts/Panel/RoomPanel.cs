@@ -15,11 +15,13 @@ public class RoomPanel : MonoBehaviour
 
     [SerializeField] Button lobbyButton;
     [SerializeField] Button startButton;
+    [SerializeField] Button GameModButton;
 
     // 현재들어온 플레이어들 관리
     private List<PlayerEntry> PlayerList;
 
-    string gameModName; // 애로 하면면될듯
+   List< string> gameModName; // 애로 하면면될듯
+    public List <string> GameModName { get { return gameModName; } }
     private void Start()
     {
         Player player = PhotonNetwork.LocalPlayer;
@@ -27,8 +29,9 @@ public class RoomPanel : MonoBehaviour
         {
             startButton.interactable = false;
         }
-        lobbyButton.onClick.AddListener(() => Lobby());
-        startButton.onClick.AddListener(() => GameStart());
+        lobbyButton.onClick.AddListener(Lobby);
+        startButton.onClick.AddListener(GameStart);
+        GameModButton.onClick.AddListener(GameMod);
     }
     private void OnEnable()
     {
@@ -47,7 +50,10 @@ public class RoomPanel : MonoBehaviour
         AllPlayerReadycheck();
         PhotonNetwork.AutomaticallySyncScene = true;
     }
-
+    private void GameMod()
+    {
+        LobbyManager.Instance.SetActivePanel(LobbyManager.Panel.GameMod);
+    }
     // 로비로 보내기
     private void Lobby()
     {
@@ -65,7 +71,7 @@ public class RoomPanel : MonoBehaviour
         {
             // 마스터일때는 준비와 게임 시작을하게 해줄거임
             PhotonNetwork.CurrentRoom.IsVisible = false; // 방 닫기
-            PhotonNetwork.LoadLevel("BaseGameScene_Lee"); // 게임 모드 바뀔때마다 바꿔야됨
+            PhotonNetwork.LoadLevel(gameModName); // 게임 모드 바뀔때마다 바꿔야됨
         }
     }
     public void PlayerEnterRoom( Player newPlayer )
