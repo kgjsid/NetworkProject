@@ -13,6 +13,9 @@ public class PlayerEmote : MonoBehaviour
     [SerializeField] GameObject emoteUI;
     public bool emoteUiCheck;
     public PlayerAttack playerAttack;
+
+    private bool playEmoteCheck = false;
+    public bool playPlayerEmoteCheck { get { return playEmoteCheck; } }
     private void Update()
     {
         EmoteCancel();
@@ -33,13 +36,14 @@ public class PlayerEmote : MonoBehaviour
 
     public void EmoteCancel()
     {
-        if (Input.anyKeyDown)
+        if ( Input.anyKeyDown )
         {
             ani.SetBool("EmoteMode", false);
             ani.SetBool("Emote01", false);
             ani.SetBool("Emote02", false);
             ani.SetBool("Emote03", false);
             ani.SetBool("Emote04", false);
+            playEmoteCheck=false;
         }
     }
 
@@ -49,6 +53,7 @@ public class PlayerEmote : MonoBehaviour
         ani.SetBool("EmoteMode", false);
         emoteUI.SetActive(false);
         playerAttack.canAttack = true;
+        playEmoteCheck = true;
     }
     public void Emote02()
     {
@@ -56,6 +61,7 @@ public class PlayerEmote : MonoBehaviour
         ani.SetBool("EmoteMode", false);
         emoteUI.SetActive(false);
         playerAttack.canAttack = true;
+        playEmoteCheck = true;
     }
     public void Emote03()
     {
@@ -63,6 +69,7 @@ public class PlayerEmote : MonoBehaviour
         ani.SetBool("EmoteMode", false);
         emoteUI.SetActive(false);
         playerAttack.canAttack = true;
+        playEmoteCheck = true;
     }
     public void Emote04()
     {
@@ -70,5 +77,6 @@ public class PlayerEmote : MonoBehaviour
         ani.SetBool("EmoteMode", false);
         emoteUI.SetActive(false);
         playerAttack.canAttack = true;
+        playEmoteCheck = true;
     }
 }

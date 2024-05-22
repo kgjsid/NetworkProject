@@ -25,6 +25,9 @@ public class PlayerMission : MonoBehaviourPun
 
     [SerializeField] private LayerMask ItemCheck;
     [SerializeField] GameObject itemBoxPrefab;
+
+    [SerializeField] PlayerEmote playerEmote;
+
     public MissionType CurMissionType
     {
         get { return curMissionType; }
@@ -44,6 +47,9 @@ public class PlayerMission : MonoBehaviourPun
                 case MissionType.itemMission:
                     missionRoutine = StartCoroutine(ItemMission());
                     break;
+                case MissionType.EmoteMission:
+                    missionRoutine = StartCoroutine(EmoteMission());
+                    break;
             }
         }
     }
@@ -51,8 +57,8 @@ public class PlayerMission : MonoBehaviourPun
     private void Start()
     {
         MissionGameScene.Instance.SetMissionScript(this);
-
-        if (photonView.IsMine)
+        playerEmote = GetComponent<PlayerEmote>();
+        if ( photonView.IsMine )
         {
             panel = FindObjectOfType<MissionPanel>();
             changeMission += panel.ShowMissionDetail;
@@ -114,7 +120,7 @@ public class PlayerMission : MonoBehaviourPun
         // 여기까지 생성
         // 이제 먹으면 완료되게
         itemCount = 0;
-        while ( true)
+        while ( true )
         {
             if ( itemCount == 1 )
             {
@@ -125,6 +131,26 @@ public class PlayerMission : MonoBehaviourPun
         }
 
     }
+    private IEnumerator EmoteMission()
+    {
+        while ( true )
+        {
+            yield return new WaitUntil(() => playerEmote.playPlayerEmoteCheck);
+            float startTime = Time.time;
+            yield return new WaitUntil(() => !playerEmote.playPlayerEmoteCheck || Time.time >= ( startTime + 3f ));
+            float endTime = Time.time;
+
+            float EmoteTime = endTime - startTime;
+
+            if ( EmoteTime >= 3f )
+            {
+                break;
+            }
+        }
+
+        ClearMission();
+    }
+
     int itemCount = 0;
     private void OnTriggerEnter( Collider other )
     {

@@ -83,8 +83,9 @@ public class MissionGameScene : BaseGameScene
     {
         for (int i = 0; i < playerMissions.Count; i++)
         {
-            MissionType randomMission = ( MissionType )Random.Range(0, ( int )MissionType.Size);
-            playerMissions [i].SetMission(randomMission);
+            /*MissionType randomMission = ( MissionType )Random.Range(0, ( int )MissionType.Size);
+            playerMissions [i].SetMission(randomMission);*/
+            playerMissions [i].SetMission(MissionType.EmoteMission);
         }
     }
 }
@@ -94,6 +95,7 @@ public enum MissionType
     killMission,
     itemMission,
     runMission,
+    EmoteMission,
     Size,
     Clear,
     Fail
