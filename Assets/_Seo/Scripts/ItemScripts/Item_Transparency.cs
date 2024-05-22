@@ -29,7 +29,7 @@ public class Item_Transparency : MonoBehaviourPun
 
     public void Use()
     {
-        user.photonView.RPC("SetTransparent", RpcTarget.Others);
+        photonView.RPC("SetTransparent", RpcTarget.Others);
         SetTranslucent();
     }
 
@@ -43,16 +43,6 @@ public class Item_Transparency : MonoBehaviourPun
         render.SetMaterials(materiallist);
         StartCoroutine(SettingTime());
     }
-    /*
-    private void SetTransparent()
-    {   // 불투명 설정
-        materiallist.Clear();
-        materiallist.Add(transparentMaterial.skinMaterial); materiallist.Add(transparentMaterial.baseMaterial);
-        //user.gameObject.layer = 30;
-
-        render.SetMaterials(materiallist);
-        StartCoroutine(SettingTime());
-    }*/
 
     private void SetTranslucent()
     {   // 반투명 설정

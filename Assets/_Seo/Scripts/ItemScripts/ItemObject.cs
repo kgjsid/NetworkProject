@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class ItemObject : MonoBehaviour, IUseable
 {
-    /*
     // 실제 플레이어의 아이템 curItemType에 들고 있는 아이템을 사용할 수 있도록 설정
     // ItemType.None -> 아이템을 들고 있지 않다
     [SerializeField] ItemType curItemType;
@@ -89,5 +88,14 @@ public class ItemObject : MonoBehaviour, IUseable
         Debug.Log($"{user.Controller.name}이 투명화 아이템을 사용");
         transparency.Use();
     }
-    */
+
+}
+
+public enum ItemType
+{   // 아이템을 표현할 열거형
+    None,
+    Trap,
+    Shield,
+    Transparent,
+    Size
 }
