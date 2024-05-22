@@ -50,7 +50,7 @@ public class MissionPanel : MonoBehaviour
 
     IEnumerator MissionTimer()
     {
-        int time = ( int )MissionGameScene.Instance.MissionTime;
+        int time = (int)MissionGameScene.Instance.MissionTime;
 
         while ( true )
         {
@@ -65,7 +65,7 @@ public class MissionPanel : MonoBehaviour
     {
         SetClearColor();
         clearOrNot.text = "완료";
-        StopCoroutine(missionTimer);
+        StopAllCoroutines();
         timeText.text = $" (남은 시간 : 0)";
     }
 
@@ -79,7 +79,7 @@ public class MissionPanel : MonoBehaviour
     {
         SetfailColor();
         missionDetail.text = $"{missionDetail.text} (실패)";
-        StopCoroutine(missionTimer);
+        StopAllCoroutines();
         timeText.text = " (남은 시간 : 0)";
     }
 

@@ -83,11 +83,8 @@ public class MissionGameScene : BaseGameScene
     {
         for (int i = 0; i < playerMissions.Count; i++)
         {
-            // 원래꺼 
             MissionType randomMission = ( MissionType )Random.Range(0, ( int )MissionType.Size);
             playerMissions [i].SetMission(randomMission);
-            // 테스트용
-            // playerMissions [i].SetMission(MissionType.itemMission) ;
         }
     }
 }
