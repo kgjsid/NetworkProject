@@ -5729,6 +5729,7 @@ MonoBehaviour:
   - missionDetail: "KillMission<br>3\uD0AC\uD558\uAE30(AI\uD3EC\uD568)"
   - missionDetail: "ItemMission<br>\uBE5B\uB098\uB294 \uC544\uC774\uD15C \uBA39\uAE30"
   - missionDetail: "RunMission<br>3\uCD08 \uC774\uC0C1 \uB2EC\uB9AC\uAE30"
+  - missionDetail: "EmoteMission<br>3\uCD08 \uC774\uC0C1 \uC774\uBAA8\uD2B8\uD558\uAE30"
 --- !u!1001 &391748857
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -7562,6 +7562,7 @@ MonoBehaviour:
     m_Bits: 1024
   itemBoxPrefab: {fileID: 2888971333223607820, guid: c932838beca4ba348995b675c2cab1e1,
     type: 3}
+  playerEmote: {fileID: 0}
 --- !u!1 &6213062719678508507
 GameObject:
   m_ObjectHideFlags: 0

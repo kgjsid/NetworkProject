@@ -61,6 +61,8 @@ MonoBehaviour:
   - GetItemBox
   - Using_Item
   - HideBox
+  - EndPosition
+  - AISetPosition
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
