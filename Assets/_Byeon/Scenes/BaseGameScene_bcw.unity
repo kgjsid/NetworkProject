@@ -1756,8 +1756,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 0
+  spawnMinCount: 0
 --- !u!1001 &146076433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4716,8 +4716,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 0
+  spawnMinCount: 0
 --- !u!1001 &315070308
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5183,8 +5183,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 0
+  spawnMinCount: 0
 --- !u!1001 &361767296
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5902,8 +5902,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 3
+  spawnMinCount: 3
 --- !u!1001 &405853651
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -23557,8 +23557,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 0
+  spawnMinCount: 0
 --- !u!1001 &1492917256
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24108,8 +24108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 0
+  spawnMinCount: 0
 --- !u!1001 &1527202341
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28368,8 +28368,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 0
+  spawnMinCount: 0
 --- !u!1001 &1759111315
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33134,8 +33134,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnCount: 0
-  spawnMaxCount: 10
-  spawnMinCount: 7
+  spawnMaxCount: 0
+  spawnMinCount: 0
 --- !u!4 &2025148957
 Transform:
   m_ObjectHideFlags: 0

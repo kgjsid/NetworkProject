@@ -192,7 +192,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             {
                 foreach ( AIController aIController in aiControllers )
                 {
-                    Destroy(aIController.gameObject); // 모든 AI없애기
+                    //Destroy(aIController.gameObject); // 모든 AI없애기
                 }
                 yield break;
             }

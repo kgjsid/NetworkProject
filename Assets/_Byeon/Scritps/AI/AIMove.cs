@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class AIMove : MonoBehaviourPun, IPunObservable
+public class AIMove : MonoBehaviourPun
 {
     [SerializeField] AIController controller;
 
@@ -22,6 +22,7 @@ public class AIMove : MonoBehaviourPun, IPunObservable
 
     private void Awake()
     {
+        //드래그앤드랍 참조 가능
         controller = GetComponent<AIController>();
         agent = transform.GetComponent<NavMeshAgent>();
         endPos = transform.GetChild(1).position;
@@ -40,55 +41,40 @@ public class AIMove : MonoBehaviourPun, IPunObservable
 
     private void Update()
     {
-        /*if(agent.velocity.sqrMagnitude > 1f )
-        {
-            controller.Animator.SetFloat("MoveSpeed", agent.speed);
-        }
-        else
-        {
-            controller.Animator.SetFloat("MoveSpeed", 0);
-        }*/
 
-        //agent.destination = endPos;
     }
 
     //마스터만실행
     IEnumerator AIRandomPos()
     {
+        yield return new WaitForSeconds(Random.Range(1f, 3f));
         while (true)
         {
+            //마스터가 좌표를 지정
             randomTime = Random.Range(0, 5);
             randomRange = Random.Range(0, 20);
             randomPos = Random.insideUnitSphere;
-
             endPos = transform.position + (new Vector3(randomPos.x, 0, randomPos.z).normalized * randomRange);
-
-            
+            //지정된 좌표를 서버를 통해 준다
+            photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos);
 
             yield return new WaitForSeconds(randomTime);
         }
     }
 
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    [PunRPC]
+    private void ResultRandomPos(Vector3 pos)
     {
-        if (stream.IsWriting) // photonView.IsMine 내가 로컬일때
-        {
-            // 네트워크로 보내기
-            stream.SendNext(endPos);
-        }
-        else // steam.IsReading , !photonView.IsMine 내가 리모트일때
-        {
-            // 네크워크에서 받기 , 보낸 순서대로 받아야한다.
-            endPos = (Vector3)stream.ReceiveNext();
-        }
+        //받은 좌료로 네비에이전트 이동
+        endPos = pos;
+        Debug.Log(endPos);
+        agent.destination = endPos;
     }
 
     IEnumerator AIMoveCoroutine()
     {
         while (true)
         {
-            agent.destination = endPos;
-
             if (agent.velocity.sqrMagnitude > 1f)
             {
                 controller.Animator.SetFloat("MoveSpeed", agent.speed);
