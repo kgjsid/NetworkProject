@@ -63,6 +63,7 @@ MonoBehaviour:
   - HideBox
   - EndPosition
   - AISetPosition
+  - SetTransparent
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
