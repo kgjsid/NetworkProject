@@ -25,7 +25,7 @@ public class ItemBox_ : MonoBehaviour
             ItemType randomItem = (ItemType)Random.Range(1, (int)ItemType.Size);
             target.PlayerItem.GetItem(randomItem);
         }
-
+        Debug.Log($"충돌 : {indexNumber}");
         controller.StartHideRoutine(indexNumber);
     }
 }
