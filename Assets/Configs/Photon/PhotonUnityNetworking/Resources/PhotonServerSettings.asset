@@ -60,6 +60,7 @@ MonoBehaviour:
   - SendRpc
   - GetItemBox
   - Using_Item
+  - HideBox
   - EndPosition
   - AISetPosition
   DisableAutoOpenWizard: 1
