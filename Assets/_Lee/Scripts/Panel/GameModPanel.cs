@@ -9,7 +9,7 @@ public class GameModPanel : MonoBehaviour
     [SerializeField] Button missionGameButon;
     [SerializeField] Button itemGameButton;
 
-    [SerializeField]RoomPanel roomPanel;
+    [SerializeField] RoomPanel roomPanel;
 
     private void Start()
     {
@@ -21,14 +21,17 @@ public class GameModPanel : MonoBehaviour
 
     private void BaseGame()
     {
-        LobbyManager.Instance.SetActivePanel(LobbyManager.Panel.Room);
+        roomPanel.curentGameModname = roomPanel.GameModName [0];
+        gameObject.SetActive (false);
     }
     private void MissionGame()
     {
-        LobbyManager.Instance.SetActivePanel(LobbyManager.Panel.Room);
+        roomPanel.curentGameModname = roomPanel.GameModName [1];
+        gameObject.SetActive(false);
     }
     private void ItemGame()
     {
-        LobbyManager.Instance.SetActivePanel(LobbyManager.Panel.Room);
+        roomPanel.curentGameModname = roomPanel.GameModName [2];
+        gameObject.SetActive(false);
     }
 }
