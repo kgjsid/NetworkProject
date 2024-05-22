@@ -8,7 +8,7 @@ using static AIController;
 
 public class AIController : MonoBehaviourPun, IDamageable//,IPointerClickHandler
 {
-    public enum AIstate { Idle, Walk, Die }
+    public enum AIstate { Idle, Walk, Run, Attack, Emote, Die }
 
     AIstate aiState;
 

@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-public class AIMove : MonoBehaviourPun
+public class ItemAIMove : MonoBehaviourPun
 {
     [SerializeField] AIController controller;
 
@@ -13,7 +12,7 @@ public class AIMove : MonoBehaviourPun
     public NavMeshAgent Agent { get { return agent; } }
 
     [SerializeField] Vector3 endPos; // 이동좌표
-    
+
 
     float randomTime; //랜덤 이동 쿨타임
     float randomRange; //랜덤 이동 거리
@@ -84,7 +83,7 @@ public class AIMove : MonoBehaviourPun
                 controller.Animator.SetFloat("MoveSpeed", 0);
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.05f);
         }
     }
 }

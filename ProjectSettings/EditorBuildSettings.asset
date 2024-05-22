@@ -33,9 +33,12 @@ EditorBuildSettings:
     path: Assets/_Seo/Scenes/MissionGameScene.unity
     guid: 300cedd42ef2e2e459183e828f19efa7
   - enabled: 0
-    path: Assets/_Byeon/NetworkRoom_bcw.unity
-    guid: 3a1e997acde527c489524d10921f8e1c
+    path: Assets/_Byeon/Scenes/TestLobbyScene_bcw.unity
+    guid: b4064c3baae163547b7f2764925ec17e
   - enabled: 0
-    path: Assets/_Byeon/BaseGameScene_bcw.unity
-    guid: 3ed4e6816096c094cb1e72e1c3d5db1c
+    path: Assets/_Byeon/Scenes/NetworkRoom _bcw.unity
+    guid: 9cf4d66297dacd940b4c95fc0c175fc3
+  - enabled: 0
+    path: Assets/_Byeon/Scenes/BaseGameScene_bcw.unity
+    guid: 6c95f8992bdee224cb0c63ae7cb731d0
   m_configObjects: {}
