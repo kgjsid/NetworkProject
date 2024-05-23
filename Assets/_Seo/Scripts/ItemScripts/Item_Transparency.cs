@@ -4,14 +4,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Item_Transparency : MonoBehaviour
+public class Item_Transparency : MonoBehaviourPun
 {
     // 투명화 아이템
     [SerializeField] materials normalMaterial;
     [SerializeField] materials transparentMaterial;  // 완전 투명
     [SerializeField] materials translucentMaterial;  // 반투명
 
-    [SerializeField] PlayerController user;
+    [SerializeField] PlayerItemController user;
     [SerializeField] SkinnedMeshRenderer render;
 
     [SerializeField] float setTime;
@@ -21,31 +21,21 @@ public class Item_Transparency : MonoBehaviour
     [SerializeField] LayerMask translucentLayer;
     [SerializeField] LayerMask normalLayer;
 
-    public void SetUser(PlayerController user)
+    public void SetUser(PlayerItemController user)
     {
         this.user = user;
         render = user.gameObject.GetComponent<SkinnedMeshRenderer>();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            SetTransparent();
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            SetTranslucent();
-        }
-    }
-
     public void Use()
     {
-        
+        photonView.RPC("SetTransparent", RpcTarget.Others);
+        SetTranslucent();
     }
 
+    [PunRPC]
     private void SetTransparent()
-    {   // 불투명 설정
+    {   // 투명 설정
         materiallist.Clear();
         materiallist.Add(transparentMaterial.skinMaterial); materiallist.Add(transparentMaterial.baseMaterial);
         //user.gameObject.layer = 30;
@@ -80,4 +70,5 @@ public class Item_Transparency : MonoBehaviour
         public Material baseMaterial;
         public Material skinMaterial;
     }
+
 }

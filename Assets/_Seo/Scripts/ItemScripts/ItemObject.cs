@@ -57,7 +57,7 @@ public class ItemObject : MonoBehaviour, IUseable
 
         switch(curItemType)
         {
-            case ItemType.Trop:
+            case ItemType.Trap:
                 CaseTrop(user);
                 break;
             case ItemType.Shield:
@@ -86,6 +86,7 @@ public class ItemObject : MonoBehaviour, IUseable
     private void CaseTransparent(PlayerItemController user)
     {
         Debug.Log($"{user.Controller.name}이 투명화 아이템을 사용");
+        transparency.Use();
     }
 
 }
@@ -93,7 +94,7 @@ public class ItemObject : MonoBehaviour, IUseable
 public enum ItemType
 {   // 아이템을 표현할 열거형
     None,
-    Trop,
+    Trap,
     Shield,
     Transparent,
     Size

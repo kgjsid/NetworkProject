@@ -5,8 +5,8 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/_Lee/Scene/NetworkRoom.unity
+  - enabled: 1
+    path: Assets/Scenes/NetworkRoom.unity
     guid: 51d7cb7b3140c844896a79293f8e12c3
   - enabled: 0
     path: Assets/_Seo/Scenes/TestLobbyScene.unity
@@ -20,11 +20,8 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Lee/Scene/TestLobbyScene_Lee.unity
     guid: 3ee8d5c6dfdcfb243bc4a0d9b18490d2
-  - enabled: 0
-    path: Assets/_Lee/Scene/NetworkRoom.unity
-    guid: 51d7cb7b3140c844896a79293f8e12c3
-  - enabled: 0
-    path: Assets/_Lee/Scene/BaseGameScene_Lee.unity
+  - enabled: 1
+    path: Assets/Scenes/BaseGameScene.unity
     guid: 3b31df18595850f4895b609b7d2ccaad
   - enabled: 0
     path: Assets/_Seo/Scenes/TestLobbyScene 1.unity

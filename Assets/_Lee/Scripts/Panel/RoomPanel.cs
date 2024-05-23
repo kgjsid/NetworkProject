@@ -29,18 +29,13 @@ public class RoomPanel : MonoBehaviour
     [SerializeField] string itemGameScene;
     public string curentGameModname;
 
-    private void Start()
+    private void Awake()
     {
         gameModName = new List<string>();
-        Player player = PhotonNetwork.LocalPlayer;
-        if ( player.IsMasterClient )
-        {
-            startButton.interactable = false;
-        }
-        if ( player.IsMasterClient )
-        {
-            GameModButton.gameObject.SetActive(false);
-        }
+        PlayerList = new List<PlayerEntry>();
+    }
+    private void Start()
+    {
         lobbyButton.onClick.AddListener(Lobby);
         startButton.onClick.AddListener(GameStart);
         GameModButton.onClick.AddListener(GameMod);
@@ -50,8 +45,19 @@ public class RoomPanel : MonoBehaviour
     }
     private void OnEnable()
     {
+        Debug.Log(PhotonNetwork.LocalPlayer.NickName);
+        if ( PhotonNetwork.LocalPlayer.IsMasterClient )
+        {
+            startButton.interactable = false;
+            GameModButton.interactable = true;
+        }
+        if ( !PhotonNetwork.LocalPlayer.IsMasterClient )
+        {
+            GameModButton.interactable = false;
+            startButton.interactable = true;
+
+        }
         roomName.text = PhotonNetwork.CurrentRoom.Name;
-        PlayerList = new List<PlayerEntry>();
         foreach ( Player player in PhotonNetwork.PlayerList ) // 네트워크에서 신호 보내준 플레이어 가져온다.
         {
             PlayerEntry playerEntry = Instantiate(platyerEntry, playerContent); // 생성 
@@ -64,6 +70,10 @@ public class RoomPanel : MonoBehaviour
         PhotonNetwork.LocalPlayer.SetLoad(false);
         AllPlayerReadycheck();
         PhotonNetwork.AutomaticallySyncScene = true;
+    }
+    private void OnDisable()
+    {
+        
     }
     private void GameMod()
     {
