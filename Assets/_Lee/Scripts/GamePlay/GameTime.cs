@@ -50,7 +50,7 @@ public class GameTime : MonoBehaviourPun
     }
     IEnumerator EndingLobby()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
         RoomButton();
     }
     public void EndingImage()

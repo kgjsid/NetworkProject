@@ -96,42 +96,42 @@ public static class CustomProperty
     }
 
     public const string PLAYERSTATE = "PlayerState";
-    public static PlayerState GetState(this Player player)
+    public static PlayerState GetState( this Player player )
     {
         PhotonHashtable customProperty = player.CustomProperties;
-        if(customProperty.TryGetValue(PLAYERSTATE, out object value))
+        if ( customProperty.TryGetValue(PLAYERSTATE, out object value) )
         {
-            return (PlayerState)value;
+            return ( PlayerState )value;
         }
         else
         {
             return PlayerState.Size;
         }
     }
-    public static void SetState(this Player player, PlayerState state)
+    public static void SetState( this Player player, PlayerState state )
     {
         Propertys.Clear();
-        Propertys[PLAYERSTATE] = state;
+        Propertys [PLAYERSTATE] = state;
         player.SetCustomProperties(Propertys);
     }
 
     public const string GAMEMODE = "GameMode";
-    public static GameMode GetMode(this Room room)
+    public static GameMode GetMode( this Room room )
     {
         PhotonHashtable customProperty = room.CustomProperties;
-        if(customProperty.TryGetValue(GAMEMODE, out object value))
+        if ( customProperty.TryGetValue(GAMEMODE, out object value) )
         {
-            return (GameMode)value;
+            return ( GameMode )value;
         }
         else
         {
             return GameMode.normal;
         }
     }
-    public static void SetMode(this Room room, GameMode gameMode)
+    public static void SetMode( this Room room, GameMode gameMode )
     {
         Propertys.Clear();
-        Propertys[GAMEMODE] = gameMode;
+        Propertys [GAMEMODE] = gameMode;
         room.SetCustomProperties(Propertys);
     }
 }
