@@ -1,8 +1,10 @@
 using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.PackageManager.UI;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 
 public class AIMove : MonoBehaviourPun

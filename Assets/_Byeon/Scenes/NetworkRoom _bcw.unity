@@ -291,7 +291,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000046610287}
+  m_AnchoredPosition: {x: 0, y: 0.00004467683}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &79648173
@@ -944,6 +944,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 471746171}
     m_Modifications:
+    - target: {fileID: 394214149105172508, guid: bac7589dd72fa3346a23f0318e6fc694,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1716852237185289229, guid: bac7589dd72fa3346a23f0318e6fc694,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1044,11 +1049,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2084382854371744618, guid: bac7589dd72fa3346a23f0318e6fc694,
-        type: 3}
-      propertyPath: inputField
-      value: 
-      objectReference: {fileID: 1787195459}
     - target: {fileID: 5529257181096569531, guid: bac7589dd72fa3346a23f0318e6fc694,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -1058,11 +1058,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7083044484645665749, guid: bac7589dd72fa3346a23f0318e6fc694,
-        type: 3}
-      propertyPath: sceneViewId
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8680419269854885289, guid: bac7589dd72fa3346a23f0318e6fc694,
         type: 3}
@@ -2765,6 +2760,12 @@ MonoBehaviour:
     type: 3}
   lobbyButton: {fileID: 1555544979}
   startButton: {fileID: 2067765545}
+  GameModButton: {fileID: 0}
+  gameModPanel: {fileID: 0}
+  baseGameScene: 
+  missionGameScne: 
+  itemGameScene: 
+  curentGameModname: 
 --- !u!224 &471746171
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13565,18 +13566,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1779383780}
   m_CullTransparentMesh: 1
---- !u!114 &1787195459 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6910714598020001959, guid: bac7589dd72fa3346a23f0318e6fc694,
-    type: 3}
-  m_PrefabInstance: {fileID: 233126552}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2da0c512f12947e489f739169773d7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1792463445
 GameObject:
   m_ObjectHideFlags: 0
@@ -15720,6 +15709,7 @@ MonoBehaviour:
   roomPanel: {fileID: 471746170}
   infoPanel: {fileID: 781642501}
   signUpPanel: {fileID: 1328392886}
+  BGM: {fileID: 0}
 --- !u!114 &2082854939
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -91,7 +91,6 @@ public class ItemAIMove : MonoBehaviourPun
     {
         //받은 좌료로 네비에이전트 이동
         endPos = pos;
-        Debug.Log(endPos);
         agent.destination = endPos;
         //controller.Animator.SetFloat("MoveSpeed", agent.speed);
     }
