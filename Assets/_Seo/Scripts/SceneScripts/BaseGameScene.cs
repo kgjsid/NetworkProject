@@ -38,7 +38,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     // 한판 시간
     [SerializeField] protected GameTime gameTimeUI;
 
-     protected virtual void Awake()
+    protected virtual void Awake()
     {
         gameTimeUI = FindObjectOfType<GameTime>();
         if ( instance == null )
@@ -60,7 +60,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         loadCount = 0;
         fade.gameObject.SetActive(true);
         fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, 1f);
-        
+
         if ( checkGameState == null )
         {   // 비어 있으면 하나는 찾아야 함
             checkGameState = FindObjectOfType<CheckGameState>();
@@ -139,13 +139,14 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             if ( ( PlayerState )changedProps [CustomProperty.PLAYERSTATE] != PlayerState.Die )
                 return;
 
-            foreach(PlayerProfileEntry entry in playerList.PlayerProfiles )
+            foreach ( PlayerProfileEntry entry in playerList.PlayerProfiles )
             {
                 entry.playerDied(targetPlayer);
             }
             deathCount++;
             if ( deathCount >= players.Count - 1 )
             {
+                if(PhotonNetwork.CurrentRoom.GetMode() != GameMode.Item)
                 checkGameState.CurState = GameState.GameEnd;
             }
         }
@@ -175,15 +176,22 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         {
             if ( checkGameState.CurState == GameState.GameEnd )
             {
-                if ( PhotonNetwork.LocalPlayer.GetState() == PlayerState.Live )
+                if ( PhotonNetwork.CurrentRoom.GetMode() != GameMode.Item )
                 {
-                    gameTimeUI.EndingImage();
-                    gameTimeUI.Victory();
+                    if ( PhotonNetwork.LocalPlayer.GetState() == PlayerState.Live )
+                    {
+                        gameTimeUI.EndingImage();
+                        gameTimeUI.Victory();
+                    }
+                    else if ( PhotonNetwork.LocalPlayer.GetState() == PlayerState.Die )
+                    {
+                        gameTimeUI.EndingImage();
+                        gameTimeUI.Lose();
+                    }
                 }
-                else if ( PhotonNetwork.LocalPlayer.GetState() == PlayerState.Die )
+                else
                 {
-                    gameTimeUI.EndingImage();
-                    gameTimeUI.Lose();
+                    // 이때 킬카운트 높은 플레이어가 이길 수 있게 조건 걸어주면됨
                 }
                 yield break;
             }
@@ -199,8 +207,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             {
                 foreach ( AIController aIController in aiControllers )
                 {
-                    if( aIController.gameObject != null)
-                    Destroy(aIController.gameObject); // 모든 AI없애기
+                    if ( aIController.gameObject != null )
+                        Destroy(aIController.gameObject); // 모든 AI없애기
                 }
                 yield break;
             }

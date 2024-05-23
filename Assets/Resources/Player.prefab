@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 69473788599621823}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3245364, y: 0.000000011087386, z: -0.000000003804168, w: 0.9458732}
+  m_LocalRotation: {x: 0.32453644, y: -0.000000030291286, z: 0.000000010393175, w: 0.9458732}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8433,7 +8433,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   damage: 2
-  ownerController: {fileID: 3401126481195836339}
+  owner: {fileID: 2796652940458905049}
   targetView: {fileID: 0}
 --- !u!54 &1985998485336159987
 Rigidbody:
@@ -8653,7 +8653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8870524643517468904}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20368248, y: -0.000000008422842, z: 0.000000001752319, w: 0.97903705}
+  m_LocalRotation: {x: 0.20368248, y: 0.000000008422842, z: -0.000000001752319, w: 0.97903705}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/NetworkRoom.unity
     guid: 51d7cb7b3140c844896a79293f8e12c3
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Seo/Scenes/TestLobbyScene.unity
     guid: 359ec83e97d6db2489e3c0107f73c1fb
   - enabled: 0
@@ -20,6 +20,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Lee/Scene/TestLobbyScene_Lee.unity
     guid: 3ee8d5c6dfdcfb243bc4a0d9b18490d2
+  - enabled: 1
+    path: Assets/Scenes/GameScene_DeathMatch.unity
+    guid: a58c08de94fa1884b889bf1e41c459ad
   - enabled: 1
     path: Assets/Scenes/BaseGameScene.unity
     guid: 3b31df18595850f4895b609b7d2ccaad
@@ -35,10 +38,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Byeon/Scenes/TestLobbyScene_bcw.unity
     guid: b4064c3baae163547b7f2764925ec17e
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Byeon/Scenes/NetworkRoom _bcw.unity
     guid: 9cf4d66297dacd940b4c95fc0c175fc3
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Byeon/Scenes/BaseGameScene_bcw.unity
     guid: 6c95f8992bdee224cb0c63ae7cb731d0
   m_configObjects: {}
