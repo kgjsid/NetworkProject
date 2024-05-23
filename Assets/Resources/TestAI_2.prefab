@@ -15,9 +15,9 @@ GameObject:
   - component: {fileID: 3852445107572737733}
   - component: {fileID: 9117481876614528857}
   - component: {fileID: 3259012290933323427}
-  - component: {fileID: 8671284098859734261}
+  - component: {fileID: -954336574356125772}
   m_Layer: 6
-  m_Name: TestAI
+  m_Name: TestAI_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
---- !u!114 &8671284098859734261
+--- !u!114 &-954336574356125772
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,12 +200,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 204425265791416288}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8bcefbe6290a784f9b127045bac74c9, type: 3}
+  m_Script: {fileID: 11500000, guid: 3752936fcf6214746ae031174ec7d7eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 0}
   agent: {fileID: 0}
-  endPos: {x: 0, y: 0, z: 0}
 --- !u!1 &303992131211876343
 GameObject:
   m_ObjectHideFlags: 0
