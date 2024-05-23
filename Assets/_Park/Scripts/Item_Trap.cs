@@ -1,36 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
+using Photon.Pun;
 using UnityEngine;
 
-public class Item_Trap : MonoBehaviour
+public class Item_Trap : MonoBehaviourPun
 {
-    [SerializeField] GameObject boom;
-    [SerializeField] LayerMask PlayerCheckLayer;
-    [SerializeField] int count;
+    [SerializeField] GameObject trapObj;
+    [SerializeField] Transform trans;
 
-    private void Start()
+    public void Use()
     {
-        Trap();
+        photonView.RPC("MakeTrap", RpcTarget.All);
     }
-
-    private void Trap() // 트랩 자동 삭제
+    [PunRPC]
+    private void MakeTrap()
     {
-        StartCoroutine(TrapCount());        
-    }
-
-    private IEnumerator TrapCount()
-    {
-        yield return new WaitForSeconds(count);
-        Destroy(gameObject);
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if ((PlayerCheckLayer.value & 1 << collision.gameObject.layer) != 0)
-        {
-            GameObject deathEffect = Instantiate(boom, transform.position, Quaternion.identity);
-            Destroy(gameObject);
-        }
+        PhotonNetwork.Instantiate(trapObj.name, trans.position, trans.rotation);
     }
 }
-
