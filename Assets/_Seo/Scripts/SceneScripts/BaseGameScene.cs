@@ -28,6 +28,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     [SerializeField] protected Image fade;
     [SerializeField] protected float fadeTime = 2f;
     [SerializeField] KillLogUI killLogUI;
+    [SerializeField] PlayerList playerList;
+
     protected int loadCount = 0;
     protected int deathCount = 0;
     [SerializeField] protected string spawnName;
@@ -36,7 +38,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     // 한판 시간
     [SerializeField] protected GameTime gameTimeUI;
 
-    protected virtual void Awake()
+     protected virtual void Awake()
     {
         gameTimeUI = FindObjectOfType<GameTime>();
         if ( instance == null )
@@ -58,17 +60,20 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         loadCount = 0;
         fade.gameObject.SetActive(true);
         fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, 1f);
-
+        
         if ( checkGameState == null )
         {   // 비어 있으면 하나는 찾아야 함
             checkGameState = FindObjectOfType<CheckGameState>();
         }
 
         // 현재 플레이어들
+        int index = 0;
         players = PhotonNetwork.PlayerList.ToList();
         foreach ( Player player in players )
         {   // 시작 시 플레이어의 상태는 살아있는 상태로
             player.SetState(PlayerState.Live);
+            playerList.CreateProfile();
+            playerList.PlayerProfiles [index++].PlayerNickname(player, player.NickName);
         }
         // 플레이어 스폰
         yield return PlayerSpawn();
@@ -134,8 +139,11 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             if ( ( PlayerState )changedProps [CustomProperty.PLAYERSTATE] != PlayerState.Die )
                 return;
 
+            foreach(PlayerProfileEntry entry in playerList.PlayerProfiles )
+            {
+                entry.playerDied(targetPlayer);
+            }
             deathCount++;
-
             if ( deathCount >= players.Count - 1 )
             {
                 checkGameState.CurState = GameState.GameEnd;
@@ -191,7 +199,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             {
                 foreach ( AIController aIController in aiControllers )
                 {
-                    //Destroy(aIController.gameObject); // 모든 AI없애기
+                    if( aIController.gameObject != null)
+                    Destroy(aIController.gameObject); // 모든 AI없애기
                 }
                 yield break;
             }
