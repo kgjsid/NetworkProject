@@ -1,8 +1,8 @@
 using Photon.Pun;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static AIController;
 
 public class ItemAIMove : MonoBehaviourPun
 {
@@ -11,36 +11,40 @@ public class ItemAIMove : MonoBehaviourPun
     [SerializeField] NavMeshAgent agent;
     public NavMeshAgent Agent { get { return agent; } }
 
-    [SerializeField] Vector3 endPos; // 이동좌표
-
+    //이동할 위치를 동기화하여 각자 이동 구현
+    Vector3 endPos; // 이동좌표
 
     float randomTime; //랜덤 이동 쿨타임
     float randomRange; //랜덤 이동 거리
     Vector3 randomPos; //랜덤 방향
-    float speed;
+
+    int randomState;
+
 
     private void Awake()
     {
         //드래그앤드랍 참조 가능
-        controller = GetComponent<AIController>();
-        agent = transform.GetComponent<NavMeshAgent>();
-        endPos = transform.GetChild(1).position;
+        if(controller == null)
+            controller = GetComponent<AIController>();
+        if(agent == null)
+            agent = transform.GetComponent<NavMeshAgent>();
+        if(endPos == null)
+            endPos = transform.GetChild(1).position;
     }
 
     private void Start()
     {
-        //마스터가 랜덤한 위치좌표 지정 후 OnPhotonSerializeView함수로 동기화
         if (photonView.IsMine)
             StartCoroutine(AIRandomPos());
 
         //좌표로 이동
-        StartCoroutine(AIMoveCoroutine());
+        //StartCoroutine(AIMoveCoroutine());
     }
-
 
     private void Update()
     {
-
+        if((transform.position - endPos).sqrMagnitude <1)
+            controller.Animator.SetFloat("MoveSpeed", 0);
     }
 
     //마스터만실행
@@ -49,15 +53,36 @@ public class ItemAIMove : MonoBehaviourPun
         yield return new WaitForSeconds(Random.Range(1f, 3f));
         while (true)
         {
-            //마스터가 좌표를 지정
-            randomTime = Random.Range(0, 5);
-            randomRange = Random.Range(0, 20);
-            randomPos = Random.insideUnitSphere;
-            endPos = transform.position + (new Vector3(randomPos.x, 0, randomPos.z).normalized * randomRange);
+            controller.State = (AIstate)Random.Range(0, 5);
+            switch (controller.State)
+            {
+                case AIstate.Idle:
+                    IdleState();
+                    break;
+                case AIstate.Walk:
+                    WalkState();
+                    break;
+                case AIstate.Run:
+                    RunState();
+                    break;
+                /*case AIstate.Attack:
+                    AttackState();
+                    break;
+                case AIstate.Emote:
+                    EmoteState();
+                    break;*/
+            }
+
             //지정된 좌표를 서버를 통해 준다
             photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos);
 
+
+            randomTime = Random.Range(0, 5); // 행동 변경 시간
             yield return new WaitForSeconds(randomTime);
+
+            
+            //controller.Animator.SetBool("Emote01", false);
+            //controller.Animator.SetTrigger("Attack");
         }
     }
 
@@ -66,24 +91,48 @@ public class ItemAIMove : MonoBehaviourPun
     {
         //받은 좌료로 네비에이전트 이동
         endPos = pos;
-        Debug.Log(endPos);
         agent.destination = endPos;
+        //controller.Animator.SetFloat("MoveSpeed", agent.speed);
     }
 
-    IEnumerator AIMoveCoroutine()
+    private void IdleState()
     {
-        while (true)
-        {
-            if (agent.velocity.sqrMagnitude > 1f)
-            {
-                controller.Animator.SetFloat("MoveSpeed", agent.speed);
-            }
-            else
-            {
-                controller.Animator.SetFloat("MoveSpeed", 0);
-            }
+        endPos = transform.position;
 
-            yield return new WaitForSeconds(0.05f);
-        }
+        controller.Animator.SetFloat("MoveSpeed", 0);
     }
+
+    private void WalkState()
+    {
+        randomRange = Random.Range(1, 20); //
+        randomPos = Random.insideUnitSphere;
+        endPos = transform.position + (new Vector3(randomPos.x, 0, randomPos.z).normalized * randomRange);
+
+        controller.Animator.SetFloat("MoveSpeed", 8);
+    }
+
+    private void RunState()
+    {
+        randomRange = Random.Range(1, 50); //
+        randomPos = Random.insideUnitSphere;
+        endPos = transform.position + (new Vector3(randomPos.x, 0, randomPos.z).normalized * randomRange);
+
+        controller.Animator.SetFloat("MoveSpeed", 12);
+    }
+
+    /*private void AttackState()
+    {
+        endPos = transform.position;
+
+        controller.Animator.SetFloat("MoveSpeed", 0);
+        controller.Animator.SetTrigger("Attack");
+    }
+
+    private void EmoteState()
+    {
+        endPos = transform.position;
+
+        controller.Animator.SetFloat("MoveSpeed", 0);
+        controller.Animator.SetBool("Emote01", true);
+    }*/
 }
