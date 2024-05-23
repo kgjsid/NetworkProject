@@ -1,6 +1,7 @@
 using Cinemachine;
 using Photon.Pun;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.UI.GridLayoutGroup;
@@ -28,7 +29,8 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] PlayerInput input;
     [SerializeField] CinemachineFreeLook virtualCamera;
     [SerializeField] Canvas playerUI;
-    [SerializeField] PlayerController deathPlayer;
+    [SerializeField] Material skinTransparent;
+    [SerializeField] Material baseTransparent;
 
     KillLogUI killLogUI;
     [SerializeField] Damage damageCheck;
@@ -147,6 +149,8 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 1. 공격 스크립트 제외
         // 2. 투명 처리
         // 3. 어택을 받을 수 없도록 처리 필요
+
+       photonView.RPC("SetDeath", RpcTarget.All);
     }
 
     public void TakeDamage( int damage )
@@ -166,15 +170,21 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     public void PlayerMove()
     {   // 애니메이션 이벤트에서 활용 중
         isAlive = true;
-        //if (photonView.IsMine)
-        //{
-        //   PhotonNetwork.Instantiate("DeathPlayer", transform.position, Quaternion.identity);
-        //    PhotonNetwork.Destroy(this.gameObject);
-        //}
-        //hp += 2;         // 테스트용 hp 
     }
     public void PlayerNotMove()
     {   // 애니메이션 이벤트에서 활용 중
         isAlive = false;
+    }
+
+    [PunRPC]
+    private void SetDeath()
+    {
+        gameObject.GetComponent<PlayerAttack>().enabled = false;
+        foreach (Transform child in transform)
+        {
+            child.gameObject.layer = 11;
+        }
+        SkinnedMeshRenderer render = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
+        render.SetMaterials(new List<Material> { skinTransparent, baseTransparent });
     }
 }
