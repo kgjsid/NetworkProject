@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1716852237185289229}
-  - component: {fileID: 1132805490718802595}
+  - component: {fileID: 3134071858053067763}
   - component: {fileID: 394214149105172508}
   m_Layer: 5
-  m_Name: Chat
+  m_Name: ChatRoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38,7 +38,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1132805490718802595
+--- !u!114 &3134071858053067763
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,10 +47,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8680419269854885289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a7d1a4d042662741a8905cd1eccdb03, type: 3}
+  m_Script: {fileID: 11500000, guid: 375438decb9d5f747ba69d4c4927a15b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  window: {fileID: 8720064702423969667}
   chatTextPrefab: {fileID: 2074951864877536549, guid: 13248416f26b39641b23fa8ad3fb4222,
     type: 3}
   inputField: {fileID: 6910714598020001959}
