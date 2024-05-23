@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] PlayerInput input;
     [SerializeField] CinemachineFreeLook virtualCamera;
     [SerializeField] Canvas playerUI;
+    [SerializeField] PlayerController deathPlayer;
 
     KillLogUI killLogUI;
     [SerializeField] Damage damageCheck;
@@ -165,7 +166,12 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     public void PlayerMove()
     {   // 애니메이션 이벤트에서 활용 중
         isAlive = true;
-        //hp += 2;         // 테스트용 hp        
+        //if (photonView.IsMine)
+        //{
+        //   PhotonNetwork.Instantiate("DeathPlayer", transform.position, Quaternion.identity);
+        //    PhotonNetwork.Destroy(this.gameObject);
+        //}
+        //hp += 2;         // 테스트용 hp 
     }
     public void PlayerNotMove()
     {   // 애니메이션 이벤트에서 활용 중

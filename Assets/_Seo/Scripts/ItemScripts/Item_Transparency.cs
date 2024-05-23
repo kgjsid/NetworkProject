@@ -35,33 +35,34 @@ public class Item_Transparency : MonoBehaviourPun
 
     [PunRPC]
     private void SetTransparent()
-    {   // 투명 설정
+    {   // 투명 설정(material)
         materiallist.Clear();
         materiallist.Add(transparentMaterial.skinMaterial); materiallist.Add(transparentMaterial.baseMaterial);
-        //user.gameObject.layer = 30;
-
         render.SetMaterials(materiallist);
+        // 투명 설정(layer)
+        //user.gameObject.layer = 30;
         StartCoroutine(SettingTime());
     }
 
     private void SetTranslucent()
-    {   // 반투명 설정
+    {   // 반투명 설정(material)
         materiallist.Clear();
-        //user.gameObject.layer = 31;
         materiallist.Add(translucentMaterial.skinMaterial); materiallist.Add(translucentMaterial.baseMaterial);
-
         render.SetMaterials(materiallist);
+        // 반투명 설정(layer)
+        //user.gameObject.layer = 31;
         StartCoroutine(SettingTime());
     }
 
     IEnumerator SettingTime()
     {
         yield return new WaitForSeconds(setTime);
+        // 노말 설정(material)
         materiallist.Clear();
-        //user.gameObject.layer = 3;
-        materiallist.Add(normalMaterial.skinMaterial); materiallist.Add(normalMaterial.baseMaterial);
-
+        materiallist.Add(normalMaterial.baseMaterial); materiallist.Add(normalMaterial.skinMaterial);
         render.SetMaterials(materiallist);
+        // 노말 설정(layer)
+        //user.gameObject.layer = 3;
     }
 
     [Serializable]
