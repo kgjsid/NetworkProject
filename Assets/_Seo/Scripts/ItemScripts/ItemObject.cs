@@ -36,6 +36,7 @@ public class ItemObject : MonoBehaviour, IUseable
     public void SetUser(PlayerItemController user)
     {
         this.user = user;
+        transparency.SetUser(user);
     }
 
     public void GetItem(ItemType type)

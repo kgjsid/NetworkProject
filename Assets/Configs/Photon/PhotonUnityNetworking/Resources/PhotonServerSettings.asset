@@ -65,6 +65,8 @@ MonoBehaviour:
   - AISetPosition
   - SetTransparent
   - RoomSendRpc
+  - MakeTrap
+  - SpawnDeathPlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

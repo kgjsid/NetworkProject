@@ -7344,6 +7344,8 @@ MonoBehaviour:
   input: {fileID: 2260261226062770527}
   virtualCamera: {fileID: 6903159871962604132}
   playerUI: {fileID: 3538356437983217742}
+  deathPlayer: {fileID: 267834644012048940, guid: 90d908d0dc1eec841afdcfa907873ffa,
+    type: 3}
   damageCheck: {fileID: 5486037445203589161}
 --- !u!143 &2857780490664833706
 CharacterController:

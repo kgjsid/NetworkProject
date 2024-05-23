@@ -17,6 +17,7 @@ public class PlayerItemController : MonoBehaviour
     {
         controller = GetComponent<PlayerController>();
         itemObject = GetComponentInChildren<ItemObject>();
+        itemObject.SetUser(this);
     }
 
     private void OnUsingItem(InputValue value)
