@@ -1,16 +1,22 @@
+using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
-public class PlayerAttack : MonoBehaviour
+public class PlayerAttack : MonoBehaviourPun
 {
     [SerializeField] Animator animator;
     [SerializeField] Slider coolTimeGauge;
     [SerializeField] int coolTime;
     [SerializeField] AudioClip attackSound;
     public bool canAttack = true;
+    KillLogUI killLogUI;
+    private void Awake()
+    {
+        killLogUI = FindObjectOfType<KillLogUI>();
+    }
     private void OnAttack(InputValue value)
     {   // 어택
         if (canAttack == false)                             // 어택이 불가능한 상태라면
@@ -37,4 +43,32 @@ public class PlayerAttack : MonoBehaviour
         coolTimeGauge.value = 1f;
         canAttack = true;       // 다시 어택은 가능한 상태로 전환
     }
+
+    int killCount = 0;
+    [PunRPC]
+    public void KillLogNickName( int targetID )
+    {
+        // 모든 클라이언트에서 실행됨
+        PhotonView targetView = PhotonView.Find(targetID);
+        if ( targetView != null )
+        {
+            killCount = photonView.Controller.GetKillCount() + 1;
+            photonView.Controller.SetKillCount(killCount);
+            string targetName = targetView.Controller.NickName;
+            if ( targetView.gameObject.layer == 3 )
+            {
+                killLogUI.KillLog(photonView.Controller.NickName, targetName);
+               
+            }
+            else
+            {
+                killLogUI.KillLog(photonView.Controller.NickName, "AI");
+            }
+        }
+    }
+    public void KillLog( int targetID )
+    {
+        photonView.RPC("KillLogNickName", RpcTarget.AllViaServer, targetID);
+    }
+
 }

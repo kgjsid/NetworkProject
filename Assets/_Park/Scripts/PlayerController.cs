@@ -32,37 +32,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] Material skinTransparent;
     [SerializeField] Material baseTransparent;
 
-    KillLogUI killLogUI;
     [SerializeField] Damage damageCheck;
-    int playerKillCount = 0;
-    public int PlayerKillCount {  get { return playerKillCount; } }// 이 친구를 가져다 쓰면될듯
-    private void Awake()
-    {
-        killLogUI = FindObjectOfType<KillLogUI>();
-    }
-    [PunRPC]
-    public void KillLogNickName( int targetID )
-    {
-        // 모든 클라이언트에서 실행됨
-        PhotonView targetView = PhotonView.Find(targetID);
-        if ( targetView != null )
-        {
-            string targetName = targetView.Controller.NickName;
-            if ( targetView.gameObject.layer == 3 )
-            {
-                playerKillCount++;
-                killLogUI.KillLog(photonView.Controller.NickName, targetName);
-            }
-            else
-            {
-                killLogUI.KillLog(photonView.Controller.NickName, "AI");
-            }
-        }
-    }
-    public void KillLog( int targetID )
-    {
-        photonView.RPC("KillLogNickName", RpcTarget.AllViaServer, targetID);
-    }
     private void Start()
     {   // 시작시 네트워크 작업
         if ( photonView.IsMine == false )
