@@ -25,7 +25,7 @@ public class GameTime : MonoBehaviourPun
     // 여기 밑에 있는거 네트워크로 동기화 시켜야됨
     public void StartTimer()
     {
-        if (timerRoutine == null)
+        if ( timerRoutine == null )
             timerRoutine = StartCoroutine(Timer());
         //Debug.Log("시간 들어옴?");
     }
@@ -40,7 +40,7 @@ public class GameTime : MonoBehaviourPun
     Coroutine timerRoutine;
     IEnumerator Timer()
     {
-        while (time >= 0)
+        while ( time >= 0 )
         {
             //Debug.Log("시간 코루틴에 들어옴?");
             timeText.text = time.ToString();
@@ -58,9 +58,9 @@ public class GameTime : MonoBehaviourPun
     public void EndingImage()
     {
         // 여기 있는 조건 게임이 끝났을때 조건
-        foreach (Player player in BaseGameScene.Instance.Players)
+        foreach ( Player player in BaseGameScene.Instance.Players )
         {
-            if (player.GetState() == PlayerState.Live)
+            if ( player.GetState() == PlayerState.Live )
             {
                 winnerNickname.text = PhotonNetwork.LocalPlayer.NickName;
             }
@@ -72,6 +72,7 @@ public class GameTime : MonoBehaviourPun
 
     private void RoomButton()
     {
-        PhotonNetwork.LoadLevel("NetworkRoom");
+        if ( PhotonNetwork.IsMasterClient )
+            PhotonNetwork.LoadLevel("NetworkRoom");
     }
 }

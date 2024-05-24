@@ -85,8 +85,8 @@ public class RoomPanel : MonoBehaviour
             image.gameObject.SetActive(false);
         }
         gameModIMG [index].gameObject.SetActive(true);
-
     }
+
     private void GameMod()
     {
         gameModPanel.gameObject.SetActive(true);
