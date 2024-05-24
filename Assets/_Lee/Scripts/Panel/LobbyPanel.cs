@@ -98,7 +98,7 @@ public class LobbyPanel : MonoBehaviour
 
     private void RandomMatching()
     {
-        if ( PhotonNetwork.CurrentRoom == null ) // 여기에 방이 없으니 새로 만들어주세요 라는 UI 넣어주면됨
+        if ( roomDictionary == null ) // 여기에 방이 없으니 새로 만들어주세요 라는 UI 넣어주면됨
             return;
         PhotonNetwork.JoinRandomOrCreateRoom();
     }

@@ -69,6 +69,7 @@ MonoBehaviour:
   - SpawnDeathPlayer
   - SetDeath
   - OtherUse
+  - MakeSmokeBomb
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
