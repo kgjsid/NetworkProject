@@ -116,8 +116,14 @@ public class ChattingManager : MonoBehaviourPun
         TMP_Text textPrefab = Instantiate(chatTextPrefab, content);
         textPrefab.text = $"{info.Sender.NickName} : {inputField}";
 
+        //추가내용
         //상대가 보냈을때 창 활성화
-        window.SetActive(true);
+        if (!window.active)
+        {
+            window.SetActive(true);
+            this.inputField.interactable = false;
+        }
+
         chatCoroutine = StartCoroutine(ChatActiveTime());
 
         if (textQueue.Count < 15)

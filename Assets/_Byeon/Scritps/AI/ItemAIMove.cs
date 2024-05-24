@@ -2,7 +2,6 @@ using Photon.Pun;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using static AIController;
 
 public class ItemAIMove : MonoBehaviourPun
 {
@@ -12,13 +11,14 @@ public class ItemAIMove : MonoBehaviourPun
     public NavMeshAgent Agent { get { return agent; } }
 
     //이동할 위치를 동기화하여 각자 이동 구현
-    Vector3 endPos; // 이동좌표
-
+    [SerializeField] Vector3 endPos; // 이동좌표
+    NavMeshHit hit; // 네비위로 위치 조정용
     float randomTime; //랜덤 이동 쿨타임
     float randomRange; //랜덤 이동 거리
     Vector3 randomPos; //랜덤 방향
 
-    int randomState;
+
+    [SerializeField] AnimationClip attackClip;
 
 
     private void Awake()
@@ -36,53 +36,56 @@ public class ItemAIMove : MonoBehaviourPun
     {
         if (photonView.IsMine)
             StartCoroutine(AIRandomPos());
-
-        //좌표로 이동
-        //StartCoroutine(AIMoveCoroutine());
     }
 
     private void Update()
     {
-        if((transform.position - endPos).sqrMagnitude <1)
+        //목표위치 도착하면 이동애니메이션 종료
+        if((transform.position - endPos).sqrMagnitude < 0.25f)
+        {
             controller.Animator.SetFloat("MoveSpeed", 0);
+        }
     }
 
     //마스터만실행
     IEnumerator AIRandomPos()
     {
-        yield return new WaitForSeconds(Random.Range(1f, 3f));
+        yield return new WaitForSeconds(Random.Range(0, 3));
         while (true)
         {
-            controller.State = (AIstate)Random.Range(0, 5);
+            //랜덤 상태
+            controller.State = GetRandomState();
             switch (controller.State)
             {
-                case AIstate.Idle:
+                case AIController.AIstate.Idle:
                     IdleState();
                     break;
-                case AIstate.Walk:
+                case AIController.AIstate.Walk:
                     WalkState();
                     break;
-                case AIstate.Run:
+                case AIController.AIstate.Run:
                     RunState();
                     break;
-                /*case AIstate.Attack:
+                case AIController.AIstate.Attack:
                     AttackState();
                     break;
-                case AIstate.Emote:
+                case AIController.AIstate.Emote:
                     EmoteState();
-                    break;*/
+                    break;
             }
 
             //지정된 좌표를 서버를 통해 준다
             photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos);
 
+            /*//공격이나,이모트 애니메이션이 끝날떄까지 대기
+            if(controller.State == AIstate.Attack)
+                yield return StartCoroutine(WaitForAnimationToEnd());*/
 
-            randomTime = Random.Range(0, 5); // 행동 변경 시간
+            //다음 행동 시간
+            randomTime = 1;// Random.Range(0, 5);
             yield return new WaitForSeconds(randomTime);
 
-            
-            //controller.Animator.SetBool("Emote01", false);
-            //controller.Animator.SetTrigger("Attack");
+            controller.Animator.SetBool("Emote01", false);
         }
     }
 
@@ -92,14 +95,14 @@ public class ItemAIMove : MonoBehaviourPun
         //받은 좌료로 네비에이전트 이동
         endPos = pos;
         agent.destination = endPos;
-        //controller.Animator.SetFloat("MoveSpeed", agent.speed);
+        controller.Animator.SetFloat("MoveSpeed", agent.speed);
     }
 
     private void IdleState()
     {
         endPos = transform.position;
-
-        controller.Animator.SetFloat("MoveSpeed", 0);
+        agent.speed = 0;
+        //controller.Animator.SetFloat("MoveSpeed", 0);
     }
 
     private void WalkState()
@@ -108,7 +111,14 @@ public class ItemAIMove : MonoBehaviourPun
         randomPos = Random.insideUnitSphere;
         endPos = transform.position + (new Vector3(randomPos.x, 0, randomPos.z).normalized * randomRange);
 
-        controller.Animator.SetFloat("MoveSpeed", 8);
+        //베이크 위에만 찍히게 하기
+        if (NavMesh.SamplePosition(endPos, out hit, randomRange, NavMesh.AllAreas))
+        {
+            endPos = hit.position;
+        }
+
+        agent.speed = 8;
+        //controller.Animator.SetFloat("MoveSpeed", 8);
     }
 
     private void RunState()
@@ -117,14 +127,22 @@ public class ItemAIMove : MonoBehaviourPun
         randomPos = Random.insideUnitSphere;
         endPos = transform.position + (new Vector3(randomPos.x, 0, randomPos.z).normalized * randomRange);
 
-        controller.Animator.SetFloat("MoveSpeed", 12);
+        //베이크 위에만 찍히게 하기
+        if (NavMesh.SamplePosition(endPos, out hit, randomRange, NavMesh.AllAreas))
+        {
+            endPos = hit.position;
+        }
+
+        agent.speed = 12;
+        //controller.Animator.SetFloat("MoveSpeed", 12);
     }
 
-    /*private void AttackState()
+    private void AttackState()
     {
         endPos = transform.position;
 
-        controller.Animator.SetFloat("MoveSpeed", 0);
+        agent.speed = 0;
+        //controller.Animator.SetFloat("MoveSpeed", 0);
         controller.Animator.SetTrigger("Attack");
     }
 
@@ -132,7 +150,41 @@ public class ItemAIMove : MonoBehaviourPun
     {
         endPos = transform.position;
 
-        controller.Animator.SetFloat("MoveSpeed", 0);
-        controller.Animator.SetBool("Emote01", true);
+        agent.speed = 0;
+        
+        int motion = Random.Range(0, 5);
+
+        controller.Animator.SetBool($"Emote0{motion}", true);
+    }
+
+
+    //행동확률
+    private AIController.AIstate GetRandomState()
+    {
+        float randomValue = Random.Range(0f, 1f);
+        if (randomValue < 0.2f)
+            return AIController.AIstate.Idle;
+        else if (randomValue < 0.6f)
+            return AIController.AIstate.Walk;
+        else if (randomValue < 0.9f)
+            return AIController.AIstate.Run;
+        /*else if (randomValue < 0.95f)
+            return AIController.AIstate.Attack;*/
+        else
+            return AIController.AIstate.Emote;
+    }
+
+    /*private IEnumerator WaitForAnimationToEnd()
+    {
+        float speed = agent.speed;
+        agent.speed = 0;
+
+        //AnimatorClipInfo[] clipInfo = controller.Animator.GetCurrentAnimatorClipInfo(0);
+        float clipLength = attackClip.length;
+
+        yield return new WaitForSeconds(clipLength);
+
+        //controller.Animator.SetTrigger("Attack");
+        agent.speed = speed;
     }*/
 }
