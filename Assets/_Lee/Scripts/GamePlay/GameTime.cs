@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameTime : MonoBehaviourPun
 {
-    int time = 10;
+    int time = 5;
     public int Time { get { return time; } }
     [SerializeField] PhotonView PV;
     [SerializeField] TMP_Text timeText;
@@ -50,6 +50,8 @@ public class GameTime : MonoBehaviourPun
     }
     IEnumerator EndingLobby()
     {
+        resultCamera.Priority = 30;
+
         yield return new WaitForSeconds(5f);
         RoomButton();
     }

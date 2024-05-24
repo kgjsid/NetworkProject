@@ -922,6 +922,9 @@ MonoBehaviour:
   damageCheckLayer:
     serializedVersion: 2
     m_Bits: 72
+  shieldLayer:
+    serializedVersion: 2
+    m_Bits: 0
   damage: 2
   owner: {fileID: 0}
   targetView: {fileID: 0}

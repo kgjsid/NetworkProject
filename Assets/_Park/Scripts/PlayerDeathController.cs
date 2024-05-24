@@ -26,8 +26,7 @@ public class PlayerDeathController : MonoBehaviourPun
     private void SetDie()
     {
         photonView.RPC("SetDeath", RpcTarget.All);
-
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {   // everyThing 설정
             Camera.main.cullingMask = -1;
         }
@@ -37,10 +36,6 @@ public class PlayerDeathController : MonoBehaviourPun
     private void SetDeath()
     {
         gameObject.GetComponent<PlayerAttack>().enabled = false;
-        foreach (Transform child in transform)
-        {   // Death로 설정
-            child.gameObject.layer = 11;
-        }
 
         StartCoroutine(DieMaterial());
     }
@@ -51,5 +46,10 @@ public class PlayerDeathController : MonoBehaviourPun
 
         SkinnedMeshRenderer render = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         render.SetMaterials(new List<Material> { baseTransparent, skinTransparent });
+
+        foreach (Transform child in transform)
+        {   // Death로 설정
+            child.gameObject.layer = 11;
+        }
     }
 }
