@@ -3,6 +3,7 @@ using Firebase.Extensions;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class LoginPanel : MonoBehaviour
@@ -20,9 +21,9 @@ public class LoginPanel : MonoBehaviour
     }
     private void Start()
     {
-        loginButton.onClick.AddListener(() => Login()); // 로그인버튼 누르면 로그인 되도록
-        signUpButton.onClick.AddListener(() => SingUp());
-        endButton.onClick.AddListener(EndGame); 
+        loginButton.onClick.AddListener(Login); // 로그인버튼 누르면 로그인 되도록
+        signUpButton.onClick.AddListener(SingUp);
+        endButton.onClick.AddListener(EndGame);
     }
 
     // 로그인해서 네트워크한테 메인상태로 만들어줌
@@ -30,7 +31,7 @@ public class LoginPanel : MonoBehaviour
     {
         string email = emailField.text;
         string pass = passwordField.text;
-
+        
         //로그인
         FirebaseManager.Auth.SignInWithEmailAndPasswordAsync(email, pass).ContinueWithOnMainThread(task =>
         {
@@ -46,23 +47,22 @@ public class LoginPanel : MonoBehaviour
                 SetInteractable(true);
                 return;
             }
-            /*            FirebaseManager.DB.GetReference($"UserDate/{email}/nickName").GetValueAsync().ContinueWithOnMainThread(task =>
-                        {
-                            DataSnapshot snapshot = task.Result;
-                            if ( snapshot.Exists )
-                            {
-                                string json = snapshot.GetValue(true).ToString();
+            /*FirebaseManager.DB.GetReference($"UserDate/{email}/nickName").GetValueAsync().ContinueWithOnMainThread(task =>
+            {
+                DataSnapshot snapshot = task.Result;
+                if ( snapshot.Exists )
+                {
+                    string json = snapshot.GetValue(true).ToString();
 
-                                PhotonNetwork.LocalPlayer.NickName = json;// 이부분은 DB에 닉네임 저장하고 불러오기로 할 예정
-                            }
-                            else
-                            {
-            #if UNITY_EDITOR
-                                UnityEditor.EditorApplication.isPlaying = false;
-            #endif
-                            }
-                        });*/
-
+                    PhotonNetwork.LocalPlayer.NickName = json;// 이부분은 DB에 닉네임 저장하고 불러오기로 할 예정
+                }
+                else
+                {
+#if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+#endif
+                }
+            });*/
             PhotonNetwork.LocalPlayer.NickName = FirebaseManager.Auth.CurrentUser.DisplayName;
             PhotonNetwork.ConnectUsingSettings();
             SetInteractable(true);
