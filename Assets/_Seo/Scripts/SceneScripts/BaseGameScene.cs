@@ -209,8 +209,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             {
                 foreach ( AIController aIController in aiControllers )
                 {
-                    if ( aIController.gameObject != null )
-                        PhotonNetwork.Destroy(aIController.gameObject);
+                    if (aIController.gameObject != null)
+                        aIController.TakeDamage(10);
                 }
                 yield break;
             }

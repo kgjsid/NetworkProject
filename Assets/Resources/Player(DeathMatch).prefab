@@ -7544,6 +7544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2857780490664833706}
+  playerDeathController: {fileID: 0}
   animator: {fileID: 2233606410619256815}
   hp: 1
   walkSpeed: 8
@@ -7554,6 +7555,8 @@ MonoBehaviour:
   input: {fileID: 2260261226062770527}
   virtualCamera: {fileID: 6903159871962604132}
   playerUI: {fileID: 3538356437983217742}
+  skinTransparent: {fileID: 0}
+  baseTransparent: {fileID: 0}
   damageCheck: {fileID: 5486037445203589161}
 --- !u!143 &2857780490664833706
 CharacterController:
@@ -8660,8 +8663,11 @@ MonoBehaviour:
   damageCheckLayer:
     serializedVersion: 2
     m_Bits: 72
+  shieldLayer:
+    serializedVersion: 2
+    m_Bits: 0
   damage: 2
-  ownerController: {fileID: 3401126481195836339}
+  owner: {fileID: 0}
   targetView: {fileID: 0}
 --- !u!54 &1985998485336159987
 Rigidbody:

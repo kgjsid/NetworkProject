@@ -7237,6 +7237,7 @@ GameObject:
   - component: {fileID: -7392773402436155110}
   - component: {fileID: 7810129418600353855}
   - component: {fileID: 6662609282865733836}
+  - component: {fileID: 4662224074288661278}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -7334,6 +7335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 2857780490664833706}
+  playerDeathController: {fileID: 4662224074288661278}
   animator: {fileID: 2233606410619256815}
   hp: 1
   walkSpeed: 8
@@ -7500,6 +7502,21 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &4662224074288661278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7167555088842048524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee233c750cda86498f721dfe221f2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  skinTransparent: {fileID: 2100000, guid: 52e6ef75389a93b45b48961d6e9e7b01, type: 2}
+  baseTransparent: {fileID: 2100000, guid: a80b3f18d3855cc4787547cd8ee96ff1, type: 2}
 --- !u!1 &7177934825029403114
 GameObject:
   m_ObjectHideFlags: 0
@@ -8432,6 +8449,9 @@ MonoBehaviour:
   damageCheckLayer:
     serializedVersion: 2
     m_Bits: 72
+  shieldLayer:
+    serializedVersion: 2
+    m_Bits: 0
   damage: 2
   owner: {fileID: 2796652940458905049}
   targetView: {fileID: 0}
