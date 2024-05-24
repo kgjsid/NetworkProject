@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using Photon.Pun;
-using static AIController;
+using System.Collections;
+using UnityEngine;
 
 public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
 {
@@ -17,6 +13,7 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     public Animator Animator { get { return animator; } }
 
     private AIMove aiMove;
+    private ItemAIMove itemAImove;
 
 
     [SerializeField] int hp; //AI 체력
@@ -31,13 +28,14 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
         }
         animator = GetComponent<Animator>();
         aiMove = GetComponent<AIMove>();
+        itemAImove = GetComponent<ItemAIMove>();
         hp = 1;
         state = AIstate.Idle;
     }
 
     private void Update()
     {
-        
+
     }
 
     public void TakeDamage(int damage)
@@ -55,8 +53,17 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     private void Die()
     {
         //죽은 ai의 이동속도, 회전속도 0으로 해서 네비메시 이동 정지
-        aiMove.Agent.speed = 0;
-        aiMove.Agent.angularSpeed = 0;
+        if(aiMove != null)
+        {
+            aiMove.Agent.speed = 0;
+            aiMove.Agent.angularSpeed = 0;
+        }
+        if(itemAImove != null)
+        {
+            itemAImove.Agent.speed = 0;
+            itemAImove.Agent.angularSpeed = 0;
+        }
+        
 
         state = AIstate.Die;
         animator.SetTrigger("Die");

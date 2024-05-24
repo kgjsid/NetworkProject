@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NetworkRoom.unity
     guid: 51d7cb7b3140c844896a79293f8e12c3
   - enabled: 0
@@ -20,7 +20,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Lee/Scene/TestLobbyScene_Lee.unity
     guid: 3ee8d5c6dfdcfb243bc4a0d9b18490d2
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BaseGameScene.unity
     guid: 3b31df18595850f4895b609b7d2ccaad
   - enabled: 0
@@ -35,10 +35,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Byeon/Scenes/TestLobbyScene_bcw.unity
     guid: b4064c3baae163547b7f2764925ec17e
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Byeon/Scenes/NetworkRoom _bcw.unity
     guid: 9cf4d66297dacd940b4c95fc0c175fc3
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Byeon/Scenes/BaseGameScene_bcw.unity
     guid: 6c95f8992bdee224cb0c63ae7cb731d0
+  - enabled: 1
+    path: Assets/_Byeon/Scenes/NetworkRoom_bbb.unity
+    guid: fe6252e72a9042d4d98bfbcd425336e0
+  - enabled: 1
+    path: Assets/_Byeon/Scenes/BaseGameScene_bbb.unity
+    guid: 50285f1f047b17b44a2bf9d1a97f4395
   m_configObjects: {}

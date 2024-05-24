@@ -20,35 +20,6 @@ public class RoomPanel_TestChat : MonoBehaviourPun
     // 현재들어온 플레이어들 관리
     private List<PlayerEntry> PlayerList;
 
-    /*[Header("chat")]
-    [SerializeField] TMP_Text chatTextPrefab;
-    [SerializeField] TMP_InputField inputField;
-    [SerializeField] RectTransform content;
-
-
-    private void Awake()
-    {
-        inputField.onSubmit.AddListener(Send);
-    }
-
-    private void Send(string a)
-    {
-        if (inputField.text == "")
-            return;
-        photonView.RPC("SendRpc", RpcTarget.All, inputField.text);
-        inputField.text = "";
-        inputField.ActivateInputField(); //채팅창 재활성화
-    }
-
-    [PunRPC]
-    private void SendRpc(string inputField, PhotonMessageInfo info) // PhotonMessageInfo info 보낸사람의 정보
-    {
-        //this.info = info;
-        TMP_Text textPrefab = Instantiate(chatTextPrefab, content);
-        textPrefab.text = $"{info.Sender.NickName} : {inputField}";
-    }*/
-
-
 
     private void Start()
     {
