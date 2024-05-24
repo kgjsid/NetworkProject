@@ -88,7 +88,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {   // 마스터 서버에 접속할 때
-        // 방을 떠나면 방 서버에서 나가고 매칭을 위한 마스터 서버로 접속할때마다 호출
+        // 방을 떠나면 게임 서버에서 나가고 매칭을 위한 마스터 서버로 접속할때마다 호출
         if ( connectedCount > 0 )
         {
             Debug.Log("들어옴");
@@ -131,6 +131,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public override void OnPlayerEnteredRoom( Player newPlayer )        // 새로운 플레이어가 방에 들어올떄
     {
+        // 마스터 서버, 게임 서버
         roomPanel.PlayerEnterRoom(newPlayer);
     }
     public override void OnPlayerLeftRoom( Player otherPlayer )         // 어떤 플레이어가 방을 나갈때

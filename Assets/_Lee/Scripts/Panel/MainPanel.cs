@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class MainPanel : MonoBehaviour
 {
-    // 언제간 여기서 상점으로 가게하는걸 만들겠지.....
     [SerializeField] Button startButton;
     [SerializeField] TMP_Text nickname;
 

@@ -12,6 +12,9 @@ public class RoomPanel : MonoBehaviour
     [SerializeField] TMP_Text roomName;
     [SerializeField] RectTransform playerContent;
     [SerializeField] PlayerEntry platyerEntry;
+    [SerializeField] TMP_Text gameMod;
+    [SerializeField] List<Image> gameModIMG;
+
 
     [SerializeField] Button lobbyButton;
     [SerializeField] Button startButton;
@@ -45,6 +48,9 @@ public class RoomPanel : MonoBehaviour
     }
     private void OnEnable()
     {
+        // 여기서 초기화시켜줘서 레디 false로 바꿔줍시다
+
+        gameMod.text = "기본 모드";
         Debug.Log(PhotonNetwork.LocalPlayer.NickName);
         if ( PhotonNetwork.LocalPlayer.IsMasterClient )
         {
@@ -64,16 +70,22 @@ public class RoomPanel : MonoBehaviour
             playerEntry.SetPlayer(player);
             PlayerList.Add(playerEntry); // 플레이어 저장
         }
-
+        PhotonNetwork.CurrentRoom.IsVisible = true; // 방 열기
         // 여기서 이제 레디상황을 알아야된다. 근데 레디상황은 플레이어 목록이 들고있다.
         PhotonNetwork.LocalPlayer.SetReady(false);
         PhotonNetwork.LocalPlayer.SetLoad(false);
         AllPlayerReadycheck();
         PhotonNetwork.AutomaticallySyncScene = true;
     }
-    private void OnDisable()
+    public void CurrentGameMod(int index, string modName)
     {
-        
+        gameMod.text = modName;
+        foreach( Image image in gameModIMG )
+        {
+            image.gameObject.SetActive(false);
+        }
+        gameModIMG [index].gameObject.SetActive(true);
+
     }
     private void GameMod()
     {
