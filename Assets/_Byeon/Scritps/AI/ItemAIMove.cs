@@ -45,6 +45,12 @@ public class ItemAIMove : MonoBehaviourPun
         {
             controller.Animator.SetFloat("MoveSpeed", 0);
         }
+
+        //죽으면 코르틴 종료
+        if(controller.Hp == 0)
+        {
+            StopAllCoroutines();
+        }
     }
 
     //마스터만실행
@@ -77,12 +83,12 @@ public class ItemAIMove : MonoBehaviourPun
             //지정된 좌표를 서버를 통해 준다
             photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos);
 
-            /*//공격이나,이모트 애니메이션이 끝날떄까지 대기
-            if(controller.State == AIstate.Attack)
-                yield return StartCoroutine(WaitForAnimationToEnd());*/
+            //공격이나,이모트 애니메이션이 끝날떄까지 대기
+            if(controller.State == AIController.AIstate.Attack)
+                yield return StartCoroutine(WaitForAnimationToEnd());
 
             //다음 행동 시간
-            randomTime = 1;// Random.Range(0, 5);
+            randomTime = Random.Range(1, 5);
             yield return new WaitForSeconds(randomTime);
 
             controller.Animator.SetBool("Emote01", false);
@@ -164,17 +170,17 @@ public class ItemAIMove : MonoBehaviourPun
         float randomValue = Random.Range(0f, 1f);
         if (randomValue < 0.2f)
             return AIController.AIstate.Idle;
-        else if (randomValue < 0.6f)
+        else if (randomValue < 0.8f)
             return AIController.AIstate.Walk;
         else if (randomValue < 0.9f)
             return AIController.AIstate.Run;
-        /*else if (randomValue < 0.95f)
-            return AIController.AIstate.Attack;*/
+        else if (randomValue < 0.95f)
+            return AIController.AIstate.Attack;
         else
             return AIController.AIstate.Emote;
     }
 
-    /*private IEnumerator WaitForAnimationToEnd()
+    private IEnumerator WaitForAnimationToEnd()
     {
         float speed = agent.speed;
         agent.speed = 0;
@@ -186,5 +192,5 @@ public class ItemAIMove : MonoBehaviourPun
 
         //controller.Animator.SetTrigger("Attack");
         agent.speed = speed;
-    }*/
+    }
 }
