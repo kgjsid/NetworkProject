@@ -2,6 +2,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 
@@ -20,18 +21,26 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     [SerializeField] RoomPanel roomPanel;
     [SerializeField] InfoPanel infoPanel;
     [SerializeField] SignUpPanel signUpPanel;
+    [SerializeField] SettingPanel settingPanel;
+    [SerializeField] Button SettingButton;
     [SerializeField] AudioClip BGM;
     private ClientState state; // 클라이언트의 상태
     private void Awake()
     {
+
         if ( instance == null )
         {
             instance = this;
         }
 
     }
+    public void Setting()
+    {
+        settingPanel.gameObject.SetActive(true);
+    }
     private void Start()
     {
+        SettingButton.onClick.AddListener(Setting);
         SetActivePanel(Panel.Login); // 시작시 무조건 Login 화면이 나올수 있게
         Manager.Sound.PlayBGM(BGM);
         if ( PhotonNetwork.CurrentRoom != null )
