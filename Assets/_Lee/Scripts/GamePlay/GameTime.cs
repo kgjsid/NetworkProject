@@ -72,6 +72,7 @@ public class GameTime : MonoBehaviourPun
 
     private void RoomButton()
     {
+        if (PhotonNetwork.IsMasterClient)
         PhotonNetwork.LoadLevel("NetworkRoom");
     }
 }
