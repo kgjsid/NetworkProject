@@ -83,9 +83,11 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     IEnumerator DieDelay()
     {
         yield return new WaitForSeconds(3f);
-        gameObject.SetActive(false);
-        /*if (photonView.IsMine)
-            PhotonNetwork.Destroy(gameObject);*/
+        //gameObject.SetActive(false);
+        if (photonView.IsMine)
+            PhotonNetwork.Destroy(gameObject);
+        //ai 리스트에서 제거
+        BaseGameScene.Instance.aiControllers.Remove(gameObject.GetComponent<AIController>());
     }
 
 
