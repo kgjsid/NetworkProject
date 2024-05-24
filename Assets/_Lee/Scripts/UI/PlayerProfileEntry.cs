@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
+// 여기서 GetKillCount 가져와서 띄어줍시다.
 public class PlayerProfileEntry : MonoBehaviourPun
 {
     [SerializeField] TMP_Text playerName;
@@ -19,10 +19,10 @@ public class PlayerProfileEntry : MonoBehaviourPun
         playerLive.gameObject.SetActive(true);
         playerDie.gameObject.SetActive(false);
     }
-    public void PlayerNickname( Player player, string Nickname )
+    public void PlayerNickname( Player player)
     {
         this.player = player;
-        playerName.text = Nickname;
+        playerName.text = player.NickName;
     }
     public void playerDied( Player player )
     {

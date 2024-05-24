@@ -27,15 +27,17 @@ public class ItemObject : MonoBehaviour, IUseable
 
     [SerializeField] List<Sprite> itemIcon;
     [SerializeField] Image itemBox_Image;
-
+    [Header("Item_Trap")]
     [SerializeField] Item_Trap trap;
     [SerializeField] Item_Transparency transparency;
+    [SerializeField] Item_Shield shield;
 
     PlayerItemController user;
 
     public void SetUser(PlayerItemController user)
     {
         this.user = user;
+        transparency.SetUser(user);
     }
 
     public void GetItem(ItemType type)
@@ -55,7 +57,7 @@ public class ItemObject : MonoBehaviour, IUseable
             return;
         }
 
-        switch(curItemType)
+        switch(CurItemType)
         {
             case ItemType.Trap:
                 CaseTrop(user);
@@ -75,17 +77,16 @@ public class ItemObject : MonoBehaviour, IUseable
     {
         // 트랩을 생성하고
         // 트랩의 주인을 설정하면 트랩은 알아서 동작할 수 있도록 스크립트를 활용???
-        Debug.Log($"{user.Controller.name}이 트랩 아이템을 사용");
+        trap.Use();
     }
 
     private void CaseShield(PlayerItemController user)
     {
-        Debug.Log($"{user.Controller.name}이 쉴드 아이템을 사용");
+        shield.Use();
     }
 
     private void CaseTransparent(PlayerItemController user)
     {
-        Debug.Log($"{user.Controller.name}이 투명화 아이템을 사용");
         transparency.Use();
     }
 

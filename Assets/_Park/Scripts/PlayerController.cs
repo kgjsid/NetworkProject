@@ -1,6 +1,7 @@
 using Cinemachine;
 using Photon.Pun;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.UI.GridLayoutGroup;
@@ -8,6 +9,7 @@ using static UnityEngine.UI.GridLayoutGroup;
 public class PlayerController : MonoBehaviourPun, IDamageable
 {   // 플레이어 컨트롤러 스크립트
     [SerializeField] CharacterController controller;
+    [SerializeField] PlayerDeathController playerDeathController;
     [SerializeField] Animator animator;
 
     [SerializeField] int hp;
@@ -28,38 +30,10 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] PlayerInput input;
     [SerializeField] CinemachineFreeLook virtualCamera;
     [SerializeField] Canvas playerUI;
+    [SerializeField] Material skinTransparent;
+    [SerializeField] Material baseTransparent;
 
-    KillLogUI killLogUI;
     [SerializeField] Damage damageCheck;
-    int playerKillCount = 0;
-    public int PlayerKillCount {  get { return playerKillCount; } }// 이 친구를 가져다 쓰면될듯
-    private void Awake()
-    {
-        killLogUI = FindObjectOfType<KillLogUI>();
-    }
-    [PunRPC]
-    public void KillLogNickName( int targetID )
-    {
-        // 모든 클라이언트에서 실행됨
-        PhotonView targetView = PhotonView.Find(targetID);
-        if ( targetView != null )
-        {
-            string targetName = targetView.Controller.NickName;
-            if ( targetView.gameObject.layer == 3 )
-            {
-                playerKillCount++;
-                killLogUI.KillLog(photonView.Controller.NickName, targetName);
-            }
-            else
-            {
-                killLogUI.KillLog(photonView.Controller.NickName, "AI");
-            }
-        }
-    }
-    public void KillLog( int targetID )
-    {
-        photonView.RPC("KillLogNickName", RpcTarget.AllViaServer, targetID);
-    }
     private void Start()
     {   // 시작시 네트워크 작업
         if ( photonView.IsMine == false )
@@ -146,26 +120,43 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 1. 공격 스크립트 제외
         // 2. 투명 처리
         // 3. 어택을 받을 수 없도록 처리 필요
+        if (playerDeathController != null)
+            playerDeathController.IsDead = true;
     }
 
     public void TakeDamage( int damage )
     {   // 실제 데미지 함수
-        if ( !isDamaged )         // 데미지를 받는 상태가 아니라면(isDamage가 false)
+        if(playerDeathController == null)
         {
-            isDamaged = true;   // 데미지를 받고 있고
-            hp -= damage;       // 체력 감소
-            if ( hp <= 0 )        // hp가 0보다 작으면
+            if(!isDamaged)
             {
-                Die();          // 사망처리
+                isDamaged = true;
+                hp -= damage;
+                if(hp <= 0)
+                {
+                    Die();
+                }
             }
         }
+        else
+        {
+            if (!isDamaged && !playerDeathController.IsDead)         // 데미지를 받는 상태가 아니라면(isDamage가 false)
+            {
+                isDamaged = true;   // 데미지를 받고 있고
+                hp -= damage;       // 체력 감소
+                if (hp <= 0)        // hp가 0보다 작으면
+                {
+                    Die();          // 사망처리
+                }
+            }
+        }
+
     }
 
 
     public void PlayerMove()
     {   // 애니메이션 이벤트에서 활용 중
         isAlive = true;
-        //hp += 2;         // 테스트용 hp        
     }
     public void PlayerNotMove()
     {   // 애니메이션 이벤트에서 활용 중

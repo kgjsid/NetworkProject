@@ -50,7 +50,6 @@ public class MissionGameScene : BaseGameScene
             }
 
             yield return new WaitForSeconds(missionTime);
-            Debug.Log("미션 시간 종료");
 
             for(int i = 0; i < playerMissions.Count; i++)
             {
@@ -83,9 +82,8 @@ public class MissionGameScene : BaseGameScene
     {
         for (int i = 0; i < playerMissions.Count; i++)
         {
-            /*MissionType randomMission = ( MissionType )Random.Range(0, ( int )MissionType.Size);
-            playerMissions [i].SetMission(randomMission);*/
-            playerMissions [i].SetMission(MissionType.EmoteMission);
+            MissionType randomMission = ( MissionType )Random.Range(0, (int)MissionType.Size);
+            playerMissions [i].SetMission(randomMission);
         }
     }
 }

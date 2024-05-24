@@ -923,7 +923,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 72
   damage: 2
-  ownerController: {fileID: 0}
+  owner: {fileID: 0}
   targetView: {fileID: 0}
 --- !u!54 &3315904299779308388
 Rigidbody:
@@ -6913,8 +6913,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c0474e503a134084ebb0c118eb0887eb, type: 2}
-  - {fileID: 2100000, guid: 172a19705c37efc4fbab0d4e56e7a72c, type: 2}
+  - {fileID: 2100000, guid: 6539ef0c3af17ad4aaa96582b145cfdb, type: 2}
+  - {fileID: 2100000, guid: 44c9951b5d267174db257b6238cce1ed, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7280,6 +7280,7 @@ GameObject:
   - component: {fileID: 5555474063229286693}
   - component: {fileID: 5344707734844084080}
   - component: {fileID: 1056037997064616022}
+  - component: {fileID: 4857828322958193479}
   m_Layer: 3
   m_Name: MissionPlayer
   m_TagString: Untagged
@@ -7377,6 +7378,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 4297965436915358703}
+  playerDeathController: {fileID: 4857828322958193479}
   animator: {fileID: 8005623291831751049}
   hp: 1
   walkSpeed: 8
@@ -7387,6 +7389,8 @@ MonoBehaviour:
   input: {fileID: 8238807199770441221}
   virtualCamera: {fileID: 3321114525504476651}
   playerUI: {fileID: 3890518662210527495}
+  skinTransparent: {fileID: 0}
+  baseTransparent: {fileID: 0}
   damageCheck: {fileID: 0}
 --- !u!143 &4297965436915358703
 CharacterController:
@@ -7563,6 +7567,21 @@ MonoBehaviour:
   itemBoxPrefab: {fileID: 2888971333223607820, guid: c932838beca4ba348995b675c2cab1e1,
     type: 3}
   playerEmote: {fileID: 0}
+--- !u!114 &4857828322958193479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5922547052056692495}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ee233c750cda86498f721dfe221f2cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  skinTransparent: {fileID: 2100000, guid: 52e6ef75389a93b45b48961d6e9e7b01, type: 2}
+  baseTransparent: {fileID: 2100000, guid: a80b3f18d3855cc4787547cd8ee96ff1, type: 2}
 --- !u!1 &6213062719678508507
 GameObject:
   m_ObjectHideFlags: 0

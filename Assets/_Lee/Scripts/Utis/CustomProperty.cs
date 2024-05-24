@@ -134,6 +134,26 @@ public static class CustomProperty
         Propertys [GAMEMODE] = gameMode;
         room.SetCustomProperties(Propertys);
     }
+    public const string KILLCOUNT = "KillCount";
+    public static int GetKillCount(this Player player)
+    {
+        PhotonHashtable customProperty = player.CustomProperties;
+        if( customProperty.TryGetValue(KILLCOUNT, out object value) )
+        {
+            return ( int )value;
+        }
+        else
+        {
+            return 0;
+        }
+    }
+
+    public static void SetKillCount( this Player player, int KillPoint )
+    {
+        Propertys.Clear();
+        Propertys [KILLCOUNT] = KillPoint;
+        player.SetCustomProperties(Propertys);
+    }
 }
 
 public enum PlayerState
@@ -146,5 +166,6 @@ public enum PlayerState
 public enum GameMode
 {
     normal,
-    mission
+    mission,
+    Item
 }

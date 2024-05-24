@@ -8,11 +8,11 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/NetworkRoom.unity
     guid: 51d7cb7b3140c844896a79293f8e12c3
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Seo/Scenes/TestLobbyScene.unity
     guid: 359ec83e97d6db2489e3c0107f73c1fb
   - enabled: 0
-    path: Assets/_Seo/Scenes/BaseGameScene.unity
+    path: Assets/_Seo/Scenes/BaseGameScene_.unity
     guid: ab5a9d4e74196ba47a987d765581d491
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
@@ -20,7 +20,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Lee/Scene/TestLobbyScene_Lee.unity
     guid: 3ee8d5c6dfdcfb243bc4a0d9b18490d2
-  - enabled: 0
+  - enabled: 1
+    path: Assets/Scenes/GameScene_DeathMatch.unity
+    guid: a58c08de94fa1884b889bf1e41c459ad
+  - enabled: 1
     path: Assets/Scenes/BaseGameScene.unity
     guid: 3b31df18595850f4895b609b7d2ccaad
   - enabled: 0
@@ -32,6 +35,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Seo/Scenes/DeathMatchGameScene.unity
     guid: 4b25f091221f4e14b8a2e0d9ca32b519
+  - enabled: 1
+    path: Assets/Scenes/MissionGameScene.unity
+    guid: aa7549aff4bfaa44ebc044680364c5e7
   - enabled: 0
     path: Assets/_Byeon/Scenes/TestLobbyScene_bcw.unity
     guid: b4064c3baae163547b7f2764925ec17e
@@ -41,10 +47,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Byeon/Scenes/BaseGameScene_bcw.unity
     guid: 6c95f8992bdee224cb0c63ae7cb731d0
-  - enabled: 1
-    path: Assets/_Byeon/Scenes/NetworkRoom_bbb.unity
-    guid: fe6252e72a9042d4d98bfbcd425336e0
-  - enabled: 1
-    path: Assets/_Byeon/Scenes/BaseGameScene_bbb.unity
-    guid: 50285f1f047b17b44a2bf9d1a97f4395
   m_configObjects: {}

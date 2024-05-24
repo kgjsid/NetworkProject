@@ -43,6 +43,6 @@ public class ItemBox : MonoBehaviourPun
             box.gameObject.SetActive(false);     
             gameObject.GetComponent<BoxCollider>().enabled = false;
             StartCoroutine(ReCreate());
-        }        
+        }
     }
 }
