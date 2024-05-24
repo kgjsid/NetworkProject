@@ -17,6 +17,7 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
 
 
     [SerializeField] int hp; //AI 체력
+    public int Hp { get { return hp; } }
 
 
 
@@ -42,6 +43,7 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     {
         if (hp - damage < 0)
         {
+            hp = 0;
             Die();
         }
         else
@@ -55,6 +57,7 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
         //죽은 ai의 이동속도, 회전속도 0으로 해서 네비메시 이동 정지
         if(aiMove != null)
         {
+            
             aiMove.Agent.speed = 0;
             aiMove.Agent.angularSpeed = 0;
         }
