@@ -16,9 +16,10 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     private static BaseGameScene instance;
     public static BaseGameScene Instance { get { return instance; } }
 
-    // 게임 씬
+    [Header("Spanwer & SpawnPoint")]
     [SerializeField] protected List<AISpawner> aiSpanwers;
     [SerializeField] protected List<Transform> playerSpawnPoints;
+
     [SerializeField] protected CheckGameState checkGameState;
     public List<AIController> aiControllers; // AI관리하기위해
     public CheckGameState CheckGameState { get { return checkGameState; } }
@@ -28,7 +29,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
     [SerializeField] protected Image fade;
     [SerializeField] protected float fadeTime = 2f;
     [SerializeField] KillLogUI killLogUI;
-    [SerializeField] PlayerList playerList;
+    [SerializeField] protected PlayerList playerList;
 
     protected int loadCount = 0;
     protected int deathCount = 0;
@@ -49,8 +50,6 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         {
             Destroy(instance.gameObject);
         }
-        StartCoroutine(GameOver());
-        StartCoroutine(TimeOut());
     }
 
     protected virtual IEnumerator Start()
@@ -58,6 +57,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         checkGameState.CurState = GameState.InitGame;
         deathCount = 0;
         loadCount = 0;
+
         fade.gameObject.SetActive(true);
         fade.color = new Color(fade.color.r, fade.color.g, fade.color.b, 1f);
 
@@ -73,7 +73,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         {   // 시작 시 플레이어의 상태는 살아있는 상태로
             player.SetState(PlayerState.Live);
             playerList.CreateProfile();
-            playerList.PlayerProfiles [index++].PlayerNickname(player, player.NickName);
+            playerList.PlayerProfiles [index++].PlayerNickname(player);
         }
         // 플레이어 스폰
         yield return PlayerSpawn();
@@ -81,8 +81,13 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         yield return SpawnRoutine();
 
         yield return FadeIn();
+
+        StartCoroutine(GameOver());
+        StartCoroutine(TimeOut());
+
         checkGameState.CurState = GameState.GameProgress;
     }
+
     protected virtual IEnumerator SpawnRoutine()
     {   // 실제 스폰 루틴
         if ( PhotonNetwork.IsMasterClient )
@@ -96,7 +101,6 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         yield return new WaitUntil(() => ( loadCount == players.Count ));
         yield return null;
     }
-
     protected virtual IEnumerator PlayerSpawn()
     {   // 플레이어 스폰루틴
         int randPoint = Random.Range(0, playerSpawnPoints.Count);
@@ -108,7 +112,6 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
 
         yield return null;
     }
-
     protected virtual IEnumerator FadeIn()
     {
         float rate = 0;
@@ -135,36 +138,35 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         }
         else if ( changedProps.ContainsKey(CustomProperty.PLAYERSTATE) )
         {
-            // 플레이어 상태 바뀐 것 체크
-            if ( ( PlayerState )changedProps [CustomProperty.PLAYERSTATE] != PlayerState.Die )
+            if ((PlayerState)changedProps [CustomProperty.PLAYERSTATE] != PlayerState.Die)
                 return;
 
             foreach ( PlayerProfileEntry entry in playerList.PlayerProfiles )
             {
                 entry.playerDied(targetPlayer);
             }
+
             deathCount++;
             if ( deathCount >= players.Count - 1 )
             {
-                if(PhotonNetwork.CurrentRoom.GetMode() != GameMode.Item)
-                checkGameState.CurState = GameState.GameEnd;
+                if (PhotonNetwork.CurrentRoom.GetMode() != GameMode.Item)
+                    checkGameState.CurState = GameState.GameEnd;
             }
         }
     }
-    public override void OnLeftRoom()
-    {
-        Debug.Log("게임씬에서 나감");
-    }
+
     public override void OnMasterClientSwitched( Player newMasterClient )
     {
         masterChangeEvent?.Invoke();
     }
+
     // 시간 동기화
     [PunRPC]
     public void StartTime()
     {
         gameTimeUI.StartTimer();
     }
+
     IEnumerator GameOver()
     {
         // 조건 
@@ -191,11 +193,11 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
                 }
                 else
                 {
-                    // 이때 킬카운트 높은 플레이어가 이길 수 있게 조건 걸어주면됨
+                    
                 }
                 yield break;
             }
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
     }
     IEnumerator TimeOut()
@@ -208,11 +210,11 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
                 foreach ( AIController aIController in aiControllers )
                 {
                     if ( aIController.gameObject != null )
-                        Destroy(aIController.gameObject); // 모든 AI없애기
+                        PhotonNetwork.Destroy(aIController.gameObject);
                 }
                 yield break;
             }
-            yield return null;
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }

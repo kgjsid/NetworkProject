@@ -112,13 +112,10 @@ public class PlayerMission : MonoBehaviourPun
     private IEnumerator ItemMission()
     {   // 아이템전은 나중에 아이템 만들고 나면 스크립트 이용해 볼 것
         // 아이템 먹는거 구현 완료
-        // 특정 아이템을 특정 플레이어만 먹을 수 있게(다른 사람이 보여야함)
         List<GameObject> itemSapwns = MissionGameScene.Instance.ItemSpawnsPoint;
         int randPoint = UnityEngine.Random.Range(0, itemSapwns.Count);
         instanceItemBox = Instantiate(itemBoxPrefab, Vector3.zero, Quaternion.identity);
         instanceItemBox.transform.position = new Vector3(itemSapwns [randPoint].transform.position.x, 1.4f, itemSapwns [randPoint].transform.position.z);
-        // 여기까지 생성
-        // 이제 먹으면 완료되게
         itemCount = 0;
         while ( true )
         {

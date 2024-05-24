@@ -9,6 +9,7 @@ using static UnityEngine.UI.GridLayoutGroup;
 public class PlayerController : MonoBehaviourPun, IDamageable
 {   // 플레이어 컨트롤러 스크립트
     [SerializeField] CharacterController controller;
+    [SerializeField] PlayerDeathController playerDeathController;
     [SerializeField] Animator animator;
 
     [SerializeField] int hp;
@@ -119,21 +120,37 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 1. 공격 스크립트 제외
         // 2. 투명 처리
         // 3. 어택을 받을 수 없도록 처리 필요
-
-       photonView.RPC("SetDeath", RpcTarget.All);
+        if (playerDeathController != null)
+            playerDeathController.IsDead = true;
     }
 
     public void TakeDamage( int damage )
     {   // 실제 데미지 함수
-        if ( !isDamaged )         // 데미지를 받는 상태가 아니라면(isDamage가 false)
+        if(playerDeathController == null)
         {
-            isDamaged = true;   // 데미지를 받고 있고
-            hp -= damage;       // 체력 감소
-            if ( hp <= 0 )        // hp가 0보다 작으면
+            if(!isDamaged)
             {
-                Die();          // 사망처리
+                isDamaged = true;
+                hp -= damage;
+                if(hp <= 0)
+                {
+                    Die();
+                }
             }
         }
+        else
+        {
+            if (!isDamaged && !playerDeathController.IsDead)         // 데미지를 받는 상태가 아니라면(isDamage가 false)
+            {
+                isDamaged = true;   // 데미지를 받고 있고
+                hp -= damage;       // 체력 감소
+                if (hp <= 0)        // hp가 0보다 작으면
+                {
+                    Die();          // 사망처리
+                }
+            }
+        }
+
     }
 
 
@@ -144,17 +161,5 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     public void PlayerNotMove()
     {   // 애니메이션 이벤트에서 활용 중
         isAlive = false;
-    }
-
-    [PunRPC]
-    private void SetDeath()
-    {
-        gameObject.GetComponent<PlayerAttack>().enabled = false;
-        foreach (Transform child in transform)
-        {
-            child.gameObject.layer = 11;
-        }
-        SkinnedMeshRenderer render = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
-        render.SetMaterials(new List<Material> { skinTransparent, baseTransparent });
     }
 }

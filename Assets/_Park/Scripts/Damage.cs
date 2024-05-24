@@ -5,6 +5,7 @@ using Photon.Realtime;
 public class Damage : MonoBehaviourPun
 {
     [SerializeField] LayerMask damageCheckLayer;
+    [SerializeField] LayerMask shieldLayer;
     [SerializeField] int damage;
     [SerializeField] PlayerAttack owner;
     public PhotonView targetView;
@@ -12,8 +13,14 @@ public class Damage : MonoBehaviourPun
     public int TargetID {  get { return targetID; } }
     private void OnTriggerEnter( Collider collision )
     {
-        // if 플레이어 쉴드상태라면 
-        // 쉴드 깨지고 return;
+        IShieldable targetShield = collision.GetComponent<IShieldable>();
+
+        if(targetShield != null)
+        {   // 쉴드가 있었다면
+            targetShield.Shielding();
+            // 밑은 진행하지 않음.
+            return;
+        }
 
         if ( ( damageCheckLayer.value & ( 1 << collision.gameObject.layer ) ) != 0 )
         {
