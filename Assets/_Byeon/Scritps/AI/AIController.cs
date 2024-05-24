@@ -14,6 +14,7 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
 
     private AIMove aiMove;
     private ItemAIMove itemAImove;
+    private CapsuleCollider capsuleCollider;
 
 
     [SerializeField] int hp; //AI 체력
@@ -30,6 +31,7 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
         animator = GetComponent<Animator>();
         aiMove = GetComponent<AIMove>();
         itemAImove = GetComponent<ItemAIMove>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
         hp = 1;
         state = AIstate.Idle;
     }
@@ -41,15 +43,19 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
 
     public void TakeDamage(int damage)
     {
-        if (hp - damage < 0)
+        if(hp != 0)
         {
-            hp = 0;
-            Die();
+            if (hp - damage <= 0)
+            {
+                hp = 0;
+                Die();
+            }
+            else
+            {
+                hp -= damage;
+            }
         }
-        else
-        {
-            hp -= damage;
-        }
+        
     }
 
     private void Die()
@@ -57,7 +63,6 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
         //죽은 ai의 이동속도, 회전속도 0으로 해서 네비메시 이동 정지
         if(aiMove != null)
         {
-            
             aiMove.Agent.speed = 0;
             aiMove.Agent.angularSpeed = 0;
         }
@@ -66,7 +71,9 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
             itemAImove.Agent.speed = 0;
             itemAImove.Agent.angularSpeed = 0;
         }
-        
+
+        //콜라이더 꺼서 킬로그 반응 끄기
+        capsuleCollider.enabled = false;
 
         state = AIstate.Die;
         animator.SetTrigger("Die");
@@ -76,8 +83,9 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     IEnumerator DieDelay()
     {
         yield return new WaitForSeconds(3f);
-        if (photonView.IsMine)
-            PhotonNetwork.Destroy(gameObject);
+        gameObject.SetActive(false);
+        /*if (photonView.IsMine)
+            PhotonNetwork.Destroy(gameObject);*/
     }
 
 
