@@ -19,10 +19,10 @@ public class PlayerProfileEntry : MonoBehaviourPun
         playerLive.gameObject.SetActive(true);
         playerDie.gameObject.SetActive(false);
     }
-    public void PlayerNickname( Player player, string Nickname )
+    public void PlayerNickname( Player player)
     {
         this.player = player;
-        playerName.text = Nickname;
+        playerName.text = player.NickName;
     }
     public void playerDied( Player player )
     {
