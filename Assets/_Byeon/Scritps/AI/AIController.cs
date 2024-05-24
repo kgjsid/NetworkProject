@@ -84,7 +84,7 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     {
         yield return new WaitForSeconds(3f);
         //gameObject.SetActive(false);
-        if (photonView.IsMine)
+        if (PhotonNetwork.IsMasterClient)
             PhotonNetwork.Destroy(gameObject);
         //ai 리스트에서 제거
         BaseGameScene.Instance.aiControllers.Remove(gameObject.GetComponent<AIController>());
