@@ -29,8 +29,9 @@ public class ItemObject : MonoBehaviour, IUseable
     [SerializeField] Image itemBox_Image;
     [Header("Item_Trap")]
     [SerializeField] Item_Trap trap;
-    [SerializeField] Item_Transparency transparency;
     [SerializeField] Item_Shield shield;
+    [SerializeField] Item_Transparency transparency;
+    [SerializeField] Item_SmokeBomb smokebomb;
 
     PlayerItemController user;
 
@@ -68,6 +69,9 @@ public class ItemObject : MonoBehaviour, IUseable
             case ItemType.Transparent:
                 CaseTransparent(user);
                 break;
+            case ItemType.SmokeBomb:
+                CaseTransparent(user);
+                break;
         }
 
         CurItemType = ItemType.None;
@@ -90,6 +94,11 @@ public class ItemObject : MonoBehaviour, IUseable
         transparency.Use();
     }
 
+    private void SmokeBomb(PlayerItemController user)
+    {
+        smokebomb.Use();
+    }
+
 }
 
 public enum ItemType
@@ -98,5 +107,6 @@ public enum ItemType
     Trap,
     Shield,
     Transparent,
+    SmokeBomb,
     Size
 }
