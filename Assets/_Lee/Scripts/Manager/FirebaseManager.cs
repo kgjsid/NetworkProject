@@ -2,6 +2,7 @@ using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class FirebaseManager : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class FirebaseManager : MonoBehaviour
     {
         CreateInstance();
         CheckDependency();
+
     }
 
     private void CreateInstance()
