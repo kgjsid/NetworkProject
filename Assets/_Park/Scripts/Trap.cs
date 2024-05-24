@@ -37,6 +37,15 @@ public class Trap : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
+        /*IShieldable targetShield = collision.GetComponent<IShieldable>();
+
+        if (targetShield != null)
+        {   // 쉴드가 있었다면
+            targetShield.Shielding(collision.GetComponent<PlayerItemController>());
+            // 밑은 진행하지 않음.
+            Debug.Log("쉴드가 막음");
+        }*/
+
         if ((PlayerCheckLayer.value & 1 << collision.gameObject.layer) != 0)
         {
             GameObject deathEffect = Instantiate(boom, transform.position, Quaternion.identity);

@@ -8,7 +8,7 @@ public class Item_Trap : MonoBehaviourPun
 
     public void Use()
     {
-        photonView.RPC("MakeTrap", RpcTarget.All);
+        photonView.RPC("MakeTrap", RpcTarget.MasterClient);
     }
     [PunRPC]
     private void MakeTrap()

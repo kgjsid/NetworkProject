@@ -11,11 +11,13 @@ public class PlayerAttack : MonoBehaviourPun
     [SerializeField] Slider coolTimeGauge;
     [SerializeField] int coolTime;
     [SerializeField] AudioClip attackSound;
+    [SerializeField] PlayerController playerController;
     public bool canAttack = true;
     KillLogUI killLogUI;
     private void Awake()
     {
         killLogUI = FindObjectOfType<KillLogUI>();
+        playerController = GetComponent<PlayerController>();
     }
     private void OnAttack(InputValue value)
     {   // 어택
@@ -23,6 +25,9 @@ public class PlayerAttack : MonoBehaviourPun
             return;
 
         if (EventSystem.current.IsPointerOverGameObject())  // UI가 가려져 있는 상태라면
+            return;
+
+        if (playerController.IsDead)
             return;
 
         animator.SetTrigger("Attack");                      // 어택을 진행

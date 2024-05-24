@@ -15,6 +15,13 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] int hp;
 
     public int Hp { get { return hp; } }
+    public bool IsDead { get { return playerDeathController.IsDead; } }
+    public bool IsShield { get { return isShield; }
+        set
+        {
+            isShield = value;
+        }
+    }
 
     [Header("Move")]
     private float moveSpeed = 8;            // 움직일 때의 속도
@@ -23,6 +30,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     private Vector3 moveDir;                // 움직임 벡터
     private float ySpeed;                   // 중력 및 점프력(수정 필요)
     private bool isAlive = true;            // 살아있는지 여부
+    private bool isShield = false;          // 쉴드 여부
 
     [SerializeField] LayerMask damageLayer; // 데미지 레이어
     private bool isDamaged;                 // 데미지를 받고 있는지에 대한 여부
@@ -126,6 +134,9 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 
     public void TakeDamage( int damage )
     {   // 실제 데미지 함수
+        if (isShield)
+            return;
+
         if(playerDeathController == null)
         {
             if(!isDamaged)

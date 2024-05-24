@@ -41,10 +41,4 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Byeon/Scenes/TestLobbyScene_bcw.unity
     guid: b4064c3baae163547b7f2764925ec17e
-  - enabled: 0
-    path: Assets/_Byeon/Scenes/NetworkRoom _bcw.unity
-    guid: 9cf4d66297dacd940b4c95fc0c175fc3
-  - enabled: 0
-    path: Assets/_Byeon/Scenes/BaseGameScene_bcw.unity
-    guid: 6c95f8992bdee224cb0c63ae7cb731d0
   m_configObjects: {}
