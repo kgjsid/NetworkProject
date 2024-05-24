@@ -22,6 +22,10 @@ public class ItemBox_ : MonoBehaviour
 
         if (target != null)
         {
+            if (target.Controller.IsDead)
+                return;
+
+
             ItemType randomItem = (ItemType)Random.Range(1, (int)ItemType.Size);
             target.PlayerItem.GetItem(randomItem);
         }

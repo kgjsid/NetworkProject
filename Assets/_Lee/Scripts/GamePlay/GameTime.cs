@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class GameTime : MonoBehaviourPun
 {
-    int time = 5;
+    int time = 60;
     public int Time { get { return time; } }
     [SerializeField] PhotonView PV;
     [SerializeField] TMP_Text timeText;

@@ -39,6 +39,7 @@ public class ItemObject : MonoBehaviour, IUseable
     {
         this.user = user;
         transparency.SetUser(user);
+        shield.SetUser(user);
     }
 
     public void GetItem(ItemType type)
@@ -70,7 +71,7 @@ public class ItemObject : MonoBehaviour, IUseable
                 CaseTransparent(user);
                 break;
             case ItemType.SmokeBomb:
-                CaseTransparent(user);
+                SmokeBomb(user);
                 break;
         }
 

@@ -650,6 +650,11 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 167467007320127047, guid: a61b54f4857d09e4f8de3c4170c2544c,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1848649524557818488, guid: a61b54f4857d09e4f8de3c4170c2544c,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -659,6 +664,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2400646326872750604, guid: a61b54f4857d09e4f8de3c4170c2544c,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163236056269034374, guid: a61b54f4857d09e4f8de3c4170c2544c,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6219960180196310415, guid: a61b54f4857d09e4f8de3c4170c2544c,
         type: 3}
@@ -1002,6 +1017,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4593398792876272974, guid: 877937f83b2129744861a889823b9fb0,
+        type: 3}
+      propertyPath: sceneViewId
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7340748587474628805, guid: 877937f83b2129744861a889823b9fb0,
         type: 3}

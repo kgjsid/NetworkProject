@@ -24,7 +24,7 @@ public class Item_Transparency : MonoBehaviourPun
     public void SetUser(PlayerItemController user)
     {
         this.user = user;
-        render = user.gameObject.GetComponent<SkinnedMeshRenderer>();
+        render = user.gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
     public void Use()

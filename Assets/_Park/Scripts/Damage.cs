@@ -13,15 +13,14 @@ public class Damage : MonoBehaviourPun
     public int TargetID {  get { return targetID; } }
     private void OnTriggerEnter( Collider collision )
     {
-        IShieldable targetShield = collision.GetComponent<IShieldable>();
-
-        if(targetShield != null)
+        /*if(((1 << collision.gameObject.layer) & shieldLayer) != 0)
         {   // 쉴드가 있었다면
-            targetShield.Shielding();
+            IShieldable targetShield = collision.GetComponent<IShieldable>();
+            Debug.Log("쉴드가 있나?");
+            targetShield.Shielding(collision.GetComponent<PlayerItemController>());
+            Debug.Log("쉴드가 막음");
             // 밑은 진행하지 않음.
-            return;
-        }
-
+        }*/
         if ( ( damageCheckLayer.value & ( 1 << collision.gameObject.layer ) ) != 0 )
         {
             targetView = collision.GetComponent<PhotonView>();
@@ -38,4 +37,6 @@ public class Damage : MonoBehaviourPun
     {
         targetID = -12;
     }
+
+    
 }

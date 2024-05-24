@@ -344,8 +344,11 @@ MonoBehaviour:
   damageCheckLayer:
     serializedVersion: 2
     m_Bits: 8
+  shieldLayer:
+    serializedVersion: 2
+    m_Bits: 0
   damage: 2
-  ownerController: {fileID: 0}
+  owner: {fileID: 0}
   targetView: {fileID: 0}
 --- !u!65 &2668599903251867757
 BoxCollider:
