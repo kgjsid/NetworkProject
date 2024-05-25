@@ -55,7 +55,6 @@ public class ItemObject : MonoBehaviour, IUseable
         // 아이템이 있어야만 사용 가능
         if (CurItemType == ItemType.None)
         {
-            Debug.Log("아이템이 없음");
             return;
         }
 

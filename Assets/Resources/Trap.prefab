@@ -321,7 +321,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81737a267f100de41bdc0bd05e23fcf9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boom: {fileID: 4375576312709391085, guid: e7babf6c41f54f042b1f833dce151ad1, type: 3}
   PlayerCheckLayer:
     serializedVersion: 2
     m_Bits: 8

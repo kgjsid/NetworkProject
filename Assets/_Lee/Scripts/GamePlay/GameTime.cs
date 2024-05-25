@@ -27,7 +27,6 @@ public class GameTime : MonoBehaviourPun
     {
         if ( timerRoutine == null )
             timerRoutine = StartCoroutine(Timer());
-        //Debug.Log("시간 들어옴?");
     }
     public void Victory()
     {
@@ -42,7 +41,6 @@ public class GameTime : MonoBehaviourPun
     {
         while ( time >= 0 )
         {
-            //Debug.Log("시간 코루틴에 들어옴?");
             timeText.text = time.ToString();
             time--;
             yield return new WaitForSeconds(1);
@@ -58,11 +56,14 @@ public class GameTime : MonoBehaviourPun
     public void EndingImage()
     {
         // 여기 있는 조건 게임이 끝났을때 조건
-        foreach ( Player player in BaseGameScene.Instance.Players )
+        if (BaseGameScene.Instance != null)
         {
-            if ( player.GetState() == PlayerState.Live )
+            foreach (Player player in BaseGameScene.Instance.Players)
             {
-                winnerNickname.text = PhotonNetwork.LocalPlayer.NickName;
+                if (player.GetState() == PlayerState.Live)
+                {
+                    winnerNickname.text = PhotonNetwork.LocalPlayer.NickName;
+                }
             }
         }
         resultCamera.Priority = 20;

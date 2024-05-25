@@ -36,15 +36,6 @@ public class CheckGameState : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        PhotonView pv;
-
-        // pv.IsMine
-        // pv.Controller
-        // 
-    }
-
     IEnumerator InitGameRoutine()
     {   // 게임 초기화 진행 중
         //endImage.gameObject.SetActive(false);

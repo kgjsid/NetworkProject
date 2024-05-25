@@ -7382,6 +7382,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 4297965436915358703}
   playerDeathController: {fileID: 4857828322958193479}
+  playerItemController: {fileID: 0}
   animator: {fileID: 8005623291831751049}
   hp: 1
   walkSpeed: 8
@@ -7437,6 +7438,7 @@ MonoBehaviour:
   coolTimeGauge: {fileID: 4406309720817839890}
   coolTime: 3
   attackSound: {fileID: 0}
+  playerController: {fileID: 0}
   canAttack: 1
 --- !u!114 &186549241330156117
 MonoBehaviour:
