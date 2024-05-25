@@ -46,7 +46,7 @@ public class PlayerDeathController : MonoBehaviourPun
 
         SkinnedMeshRenderer render = gameObject.GetComponentInChildren<SkinnedMeshRenderer>();
         render.SetMaterials(new List<Material> { baseTransparent, skinTransparent });
-
+        gameObject.layer = 11;
         foreach (Transform child in transform)
         {   // Death로 설정
             child.gameObject.layer = 11;

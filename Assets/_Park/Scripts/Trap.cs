@@ -25,7 +25,7 @@ public class Trap : MonoBehaviour
     private IEnumerator TrapCount()
     {
         yield return new WaitForSeconds(count);
-        Destroy(gameObject);
+        PhotonNetwork.Destroy(gameObject);
     }
 
     private IEnumerator SafeTime()
@@ -50,7 +50,7 @@ public class Trap : MonoBehaviour
         {
             PhotonNetwork.Instantiate("FX_Trab_Boom", transform.position, Quaternion.identity);
             Manager.Sound.PlaySFX(boomSFX);
-            Destroy(gameObject);
+            PhotonNetwork.Destroy(gameObject);
         }
     }
 }
