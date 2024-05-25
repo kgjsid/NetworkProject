@@ -9320,6 +9320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 6857142214041531205}
   playerDeathController: {fileID: 5294838920959933428}
+  playerItemController: {fileID: 6848639103885102974}
   animator: {fileID: 940930640906915166}
   hp: 1
   walkSpeed: 8

@@ -1,10 +1,10 @@
+using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
-    [SerializeField] GameObject boom;
     [SerializeField] LayerMask PlayerCheckLayer;
     [SerializeField] AudioClip boomSFX;
     [SerializeField] int count;
@@ -48,7 +48,7 @@ public class Trap : MonoBehaviour
 
         if ((PlayerCheckLayer.value & 1 << collision.gameObject.layer) != 0)
         {
-            GameObject deathEffect = Instantiate(boom, transform.position, Quaternion.identity);
+            PhotonNetwork.Instantiate("FX_Trab_Boom", transform.position, Quaternion.identity);
             Manager.Sound.PlaySFX(boomSFX);
             Destroy(gameObject);
         }

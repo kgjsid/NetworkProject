@@ -149,8 +149,8 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             deathCount++;
             if ( deathCount >= players.Count - 1 )
             {
-                if (PhotonNetwork.CurrentRoom.GetMode() != GameMode.Item)
-                    checkGameState.CurState = GameState.GameEnd;
+                // if (PhotonNetwork.CurrentRoom.GetMode() != GameMode.Item)
+                checkGameState.CurState = GameState.GameEnd;
             }
         }
     }
@@ -167,7 +167,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
         gameTimeUI.StartTimer();
     }
 
-    IEnumerator GameOver()
+    protected IEnumerator GameOver()
     {
         // 조건 
         // 1. 플레이어가 한명 남았을때
@@ -192,15 +192,24 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
                     }
                 }
                 else
-                {
-                    
+                {   // 추가로 킬카운트를 늘리기?
+                    if (PhotonNetwork.LocalPlayer.GetState() == PlayerState.Live)
+                    {
+                        gameTimeUI.EndingImage();
+                        gameTimeUI.Victory();
+                    }
+                    else if (PhotonNetwork.LocalPlayer.GetState() == PlayerState.Die)
+                    {
+                        gameTimeUI.EndingImage();
+                        gameTimeUI.Lose();
+                    }
                 }
                 yield break;
             }
             yield return new WaitForSeconds(0.1f);
         }
     }
-    IEnumerator TimeOut()
+    protected IEnumerator TimeOut()
     {
         // 시간이 다되면
         while ( true )

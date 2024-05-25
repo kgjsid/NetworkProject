@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 {   // 플레이어 컨트롤러 스크립트
     [SerializeField] CharacterController controller;
     [SerializeField] PlayerDeathController playerDeathController;
+    [SerializeField] PlayerItemController playerItemController;
     [SerializeField] Animator animator;
 
     [SerializeField] int hp;
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] Material baseTransparent;
 
     [SerializeField] Damage damageCheck;
+
     private void Start()
     {   // 시작시 네트워크 작업
         if ( photonView.IsMine == false )
@@ -130,12 +132,18 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 3. 어택을 받을 수 없도록 처리 필요
         if (playerDeathController != null)
             playerDeathController.IsDead = true;
+
+        if (playerItemController != null)
+            playerItemController.PlayerItem.CurItemType = ItemType.None;
     }
 
     public void TakeDamage( int damage )
     {   // 실제 데미지 함수
         if (isShield)
+        {
+            // 5초간 데미지 무효화 -> 한번 피격시 쉴드가 꺼지도록 수정해야 함
             return;
+        }
 
         if(playerDeathController == null)
         {
