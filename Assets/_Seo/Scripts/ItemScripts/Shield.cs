@@ -26,7 +26,6 @@ public class Shield : MonoBehaviour, IShieldable
 
     private IEnumerator ShieldRoutine()
     {
-        Debug.Log("쉴드 루틴");
         user.Controller.IsShield = true;
         yield return new WaitForSeconds(5f);
         user.Controller.IsShield = false;

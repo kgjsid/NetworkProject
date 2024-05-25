@@ -27,7 +27,6 @@ public class GameTime : MonoBehaviourPun
     {
         if ( timerRoutine == null )
             timerRoutine = StartCoroutine(Timer());
-        //Debug.Log("시간 들어옴?");
     }
     public void Victory()
     {
@@ -42,7 +41,6 @@ public class GameTime : MonoBehaviourPun
     {
         while ( time >= 0 )
         {
-            //Debug.Log("시간 코루틴에 들어옴?");
             timeText.text = time.ToString();
             time--;
             yield return new WaitForSeconds(1);
