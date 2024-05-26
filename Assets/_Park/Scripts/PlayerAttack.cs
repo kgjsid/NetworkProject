@@ -19,15 +19,15 @@ public class PlayerAttack : MonoBehaviourPun
         killLogUI = FindObjectOfType<KillLogUI>();
         playerController = GetComponent<PlayerController>();
     }
-    private void OnAttack(InputValue value)
+    private void OnAttack( InputValue value )
     {   // 어택
-        if (canAttack == false)                             // 어택이 불가능한 상태라면
+        if ( canAttack == false )                             // 어택이 불가능한 상태라면
             return;
 
-        if (EventSystem.current.IsPointerOverGameObject())  // UI가 가려져 있는 상태라면
+        if ( EventSystem.current.IsPointerOverGameObject() )  // UI가 가려져 있는 상태라면
             return;
 
-        if (playerController.IsDead)
+        if ( playerController.IsDead )
             return;
 
         animator.SetTrigger("Attack");                      // 어택을 진행
@@ -39,7 +39,7 @@ public class PlayerAttack : MonoBehaviourPun
         canAttack = false;      // 어택은 불가능한 상태로
         float timePassed = 0f;  // 0초부터 시작하여 쿨타임 체크
 
-        while (timePassed < coolTime)
+        while ( timePassed < coolTime )
         {   // 쿨타임 측정
             timePassed += Time.deltaTime;
             coolTimeGauge.value = timePassed / coolTime; // Update the cool time gauge if needed
@@ -50,6 +50,7 @@ public class PlayerAttack : MonoBehaviourPun
     }
 
     int killCount = 0;
+    int curtargetID = 0;
     [PunRPC]
     public void KillLogNickName( int targetID )
     {
@@ -57,23 +58,31 @@ public class PlayerAttack : MonoBehaviourPun
         PhotonView targetView = PhotonView.Find(targetID);
         if ( targetView != null )
         {
+
             killCount = photonView.Controller.GetKillCount() + 1;
             photonView.Controller.SetKillCount(killCount);
             string targetName = targetView.Controller.NickName;
             if ( targetView.gameObject.layer == 3 )
             {
-                killLogUI.KillLog(photonView.Controller.NickName, targetName);
-               
+                if ( curtargetID != targetID )
+                {
+                    killLogUI.KillLog(photonView.Controller.NickName, targetName);
+                    curtargetID = targetID;
+                }
             }
             else
             {
-                killLogUI.KillLog(photonView.Controller.NickName, "AI");
+                if ( curtargetID != targetID )
+                {
+                    killLogUI.KillLog(photonView.Controller.NickName, "AI");
+                    curtargetID = targetID;
+                }
             }
         }
     }
     public void KillLog( int targetID )
     {
-        photonView.RPC("KillLogNickName", RpcTarget.AllViaServer, targetID);
+        photonView.RPC("KillLogNickName", RpcTarget.All, targetID);
     }
 
 }

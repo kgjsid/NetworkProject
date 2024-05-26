@@ -3,6 +3,7 @@ using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
@@ -147,7 +148,6 @@ public class RoomPanel : MonoBehaviour
         playerEntry.ChangeCustomProperty(changedProps);
         AllPlayerReadycheck();
     }
-
     public void MasterClientSwitched( Player newMaster )
     {
         foreach ( PlayerEntry entry in PlayerList )
