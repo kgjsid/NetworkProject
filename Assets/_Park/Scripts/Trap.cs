@@ -10,9 +10,10 @@ public class Trap : MonoBehaviour
     [SerializeField] int count;
     [SerializeField] int safeTime;
     [SerializeField] Collider collider;
-
+    [SerializeField] KillLogUI killLogUI;
     private void Awake()
     {
+        killLogUI = FindObjectOfType<KillLogUI>();
         TrapTimer();
     }
 
@@ -45,12 +46,13 @@ public class Trap : MonoBehaviour
             // 밑은 진행하지 않음.
             Debug.Log("쉴드가 막음");
         }*/
-
-        if ((PlayerCheckLayer.value & 1 << collision.gameObject.layer) != 0)
+        if ( (PlayerCheckLayer.value & 1 << collision.gameObject.layer) != 0)
         {
+            PhotonView targetView = collision.GetComponent<PhotonView>();
             PhotonNetwork.Instantiate("FX_Trab_Boom", transform.position, Quaternion.identity);
             Manager.Sound.PlaySFX(boomSFX);
             PhotonNetwork.Destroy(gameObject);
+            killLogUI.KillLog("지뢰", targetView.name);
         }
     }
 }
