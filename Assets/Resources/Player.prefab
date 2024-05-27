@@ -7351,6 +7351,7 @@ MonoBehaviour:
   skinTransparent: {fileID: 2100000, guid: 52e6ef75389a93b45b48961d6e9e7b01, type: 2}
   baseTransparent: {fileID: 2100000, guid: a80b3f18d3855cc4787547cd8ee96ff1, type: 2}
   damageCheck: {fileID: 5486037445203589161}
+  hitSound: {fileID: 8300000, guid: a03d153734bff486e889c50168c69afa, type: 3}
 --- !u!143 &2857780490664833706
 CharacterController:
   m_ObjectHideFlags: 0
@@ -7392,7 +7393,7 @@ MonoBehaviour:
   animator: {fileID: 2233606410619256815}
   coolTimeGauge: {fileID: 4672228165683444813}
   coolTime: 3
-  attackSound: {fileID: 0}
+  attackSound: {fileID: 8300000, guid: 876c5c437c29b402eb47a12bf38bcac6, type: 3}
   playerController: {fileID: 0}
   canAttack: 1
 --- !u!114 &6076264322487257399

@@ -9335,6 +9335,8 @@ MonoBehaviour:
   skinTransparent: {fileID: 0}
   baseTransparent: {fileID: 0}
   damageCheck: {fileID: 5736426736854283248}
+  attackSound: {fileID: 0}
+  dieSound: {fileID: 0}
 --- !u!143 &6857142214041531205
 CharacterController:
   m_ObjectHideFlags: 0
