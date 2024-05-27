@@ -9,6 +9,7 @@ public class PlayerDeathController : MonoBehaviourPun
 
     [SerializeField] Material skinTransparent;
     [SerializeField] Material baseTransparent;
+    [SerializeField] GameObject bat;
 
     public bool IsDead
     {
@@ -51,5 +52,6 @@ public class PlayerDeathController : MonoBehaviourPun
         {   // Death로 설정
             child.gameObject.layer = 11;
         }
+        bat.gameObject.SetActive(false);
     }
 }

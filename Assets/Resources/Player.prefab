@@ -6512,6 +6512,7 @@ MonoBehaviour:
   isDead: 0
   skinTransparent: {fileID: 2100000, guid: 52e6ef75389a93b45b48961d6e9e7b01, type: 2}
   baseTransparent: {fileID: 2100000, guid: a80b3f18d3855cc4787547cd8ee96ff1, type: 2}
+  bat: {fileID: 4952348874231719211}
 --- !u!1 &7434230867922999753
 GameObject:
   m_ObjectHideFlags: 0
@@ -7476,6 +7477,12 @@ PrefabInstance:
 --- !u!4 &4949181195542235997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4781685058434750, guid: 1a3588c093ba8e74fa25f9822468fdb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 4953954065135664611}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4952348874231719211 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1616240793639112, guid: 1a3588c093ba8e74fa25f9822468fdb2,
     type: 3}
   m_PrefabInstance: {fileID: 4953954065135664611}
   m_PrefabAsset: {fileID: 0}
