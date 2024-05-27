@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -29,7 +30,7 @@ public class PlayerAttack : MonoBehaviourPun
 
         if ( playerController.IsDead )
             return;
-
+        Manager.Sound.PlaySFX(attackSound);                 // 어택 사운드
         animator.SetTrigger("Attack");                      // 어택을 진행
         StartCoroutine(StartCoolTime());                    // 어택 쿨타임 코루틴 진행
     }
@@ -58,7 +59,6 @@ public class PlayerAttack : MonoBehaviourPun
         PhotonView targetView = PhotonView.Find(targetID);
         if ( targetView != null )
         {
-
             killCount = photonView.Controller.GetKillCount() + 1;
             photonView.Controller.SetKillCount(killCount);
             string targetName = targetView.Controller.NickName;
