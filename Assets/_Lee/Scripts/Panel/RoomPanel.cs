@@ -158,6 +158,22 @@ public class RoomPanel : MonoBehaviour
         }
     }
 
+    public void OnModeChagne(PhotonHashtable hashtable)
+    {
+        switch ((GameMode)hashtable[CustomProperty.GAMEMODE])
+        {
+            case GameMode.normal:
+                CurrentGameMod(0, "기본 모드");
+                break;
+            case GameMode.mission:
+                CurrentGameMod(2, "미션 모드");
+                break;
+            case GameMode.Item:
+                CurrentGameMod(1, "아이템 모드");
+                break;
+        }
+    }
+
     private void AllPlayerReadycheck()
     {
         // 마스터만 확인
