@@ -138,10 +138,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         roomPanel.PlayerLeftRoom(otherPlayer);
     }
-    public override void OnRoomPropertiesUpdate( PhotonHashtable propertiesThatChanged )
-    {
-
-    }
     public override void OnPlayerPropertiesUpdate( Player targetPlayer, PhotonHashtable changedProps )
     {
         roomPanel.PlayerPropertiesUpdate(targetPlayer, changedProps);

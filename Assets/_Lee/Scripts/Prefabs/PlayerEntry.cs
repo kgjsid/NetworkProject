@@ -34,25 +34,6 @@ public class PlayerEntry : MonoBehaviour
             masterIcon.gameObject.SetActive(false);
         }
     }
-
-
-    /* public void ReadyAndStart()
-     {
-         Debug.Log(player.NickName);
-         bool ready = player.GetReady();
-         player.SetReady(!ready);
-         if(!player.IsMasterClient)
-         {
-             readyTxT.text = "준비완료";
-         }
-
-         if(player.IsMasterClient )
-         {
-             // 마스터일때는 준비와 게임 시작을하게 해줄거임
-             PhotonNetwork.CurrentRoom.IsVisible = false; // 방 닫기
-             PhotonNetwork.LoadLevel("BaseGameScene");
-         }
-     }*/
     public void ChangeCustomProperty( PhotonHashtable property )
     {
         bool ready = player.GetReady();

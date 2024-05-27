@@ -41,6 +41,11 @@ public class Item_Transparency : MonoBehaviourPun
         render.SetMaterials(materiallist);
         // 투명 설정(layer)
         //user.gameObject.layer = 30;
+        gameObject.layer = 31;
+        foreach (Transform child in transform)
+        {   // Death로 설정
+            child.gameObject.layer = 31;
+        }
         StartCoroutine(SettingTime());
     }
 
@@ -62,7 +67,12 @@ public class Item_Transparency : MonoBehaviourPun
         materiallist.Add(normalMaterial.baseMaterial); materiallist.Add(normalMaterial.skinMaterial);
         render.SetMaterials(materiallist);
         // 노말 설정(layer)
-        //user.gameObject.layer = 3;
+        //user.gameObject.layer = 3
+        gameObject.layer = 3;
+        foreach (Transform child in transform)
+        {   // Death로 설정
+            child.gameObject.layer = 3;
+        }
     }
 
     [Serializable]

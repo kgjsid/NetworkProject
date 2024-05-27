@@ -27,7 +27,9 @@ public class Shield : MonoBehaviour, IShieldable
     private IEnumerator ShieldRoutine()
     {
         user.Controller.IsShield = true;
-        yield return new WaitForSeconds(5f);
+
+        float startTime = Time.time;
+        yield return new WaitUntil(() => (!user.Controller.IsShield) || (Time.time >= startTime + 5f));
         user.Controller.IsShield = false;
         gameObject.SetActive(false);
     }
