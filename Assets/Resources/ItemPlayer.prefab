@@ -1623,7 +1623,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5413601700104698309}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.32453644, y: -0.000000030291286, z: 0.000000010393175, w: 0.9458732}
+  m_LocalRotation: {x: 0.3245364, y: 0.000000011087386, z: -0.000000003804168, w: 0.9458732}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -8072,6 +8072,7 @@ MonoBehaviour:
   isDead: 0
   skinTransparent: {fileID: 2100000, guid: 52e6ef75389a93b45b48961d6e9e7b01, type: 2}
   baseTransparent: {fileID: 2100000, guid: a80b3f18d3855cc4787547cd8ee96ff1, type: 2}
+  bat: {fileID: 7967193312762768005}
 --- !u!1 &8874186020647365886
 GameObject:
   m_ObjectHideFlags: 0
@@ -8196,6 +8197,12 @@ PrefabInstance:
 --- !u!4 &7963605522251384051 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4781685058434750, guid: 1a3588c093ba8e74fa25f9822468fdb2,
+    type: 3}
+  m_PrefabInstance: {fileID: 7968158486980194893}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7967193312762768005 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1616240793639112, guid: 1a3588c093ba8e74fa25f9822468fdb2,
     type: 3}
   m_PrefabInstance: {fileID: 7968158486980194893}
   m_PrefabAsset: {fileID: 0}
