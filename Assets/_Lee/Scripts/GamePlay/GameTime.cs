@@ -62,7 +62,7 @@ public class GameTime : MonoBehaviourPun
             {
                 if (player.GetState() == PlayerState.Live)
                 {
-                    winnerNickname.text = PhotonNetwork.LocalPlayer.NickName;
+                    winnerNickname.text = player.NickName;
                 }
             }
         }

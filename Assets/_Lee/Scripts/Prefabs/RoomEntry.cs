@@ -10,7 +10,6 @@ public class RoomEntry : MonoBehaviour
 {
     [SerializeField] TMP_Text roomName;
     [SerializeField] TMP_Text players;
-    [SerializeField] TMP_Text gameMod;
     [SerializeField] Button joinRoomButton;
 
     private RoomInfo roomInfo;
