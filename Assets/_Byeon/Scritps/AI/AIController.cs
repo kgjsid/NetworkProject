@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections;
+using System.Net;
 using UnityEngine;
 
 public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
@@ -20,13 +21,14 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     [SerializeField] int hp; //AI 체력
     public int Hp { get { return hp; } }
 
-
+    bool timeOver;
 
     private void Awake()
     {
         if (BaseGameScene.Instance != null)
         {
             BaseGameScene.Instance.aiControllers.Add(this);
+
         }
         animator = GetComponent<Animator>();
         aiMove = GetComponent<AIMove>();
@@ -45,6 +47,15 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     {
         if(hp != 0)
         {
+            if (damage != 10)
+            {
+                timeOver = true;
+            }
+            else
+            {
+                timeOver = false;
+            }
+            
             if (hp - damage <= 0)
             {
                 hp = 0;
@@ -77,17 +88,27 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
 
         state = AIstate.Die;
         animator.SetTrigger("Die");
-        StartCoroutine(DieDelay());
+
+        //마스터클라이언트에서 전체에 전송하여 삭제
+        photonView.RPC("RequestDie", RpcTarget.MasterClient);
     }
 
-    IEnumerator DieDelay()
+    [PunRPC]
+    private void RequestDie()
     {
-        yield return new WaitForSeconds(3f);
-        //gameObject.SetActive(false);
-        if (PhotonNetwork.IsMasterClient)
+        if (!timeOver)
+        {
+            BaseGameScene.Instance.aiControllers.Remove(gameObject.GetComponent<AIController>());
+        }
+
+        photonView.RPC("ResultAIDie", RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    private void ResultAIDie()
+    {
+        if(PhotonNetwork.IsMasterClient)
             PhotonNetwork.Destroy(gameObject);
-        //ai 리스트에서 제거
-        BaseGameScene.Instance.aiControllers.Remove(gameObject.GetComponent<AIController>());
     }
 
 
@@ -100,22 +121,4 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
     {
 
     }
-
-    /*public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        //포톤뷰를 가진 게임오브젝트에 접근하는 방법
-        //Rigidbody rigid = PhotonView.Find(photonView.ViewID).GetComponent<Rigidbody>(); 
-
-        //변수동기화
-        if (stream.IsWriting) // photonView.IsMine 내가 로컬일때
-        {
-            // 네트워크로 보내기
-            stream.SendNext(currentSpeed);
-        }
-        else // steam.IsReading , !photonView.IsMine 내가 리모트일때
-        {
-            // 네크워크에서 받기 , 보낸 순서대로 받아야한다.
-            currentSpeed = (float)stream.ReceiveNext();
-        }
-    }*/
 }

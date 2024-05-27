@@ -218,7 +218,7 @@ public class BaseGameScene : MonoBehaviourPunCallbacks
             {
                 foreach ( AIController aIController in aiControllers )
                 {
-                    if (aIController.gameObject != null)
+                    //if (aIController.gameObject != null)
                         aIController.TakeDamage(10);
                 }
                 yield break;

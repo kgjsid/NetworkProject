@@ -72,6 +72,9 @@ MonoBehaviour:
   - MakeSmokeBomb
   - ClearMission
   - TrapKillLog
+  - AiDie
+  - RequestDie
+  - ResultAIDie
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
