@@ -357,7 +357,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageCheckLayer:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 2147483720
   shieldLayer:
     serializedVersion: 2
     m_Bits: 0

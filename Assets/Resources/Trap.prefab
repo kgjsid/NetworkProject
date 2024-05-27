@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCheckLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 2147483656
   boomSFX: {fileID: 8300000, guid: 4cfc5c8979c67f24ab35ebbf269048e7, type: 3}
   count: 30
   safeTime: 1
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageCheckLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 2147483656
   shieldLayer:
     serializedVersion: 2
     m_Bits: 0
