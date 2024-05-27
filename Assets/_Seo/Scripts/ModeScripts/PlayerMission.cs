@@ -1,10 +1,7 @@
 using Photon.Pun;
-using Photon.Realtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.Mathematics;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -36,6 +33,8 @@ public class PlayerMission : MonoBehaviourPun
             curMissionType = value;
             changeMission?.Invoke(curMissionType);
 
+            StopAllCoroutines();
+
             switch ( curMissionType )
             {
                 case MissionType.killMission:
@@ -65,6 +64,7 @@ public class PlayerMission : MonoBehaviourPun
         }
     }
 
+    [PunRPC]
     private void ClearMission()
     {
         CurMissionType = MissionType.Clear;
@@ -87,7 +87,7 @@ public class PlayerMission : MonoBehaviourPun
             }
         }
 
-        ClearMission();
+        photonView.RPC("ClearMission", RpcTarget.All);
     }
 
     private IEnumerator KillMission()
@@ -105,7 +105,7 @@ public class PlayerMission : MonoBehaviourPun
             }
             yield return new WaitForSeconds(0.1f);
         }
-        ClearMission();
+        photonView.RPC("ClearMission", RpcTarget.All);
     }
 
     GameObject instanceItemBox;
@@ -121,7 +121,7 @@ public class PlayerMission : MonoBehaviourPun
         {
             if ( itemCount == 1 )
             {
-                ClearMission();
+                photonView.RPC("ClearMission", RpcTarget.All);
                 yield break;
             }
             yield return new WaitForSeconds(0.1f);
@@ -145,7 +145,7 @@ public class PlayerMission : MonoBehaviourPun
             }
         }
 
-        ClearMission();
+        photonView.RPC("ClearMission", RpcTarget.All);
     }
 
     int itemCount = 0;

@@ -32,7 +32,6 @@ public class ItemBoxController : MonoBehaviourPun
 
     IEnumerator HideRoutine(int indexNumber)
     {
-        Debug.Log($"{itemBoxes[indexNumber].gameObject.name}");
         itemBoxes[indexNumber].gameObject.SetActive(false);
         yield return new WaitForSeconds(SpawnTime);
         itemBoxes[indexNumber].gameObject.SetActive(true);

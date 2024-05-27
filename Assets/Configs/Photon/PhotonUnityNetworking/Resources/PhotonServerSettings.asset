@@ -70,6 +70,7 @@ MonoBehaviour:
   - SetDeath
   - OtherUse
   - MakeSmokeBomb
+  - ClearMission
   - AiDie
   - RequestDie
   - ResultAIDie

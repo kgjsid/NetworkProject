@@ -10,11 +10,19 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 {   // 플레이어 컨트롤러 스크립트
     [SerializeField] CharacterController controller;
     [SerializeField] PlayerDeathController playerDeathController;
+    [SerializeField] PlayerItemController playerItemController;
     [SerializeField] Animator animator;
 
     [SerializeField] int hp;
 
     public int Hp { get { return hp; } }
+    public bool IsDead { get { return playerDeathController.IsDead; } }
+    public bool IsShield { get { return isShield; }
+        set
+        {
+            isShield = value;
+        }
+    }
 
     [Header("Move")]
     private float moveSpeed = 8;            // 움직일 때의 속도
@@ -23,6 +31,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     private Vector3 moveDir;                // 움직임 벡터
     private float ySpeed;                   // 중력 및 점프력(수정 필요)
     private bool isAlive = true;            // 살아있는지 여부
+    private bool isShield = false;          // 쉴드 여부
 
     [SerializeField] LayerMask damageLayer; // 데미지 레이어
     private bool isDamaged;                 // 데미지를 받고 있는지에 대한 여부
@@ -34,6 +43,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     [SerializeField] Material baseTransparent;
 
     [SerializeField] Damage damageCheck;
+
     private void Start()
     {   // 시작시 네트워크 작업
         if ( photonView.IsMine == false )
@@ -122,10 +132,19 @@ public class PlayerController : MonoBehaviourPun, IDamageable
         // 3. 어택을 받을 수 없도록 처리 필요
         if (playerDeathController != null)
             playerDeathController.IsDead = true;
+
+        if (playerItemController != null)
+            playerItemController.PlayerItem.CurItemType = ItemType.None;
     }
 
     public void TakeDamage( int damage )
     {   // 실제 데미지 함수
+        if (isShield)
+        {
+            // 5초간 데미지 무효화 -> 한번 피격시 쉴드가 꺼지도록 수정해야 함
+            return;
+        }
+
         if(playerDeathController == null)
         {
             if(!isDamaged)

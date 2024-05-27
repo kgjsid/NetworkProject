@@ -8,11 +8,11 @@ public class Item_Trap : MonoBehaviourPun
 
     public void Use()
     {
-        photonView.RPC("MakeTrap", RpcTarget.All);
+        photonView.RPC("MakeTrap", RpcTarget.All, trans.position, trans.rotation);
     }
     [PunRPC]
-    private void MakeTrap()
+    private void MakeTrap(Vector3 position, Quaternion rotation)
     {
-        PhotonNetwork.Instantiate(trapObj.name, trans.position, trans.rotation);
+        PhotonNetwork.InstantiateRoomObject(trapObj.name, position, rotation);
     }
 }

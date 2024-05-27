@@ -16,6 +16,8 @@ public class Item_Shield : MonoBehaviourPun
     public void SetUser(PlayerItemController user)
     {
         this.user = user;
+        visiableShield.SetUser(user);
+        unVisiableShield.SetUser(user);
     }
 
     public void Use()

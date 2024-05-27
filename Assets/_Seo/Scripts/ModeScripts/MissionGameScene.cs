@@ -45,27 +45,30 @@ public class MissionGameScene : BaseGameScene
 
             foreach (PlayerMission playerMission in playerMissions)
             {
-                if(PhotonNetwork.IsMasterClient)
-                photonView.RPC("SetPlayerMission", RpcTarget.All);
+                if (PhotonNetwork.IsMasterClient)
+                    photonView.RPC("SetPlayerMission", RpcTarget.All);
             }
 
             yield return new WaitForSeconds(missionTime);
 
-            for(int i = 0; i < playerMissions.Count; i++)
+            if (PhotonNetwork.IsMasterClient)
             {
-                if (playerMissions[i].CurMissionType != MissionType.Clear)
-                {   // 미션 실패시 10 데미지
-                    playerMissions[i].CurMissionType = MissionType.Fail;
+                for (int i = 0; i < playerMissions.Count; i++)
+                {
+                    if (playerMissions[i].CurMissionType != MissionType.Clear)
+                    {   // 미션 실패시 10 데미지
+                        playerMissions[i].CurMissionType = MissionType.Fail;
 
-                    PlayerController target = playerMissions[i].gameObject.GetComponent<PlayerController>();
-                    if (target == null) // 미리 맞아서 죽었을 수 있으니까
-                        continue;
-                    
-                    playerMissions.Remove(playerMissions[i]);
+                        PlayerController target = playerMissions[i].gameObject.GetComponent<PlayerController>();
+                        if (target == null) // 미리 맞아서 죽었을 수 있으니까
+                            continue;
 
-                    if (target.Hp > 0)
-                    {
-                        target.TakeDamage(10);
+                        playerMissions.Remove(playerMissions[i]);
+
+                        if (target.Hp > 0)
+                        {
+                            target.TakeDamage(10);
+                        }
                     }
                 }
             }
