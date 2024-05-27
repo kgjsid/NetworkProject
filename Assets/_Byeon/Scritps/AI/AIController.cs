@@ -77,17 +77,37 @@ public class AIController : MonoBehaviourPun, IDamageable//, IPunObservable
 
         state = AIstate.Die;
         animator.SetTrigger("Die");
-        StartCoroutine(DieDelay());
-    }
+        //코르틴 말고 if문으로 종료 확인
+        //StartCoroutine(DieDelay());
 
-    IEnumerator DieDelay()
-    {
-        yield return new WaitForSeconds(3f);
-        //gameObject.SetActive(false);
-        if (PhotonNetwork.IsMasterClient)
-            PhotonNetwork.Destroy(gameObject);
+        //마스터클라이언트에서 전체에 전송하여 삭제
+        photonView.RPC("RequestDie", RpcTarget.MasterClient);
         //ai 리스트에서 제거
         BaseGameScene.Instance.aiControllers.Remove(gameObject.GetComponent<AIController>());
+
+    }
+
+    /*IEnumerator DieDelay()
+    {
+        yield return new WaitForSeconds(3f);
+
+        //마스터클라이언트에서 전체에 전송하여 삭제
+        photonView.RPC("RequestDie", RpcTarget.MasterClient);
+
+        //ai 리스트에서 제거
+        BaseGameScene.Instance.aiControllers.Remove(gameObject.GetComponent<AIController>());
+    }*/
+
+    [PunRPC]
+    private void RequestDie()
+    {
+        photonView.RPC("ResultAIDie", RpcTarget.AllViaServer);
+    }
+
+    [PunRPC]
+    private void ResultAIDie()
+    {
+        Destroy(gameObject,3f);
     }
 
 

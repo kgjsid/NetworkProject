@@ -16,7 +16,8 @@ public class ItemAIMove : MonoBehaviourPun
     float randomTime; //랜덤 이동 쿨타임
     float randomRange; //랜덤 이동 거리
     Vector3 randomPos; //랜덤 방향
-
+    int agentSpeed;
+    int motion;
 
     [SerializeField] AnimationClip attackClip;
 
@@ -72,43 +73,56 @@ public class ItemAIMove : MonoBehaviourPun
                 case AIController.AIstate.Run:
                     RunState();
                     break;
-                case AIController.AIstate.Attack:
+                /*case AIController.AIstate.Attack:
                     AttackState();
                     break;
                 case AIController.AIstate.Emote:
                     EmoteState();
-                    break;
+                    break;*/
             }
 
             //지정된 좌표를 서버를 통해 준다
-            photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos);
+            
 
-            //공격이나,이모트 애니메이션이 끝날떄까지 대기
+            /*//공격이나,이모트 애니메이션이 끝날떄까지 대기
             if(controller.State == AIController.AIstate.Attack)
-                yield return StartCoroutine(WaitForAnimationToEnd());
+                yield return StartCoroutine(WaitForAnimationToEnd());*/
 
             //다음 행동 시간
             randomTime = Random.Range(1, 5);
             yield return new WaitForSeconds(randomTime);
 
-            controller.Animator.SetBool("Emote01", false);
+            controller.Animator.SetBool($"Emote0{motion}", false);
         }
     }
 
     [PunRPC]
-    private void ResultRandomPos(Vector3 pos)
+    private void ResultRandomPos(Vector3 pos, int agentSpeed)
     {
         //받은 좌료로 네비에이전트 이동
         endPos = pos;
         agent.destination = endPos;
-        controller.Animator.SetFloat("MoveSpeed", agent.speed);
+        agent.speed = agentSpeed;
+        controller.Animator.SetFloat("MoveSpeed", agentSpeed);
+    }
+
+
+    [PunRPC]
+    private void ResultAttack()
+    {
+        endPos = transform.position;
+        agent.destination = endPos;
+        agentSpeed = 0;
+        controller.Animator.SetTrigger("Attack");
     }
 
     private void IdleState()
     {
         endPos = transform.position;
-        agent.speed = 0;
+        agentSpeed = 0;
         //controller.Animator.SetFloat("MoveSpeed", 0);
+
+        photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos, agentSpeed);
     }
 
     private void WalkState()
@@ -123,8 +137,10 @@ public class ItemAIMove : MonoBehaviourPun
             endPos = hit.position;
         }
 
-        agent.speed = 8;
+        agentSpeed = 8;
         //controller.Animator.SetFloat("MoveSpeed", 8);
+
+        photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos, agentSpeed);
     }
 
     private void RunState()
@@ -139,16 +155,17 @@ public class ItemAIMove : MonoBehaviourPun
             endPos = hit.position;
         }
 
-        agent.speed = 12;
+        agentSpeed = 12;
         //controller.Animator.SetFloat("MoveSpeed", 12);
+
+        photonView.RPC("ResultRandomPos", RpcTarget.AllViaServer, endPos, agentSpeed);
     }
 
-    private void AttackState()
+    /*private void AttackState()
     {
         endPos = transform.position;
 
-        agent.speed = 0;
-        //controller.Animator.SetFloat("MoveSpeed", 0);
+        agentSpeed = 0;
         controller.Animator.SetTrigger("Attack");
     }
 
@@ -156,12 +173,11 @@ public class ItemAIMove : MonoBehaviourPun
     {
         endPos = transform.position;
 
-        agent.speed = 0;
-        
-        int motion = Random.Range(0, 5);
-
+        agentSpeed = 0;
+        //controller.Animator.SetFloat("MoveSpeed", 0);
+        motion = Random.Range(0, 5);
         controller.Animator.SetBool($"Emote0{motion}", true);
-    }
+    }*/
 
 
     //행동확률
@@ -180,7 +196,7 @@ public class ItemAIMove : MonoBehaviourPun
             return AIController.AIstate.Emote;
     }
 
-    private IEnumerator WaitForAnimationToEnd()
+    /*private IEnumerator WaitForAnimationToEnd()
     {
         float speed = agent.speed;
         agent.speed = 0;
@@ -192,5 +208,5 @@ public class ItemAIMove : MonoBehaviourPun
 
         //controller.Animator.SetTrigger("Attack");
         agent.speed = speed;
-    }
+    }*/
 }

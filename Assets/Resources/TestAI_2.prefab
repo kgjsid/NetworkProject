@@ -165,10 +165,10 @@ MonoBehaviour:
     SynchronizeType: 1
     Name: Emote01
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Emote02
   - Type: 4
-    SynchronizeType: 0
+    SynchronizeType: 1
     Name: Emote03
   - Type: 4
     SynchronizeType: 0
