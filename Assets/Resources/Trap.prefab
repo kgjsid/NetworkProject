@@ -328,6 +328,7 @@ MonoBehaviour:
   count: 30
   safeTime: 1
   collider: {fileID: 2668599903251867757}
+  killLogUI: {fileID: 0}
 --- !u!114 &9117471717256743220
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NetworkRoom.unity
     guid: 51d7cb7b3140c844896a79293f8e12c3
-  - enabled: 0
+  - enabled: 1
     path: Assets/_Seo/Scenes/TestLobbyScene.unity
     guid: 359ec83e97d6db2489e3c0107f73c1fb
   - enabled: 0
