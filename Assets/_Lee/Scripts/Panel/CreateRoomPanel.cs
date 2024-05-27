@@ -11,7 +11,6 @@ public class CreateRoomPanel : MonoBehaviour
     [SerializeField] Button cancel;
     [SerializeField] TMP_InputField creatRoomName;
     [SerializeField] TMP_Dropdown roomNumber;
-    [SerializeField] TMP_InputField password; // 비밀번호는 나중에
     [SerializeField] Button creatRoomButton;
 
     private void Start()
@@ -22,7 +21,6 @@ public class CreateRoomPanel : MonoBehaviour
     private void OnDisable()
     {
         creatRoomName.text = "";
-        password.text = "";
     }
 
     // 방만들기

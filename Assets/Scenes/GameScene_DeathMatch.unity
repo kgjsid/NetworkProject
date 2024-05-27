@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.38825688, g: 0.7281151, b: 0.7341303, a: 1}
+  m_IndirectSpecularColor: {r: 0.38808668, g: 0.7278085, b: 0.7325042, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2325,7 +2325,7 @@ PrefabInstance:
     - target: {fileID: 670780253692466656, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0000014305115
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 670780253692466656, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
@@ -2340,7 +2340,7 @@ PrefabInstance:
     - target: {fileID: 2320175331983474169, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.000002861023
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2320175331983474169, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
@@ -2430,7 +2430,7 @@ PrefabInstance:
     - target: {fileID: 3441318029980543645, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0000014305115
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3441318029980543645, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
@@ -2460,12 +2460,12 @@ PrefabInstance:
     - target: {fileID: 7415090866204088697, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.833361
+      value: 5.8333616
       objectReference: {fileID: 0}
     - target: {fileID: 7415090866204088697, guid: f43da04ef9e004540b2cc0ee8e277ad0,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.499999
+      value: 7.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3057,6 +3057,9 @@ MonoBehaviour:
   resultText: {fileID: 8661893424837073738}
   winnerNickname: {fileID: 2564272960963750184}
   resultCamera: {fileID: 2564272960963750185}
+  bgm: {fileID: 8300000, guid: 6d041634cb81a1244900d421d118d0a1, type: 3}
+  victory: {fileID: 8300000, guid: ef26e3eb8090f4441bc03f69213acb93, type: 3}
+  Applause: {fileID: 8300000, guid: bc30a0d2f2ff051459b17fa4702b3ebb, type: 3}
 --- !u!222 &6336620732736498189
 CanvasRenderer:
   m_ObjectHideFlags: 0

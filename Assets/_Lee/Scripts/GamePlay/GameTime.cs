@@ -18,9 +18,16 @@ public class GameTime : MonoBehaviourPun
 
     //[Header("ItemMode")]
     [SerializeField] CinemachineVirtualCamera resultCamera;
+
+    [Header("Sound")]
+    [SerializeField] AudioClip bgm;
+    [SerializeField] AudioClip victory;
+    [SerializeField] AudioClip Applause;
+
     public TMP_Text TimeText { get { return timeText; } }
-    private void Awake()
+    private void Start()
     {
+        Manager.Sound.PlayBGM(bgm);
     }
     // 여기 밑에 있는거 네트워크로 동기화 시켜야됨
     public void StartTimer()
@@ -49,7 +56,9 @@ public class GameTime : MonoBehaviourPun
     IEnumerator EndingLobby()
     {
         resultCamera.Priority = 30;
-
+        Manager.Sound.StopBGM();
+        Manager.Sound.PlaySFX(victory);
+        Manager.Sound.PlaySFX(Applause);
         yield return new WaitForSeconds(5f);
         RoomButton();
     }
@@ -62,7 +71,7 @@ public class GameTime : MonoBehaviourPun
             {
                 if (player.GetState() == PlayerState.Live)
                 {
-                    winnerNickname.text = PhotonNetwork.LocalPlayer.NickName;
+                    winnerNickname.text = player.NickName;
                 }
             }
         }

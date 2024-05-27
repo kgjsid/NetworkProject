@@ -50,7 +50,6 @@ public class RoomPanel : MonoBehaviour
     private void OnEnable()
     {
         // 여기서 초기화시켜줘서 레디 false로 바꿔줍시다
-
         gameMod.text = "기본 모드";
         Debug.Log(PhotonNetwork.LocalPlayer.NickName);
         if ( PhotonNetwork.LocalPlayer.IsMasterClient )
@@ -156,6 +155,22 @@ public class RoomPanel : MonoBehaviour
             {
                 entry.SetPlayer(newMaster);
             }
+        }
+    }
+
+    public void OnModeChagne(PhotonHashtable hashtable)
+    {
+        switch ((GameMode)hashtable[CustomProperty.GAMEMODE])
+        {
+            case GameMode.normal:
+                CurrentGameMod(0, "기본 모드");
+                break;
+            case GameMode.mission:
+                CurrentGameMod(2, "미션 모드");
+                break;
+            case GameMode.Item:
+                CurrentGameMod(1, "아이템 모드");
+                break;
         }
     }
 

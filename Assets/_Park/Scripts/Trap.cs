@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Trap : MonoBehaviour
+public class Trap : MonoBehaviourPun
 {
     [SerializeField] LayerMask PlayerCheckLayer;
     [SerializeField] AudioClip boomSFX;
@@ -36,7 +36,7 @@ public class Trap : MonoBehaviour
         collider.enabled = true;
     }
 
-    private void OnTriggerEnter(Collider collision)
+    private void OnTriggerEnter( Collider collision )
     {
         /*IShieldable targetShield = collision.GetComponent<IShieldable>();
 
@@ -46,14 +46,22 @@ public class Trap : MonoBehaviour
             // 밑은 진행하지 않음.
             Debug.Log("쉴드가 막음");
         }*/
-        if ( (PlayerCheckLayer.value & 1 << collision.gameObject.layer) != 0)
+        if ( ( PlayerCheckLayer.value & 1 << collision.gameObject.layer ) != 0 )
         {
             PhotonView targetView = collision.GetComponent<PhotonView>();
             PhotonNetwork.Instantiate("FX_Trab_Boom", transform.position, Quaternion.identity);
             Manager.Sound.PlaySFX(boomSFX);
             PhotonNetwork.Destroy(gameObject);
-            killLogUI.KillLog("지뢰", targetView.name);
+            photonView.RPC("TrapKillLog", RpcTarget.All, targetView.name);
         }
+    }
+
+
+    [PunRPC]
+    private void TrapKillLog( string targetName )
+    {
+        killLogUI.KillLog("지뢰", targetName);
+
     }
 }
 

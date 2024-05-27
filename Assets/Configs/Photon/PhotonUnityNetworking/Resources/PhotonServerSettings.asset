@@ -71,6 +71,7 @@ MonoBehaviour:
   - OtherUse
   - MakeSmokeBomb
   - ClearMission
+  - TrapKillLog
   - AiDie
   - RequestDie
   - ResultAIDie

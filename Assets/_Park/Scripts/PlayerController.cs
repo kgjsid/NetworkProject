@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviourPun, IDamageable
 
     [SerializeField] Damage damageCheck;
 
+    [Header("Sound")]    
+    [SerializeField] AudioClip hitSound;
+
+
     private void Start()
     {   // 시작시 네트워크 작업
         if ( photonView.IsMine == false )
@@ -152,6 +156,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
             {
                 isDamaged = true;
                 hp -= damage;
+                Manager.Sound.PlaySFX(hitSound);
                 if(hp <= 0)
                 {
                     Die();

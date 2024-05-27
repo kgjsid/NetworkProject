@@ -150,4 +150,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         infoPanel.ShowInfo(message);
     }
+    public override void OnRoomPropertiesUpdate(PhotonHashtable propertiesThatChanged)
+    {
+        if (propertiesThatChanged.ContainsKey(CustomProperty.GAMEMODE))
+        {
+            roomPanel.OnModeChagne(propertiesThatChanged);
+        }
+    }
 }
