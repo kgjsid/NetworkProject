@@ -92,7 +92,7 @@ public class ItemAIMove : MonoBehaviourPun
             randomTime = Random.Range(1, 5);
             yield return new WaitForSeconds(randomTime);
 
-            controller.Animator.SetBool($"Emote0{motion}", false);
+            //controller.Animator.SetBool($"Emote0{motion}", false);
         }
     }
 
@@ -188,12 +188,12 @@ public class ItemAIMove : MonoBehaviourPun
             return AIController.AIstate.Idle;
         else if (randomValue < 0.8f)
             return AIController.AIstate.Walk;
-        else if (randomValue < 0.9f)
+        else //if (randomValue < 0.9f)
             return AIController.AIstate.Run;
-        else if (randomValue < 0.95f)
+        /*else if (randomValue < 0.95f)
             return AIController.AIstate.Attack;
         else
-            return AIController.AIstate.Emote;
+            return AIController.AIstate.Emote;*/
     }
 
     /*private IEnumerator WaitForAnimationToEnd()

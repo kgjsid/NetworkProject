@@ -22,7 +22,7 @@ public class KillLogUI : MonoBehaviour
         killLogQueue.Enqueue(killLogObject);
         killLogObject.transform.parent = KillLogContent.transform;
         killLogObject.GetComponent<KillLogPanel>().changeLog(killer, die);
-        if ( killLogQueue.Count > 5 )
+        if ( killLogQueue.Count > 8 )
         {
             killLogQueue.Dequeue().gameObject.SetActive(false);
         }
