@@ -8,8 +8,7 @@ public class PlayerEntry : MonoBehaviour
 {
     [SerializeField] TMP_Text nickName;
     [SerializeField] Image readyIMG;
-    [SerializeField] TMP_Text readyTxT;
-    public TMP_Text ReadyTxT { get { return readyTxT; } set { readyTxT = value; } }
+    [SerializeField] GameObject readyObject;
     [SerializeField] Image masterIcon;
 
     private Player player;
@@ -37,6 +36,6 @@ public class PlayerEntry : MonoBehaviour
     public void ChangeCustomProperty( PhotonHashtable property )
     {
         bool ready = player.GetReady();
-        readyTxT.text = ready ? "준비 완료" : "준비 미완료";
+        readyObject.SetActive(ready);
     }
 }
