@@ -913,8 +913,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 920328189}
   m_HandleRect: {fileID: 920328188}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.95137995
+  m_Value: 1.0000014
+  m_Size: 0.9513801
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7906,7 +7906,7 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 380019982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.048620045}
+  m_AnchorMin: {x: 0, y: 0.048619926}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -19514,7 +19514,7 @@ MonoBehaviour:
   signUpPanel: {fileID: 1328392886}
   settingPanel: {fileID: 0}
   SettingButton: {fileID: 600744399}
-  BGM: {fileID: 8300000, guid: 6d041634cb81a1244900d421d118d0a1, type: 3}
+  BGM: {fileID: 8300000, guid: 240d7b6575565ab469de3d86012692b7, type: 3}
 --- !u!1 &2085498542
 GameObject:
   m_ObjectHideFlags: 0
