@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviourPun, IDamageable
     {   // 실제 데미지 함수
         if (isShield)
         {
-            // 5초간 데미지 무효화 -> 한번 피격시 쉴드가 꺼지도록 수정해야 함
+            // 5초간 데미지 한번
             isShield = false;
             return;
         }
